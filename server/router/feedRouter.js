@@ -2,6 +2,9 @@ const controller = require("../controller");
 const upload = require("../middlewares/uploadImage");
 const express = require("express");
 const feedRouter = express.Router();
+const authUser = require("../middlewares/authUser");
+
+feedRouter.use("/", authUser);
 
 // 피드 업로드 /feeds/upload
 feedRouter.post("/upload", upload.single("image"), controller.createFeed);
