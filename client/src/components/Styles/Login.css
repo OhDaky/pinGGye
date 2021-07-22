@@ -1,9 +1,9 @@
 
-#container {
+.login__container {
   display: flex;
 }
 
-#imgBox {
+.login__img-box {
   margin-top: 10rem;
   margin-left: 30%;
   width: 25rem;
@@ -11,13 +11,13 @@
   border : 1px solid black;
 }
 
-#title {
+.login__container-title {
   margin-top: 2rem;
   text-align: center;
   font-size: 1.5rem;
 }
 
-#loginBox {
+.login__login-box {
   font-size: 1rem;
   margin-left: 5rem;
   margin-top: 10rem;
@@ -27,7 +27,7 @@
   height: 25rem;
 }
 
-.email, .password{
+.login__input-email, .login__input-password{
   margin: 2rem;
   text-align: left;
 }
@@ -41,7 +41,7 @@ button {
 }
 
 
-.btn-signup {
+.login__btn-signup {
   margin-left: 70%;
   width: 20%;
 }
@@ -52,7 +52,7 @@ input {
   width: 95%;
 }
 
-#alert-box {
+.login__alert-box {
   margin-top: 0.5rem;
   text-align: center;
 }
