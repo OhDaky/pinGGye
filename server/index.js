@@ -31,5 +31,3 @@ if (fs.existsSync("./key.pem") && fs.existsSync("./cert.pem")) {
 } else {
   server = app.listen(HTTPS_PORT, () => console.log("http server runnning"));
 }
-
-module.exports = server;
