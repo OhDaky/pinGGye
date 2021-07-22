@@ -7,7 +7,7 @@ import Home from "./components/Home";
 import Landing from "./components/Landing";
 import Login from "./components/Login";
 import Mypage from "./components/Mypage";
-import Signin from "./components/Signin";
+import Signup from "./components/Signup";
 
 function App() {
   axios
@@ -39,8 +39,8 @@ function App() {
         <Route path="/mypage">
           <Mypage />
         </Route>
-        <Route path="/signin">
-          <Signin />
+        <Route path="/signup">
+          <Signup />
         </Route>
       </Switch>
     </>
