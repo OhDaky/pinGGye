@@ -1,8 +1,8 @@
 import React from "react";
-import "./Styles/Feed.css";
-import FeedComment from "./FeedComment";
+import "./Styles/FeedDetail.css";
+import FeedComment from "../components/FeedComment";
 
-export default function Feed() {
+export default function FeedDetail() {
   return (
     <>
       <div className="main">

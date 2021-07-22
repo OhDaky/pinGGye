@@ -1,13 +1,13 @@
 import axios from "axios";
 import { Route, Switch } from "react-router-dom";
-import Feed from "./components/Feed";
-import FeedUpload from "./components/FeedUpload";
 import Nav from "./components/Nav";
-import Home from "./components/Home";
-import Landing from "./components/Landing";
-import Login from "./components/Login";
-import Mypage from "./components/Mypage";
-import Signup from "./components/Signup";
+import FeedDetail from "./pages/FeedDetail";
+import FeedUpload from "./pages/FeedUpload";
+import Home from "./pages/Home";
+import Landing from "./pages/Landing";
+import Login from "./pages/Login";
+import Mypage from "./pages/Mypage";
+import Signup from "./pages/Signup";
 
 function App() {
   axios
@@ -25,7 +25,7 @@ function App() {
           <Home />
         </Route>
         <Route path="/feed" exact>
-          <Feed />
+          <FeedDetail />
         </Route>
         <Route path="/feed/upload">
           <FeedUpload />
