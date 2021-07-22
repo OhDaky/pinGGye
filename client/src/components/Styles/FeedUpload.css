@@ -16,13 +16,13 @@
 }
 
 .feed__left-content {
-  height: 100%;
-  width: 55%;
+  height: 500px;
+  width: 500px;
   border: 1px solid black;
 }
 
 .feed__right-content {
-  height: 100%;
+  height: 500px;
   width: 45%;
 }
 
