@@ -4,30 +4,34 @@ const https = require("https");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const express = require("express");
-const app = express();
+const morgan = require("morgan");
 
+// const feedRouter = require("./router/feedRouter");
+const mainRouter = require("./router/mainRouter");
+const userRouter = require("./router/userRouter");
+
+const app = express();
+const PORT = 80;
+
+app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(
   cors({
-    origin: ["https://localhost:3000"],
+    origin: true,
     credentials: true,
-    methods: ["GET", "POST", "OPTIONS"],
+    methods: ["GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS"],
   })
 );
-
 app.use(cookieParser());
 
-const HTTPS_PORT = process.env.HTTPS_PORT || 80;
+// Routing
+app.use("/main", mainRouter);
+app.use("/users", userRouter);
+// app.use("/feeds", feedRouter);
 
-let server;
-if (fs.existsSync("./key.pem") && fs.existsSync("./cert.pem")) {
-  const privateKey = fs.readFileSync(__dirname + "/key.pem", "utf8");
-  const certificate = fs.readFileSync(__dirname + "/cert.pem", "utf8");
-  const credentials = { key: privateKey, cert: certificate };
+app.get("/", (req, res) => {
+  res.status(200).send('Hello World');
+});
 
-  server = https.createServer(credentials, app);
-  server.listen(HTTPS_PORT, () => console.log("https server runnning"));
-} else {
-  server = app.listen(HTTPS_PORT, () => console.log("http server runnning"));
-}
+app.listen(PORT, () => console.log(`http server is runnning on ${PORT}`));
