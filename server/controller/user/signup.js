@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 
-module.export = (req, res) => {
+module.exports = async (req, res) => {
   const { email, password, nickname } = req.body;
 
   if (!email || !password || !nickname) {
