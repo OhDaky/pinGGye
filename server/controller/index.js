@@ -17,5 +17,9 @@ module.exports = {
   createFeedComment: require("./feed/createFeedComment"),
   reedFeedComment: require("./feed/readFeedComment"),
   updateFeedComment: require("./feed/updateFeedComment"),
-  deleteFeedComment: require("./feed/deleteFeedComment")
+  deleteFeedComment: require("./feed/deleteFeedComment"),
+
+  // main
+  readAllFeeds: require("./main/readAllFeeds"),
+  readAllTags: require("./main/readAllTags"),
 };

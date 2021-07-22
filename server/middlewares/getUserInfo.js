@@ -6,8 +6,8 @@ const verifyAccessToken = require("../token/verifyAccessToken");
 //* 현재 기존 회원만 인증 가능
 const getUserInfo = async (accessToken, loginType) => {
   const userInfo = {
-    userId,
-    email,
+    userId: null,
+    email: null,
   };
 
   if (loginType === "email") {
@@ -25,7 +25,6 @@ const getUserInfo = async (accessToken, loginType) => {
     //! DB 조회 필요성?
   } else if (loginType === "google") {
   }
-
   return userInfo;
 };
 

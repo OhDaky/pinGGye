@@ -1,7 +1,8 @@
 const getUserInfo = require("./getUserInfo");
 
 const authUser = async (req, res, next) => {
-  const { authorization, loginType } = req.headers;
+  const { authorization, logintype: loginType } = req.headers;
+
   if (!authorization) {
     // 액세스 토큰 없음
     return res.status(403).json({ message: "Token does not exist" });
@@ -10,7 +11,7 @@ const authUser = async (req, res, next) => {
     // 요청에 로그인 타입 없음
     return res.status(403).json({ message: "Type does not exist" });
   }
-  
+
   const accessToken = authorization.split(" ")[1];
 
   const userInfo = await getUserInfo(accessToken, loginType);

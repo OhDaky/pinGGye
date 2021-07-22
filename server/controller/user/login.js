@@ -1,7 +1,12 @@
-const { Feed: FeedModel, Tag: TagModel, User: UserModel, FeedComment: FCModel } = require("../../models");
-const crypto = require('crypto');
+const {
+  Feed: FeedModel,
+  Tag: TagModel,
+  User: UserModel,
+  FeedComment: FCModel,
+} = require("../../models");
+const crypto = require("crypto");
 
-const generateAccessToken = require('../../token/generateAccessToken')
+const generateAccessToken = require("../../token/generateAccessToken");
 // const generateRefreshToken = require('../../token/generateRefreshToken')
 
 module.exports = async (req, res) => {
@@ -10,19 +15,27 @@ module.exports = async (req, res) => {
 
   const { email, password } = req.body;
 
-  const salt = '123';
-  const hashedPassword = crypto.createHash('sha512').update(password + salt).digest('hex');
+  if (!email || !password) {
+    return res.status(400).json({ message: "Insufficient parameters supplied" });
+  }
+
+  const salt = "123";
+  const hashedPassword = crypto
+    .createHash("sha512")
+    .update(password + salt)
+    .digest("hex");
 
   const userInfo = await UserModel.findOne({
-    where: { email: email, password: hashedPassword},
+    where: { email: email, password: hashedPassword },
   });
-  console.log('유저 정보', userInfo);
-  
-  if (!userInfo) {
-    console.log('잘못된 유저 정보 입력');
-    return res.status(401).json({ data: null, message: "not authorized" });
-  } 
-    const accessToken = generateAccessToken(userInfo.id, userInfo.email);
-    return res.json({ data: { accessToken }, message: "ok" });
 
+  if (!userInfo) {
+    console.log("잘못된 유저 정보 입력");
+    return res.status(401).json({ data: null, message: "not authorized" });
+  }
+  delete userInfo.dataValues.password;
+  const accessToken = await generateAccessToken(userInfo.id, userInfo.email);
+
+  // console.log(accessToken);
+  return res.status(201).json({ data: { accessToken, userInfo }, message: "ok" });
 };
