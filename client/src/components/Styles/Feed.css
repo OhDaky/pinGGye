@@ -1,0 +1,64 @@
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+}
+
+.feed__content {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 80%;
+  height: 80vh;
+  border: 1px solid;
+}
+
+.feed__main-img {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.feed__main-img__underbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.feed__main-contents {
+  width: 100%;
+  height: 40%;
+  border: 1px solid black;
+}
+
+.feed__comments {
+  width: 100%;
+  height: 60%;
+  border: 1px solid black;
+}
+
+.feed__comment-right-content {
+  display: flex;
+}
+
+.input-comment {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  height: 50px;
+}
+
+.input-comment > input {
+  width: 80%;
+}
+
+.feed__comments-box {
+  width: 100%;
+  height: 85%;
+  margin-top: 10px;
+  overflow-y: scroll;
+}
