@@ -1,0 +1,123 @@
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+}
+
+.feed__content {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 80%;
+  height: 80vh;
+  border: 1px solid;
+}
+
+.feed__left-content {
+  height: 100%;
+  width: 55%;
+  border: 1px solid black;
+}
+
+.feed__right-content {
+  height: 100%;
+  width: 45%;
+}
+
+.feed__main-img {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.feed__main-img__underbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* 여기까지 Feed.css와 동일 */
+.feed__main-contents {
+  width: 100%;
+  height: 100%;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.feed__btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 50px;
+  border: 1px solid black;
+  border-radius: 30px;
+  margin: 30px;
+}
+
+#feed-upload__hashtag {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin: 20px 0px;
+  width: 100%;
+  height: 30%;
+}
+
+.feed-upload__hashtag-input {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 40px;
+}
+
+.hashtag-input {
+  width: 70%;
+}
+
+.hashtag-submit-btn {
+  width: 20%;
+}
+
+.feed-upload__hashtag-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hashtag {
+  border: 1px solid black;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 0px 5px;
+}
+
+#feed-upload__img-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 30%;
+}
+
+.feed-upload__main-message {
+  font-size: 1.5rem;
+  width: 100%;
+}
+
+.feed-upload__content {
+  width: 80%;
+  margin: 10px;
+  resize: none;
+}
+
+.feed-upload__underbar {
+  display: flex;
+  justify-content: flex-end;
+}
