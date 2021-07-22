@@ -1,0 +1,15 @@
+.home__feed {
+  margin: 1rem;
+  display: flex;
+  float: left;
+  text-align: center;
+  /* align-content: center; */
+  width: 200px;
+  height: 200px;
+  border: 1px solid black;
+}
+
+.home__feed-tags {
+  margin: 10px;
+  margin-top: 170px;
+}
