@@ -18,3 +18,5 @@ app.get("/", (req, res) => {
 app.listen(port, () => {
   console.log(`서버가 ${port}번에서 작동중입니다.`);
 });
+
+const test = require("./test.js")
