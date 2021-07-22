@@ -1,3 +1,10 @@
-const jwt = require("jsonwebtoken");
+const { Feed: FeedModel, Tag: TagModel, User: UserModel, FeedComment: FCModel } = require("../../models");
 
-module.exports = async (req, res) => {};
+module.exports = (req, res) => {
+
+  res.cookie("jwt", "", {
+    httpOnly: true,
+  });
+
+  res.status(205).send("Logged out successfully");
+};

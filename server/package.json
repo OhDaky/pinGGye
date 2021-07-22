@@ -27,6 +27,7 @@
     "sharp": "^0.28.3"
   },
   "devDependencies": {
+    "crypto": "^1.0.1",
     "sequelize-cli": "^6.2.0"
   }
 }

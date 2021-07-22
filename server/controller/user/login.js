@@ -1,35 +1,28 @@
-const jwt = require("jsonwebtoken");
+const { Feed: FeedModel, Tag: TagModel, User: UserModel, FeedComment: FCModel } = require("../../models");
+const crypto = require('crypto');
+
+const generateAccessToken = require('../../token/generateAccessToken')
+// const generateRefreshToken = require('../../token/generateRefreshToken')
 
 module.exports = async (req, res) => {
-  const userInfo = await Users.findOne({
-    where: { userId: req.body.userId, password: req.body.password },
+  console.log(req.body);
+  // 입력받은 비밀번호를 해싱해서 db의 값과 비교해야 함
+
+  const { email, password } = req.body;
+
+  const salt = '123';
+  const hashedPassword = crypto.createHash('sha512').update(password + salt).digest('hex');
+
+  const userInfo = await UserModel.findOne({
+    where: { email: email, password: hashedPassword},
   });
-  // console.log(userInfo);
-
+  console.log('유저 정보', userInfo);
+  
   if (!userInfo) {
-    res.status(401).json({ data: null, message: "not authorized" });
-  } else {
-    delete userInfo.dataValues.password;
+    console.log('잘못된 유저 정보 입력');
+    return res.status(401).json({ data: null, message: "not authorized" });
+  } 
+    const accessToken = generateAccessToken(userInfo.id, userInfo.email);
+    return res.json({ data: { accessToken }, message: "ok" });
 
-    const accessToken = jwt.sign(
-      userInfo.dataValues,
-      process.env.ACCESS_SECRET,
-      { expiresIn: "1h" }
-    );
-    const refreshToken = jwt.sign(
-      userInfo.dataValues,
-      process.env.REFRESH_SECRET,
-      { expiresIn: "1h" }
-    );
-
-    res.cookie("refreshToken", refreshToken, {
-      domain: "localhost",
-      path: "/",
-      httpOnly: true,
-      secure: true,
-      sameSite: "none",
-    });
-
-    res.json({ data: { accessToken }, message: "ok" });
-  }
 };
