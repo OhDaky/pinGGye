@@ -14,11 +14,7 @@
   width: 300px;
   height: 350px;
   border: 1px solid black;
-  font: 1rem;
-}
-
-.sign-up__message {
-  font: 2rem;
+  font-size: 1rem;
 }
 
 .sign-up > input {

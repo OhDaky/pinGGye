@@ -6,7 +6,7 @@ export default function Signup() {
     <>
       <div className="main">
         <div className="sign-up">
-          <div className="input__message">Email</div>
+          <div className="main__message">회원가입</div>
           <input className="input__email" type="email" placeholder="Email" />
           <input
             className="input__nickname"
