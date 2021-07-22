@@ -3,7 +3,6 @@ import "./Styles/Feed.css";
 import FeedComment from "./FeedComment";
 
 export default function Feed() {
-  let comment = 10;
   return (
     <>
       <div className="main">

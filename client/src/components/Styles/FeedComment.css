@@ -7,17 +7,6 @@
   border: 1px solid black;
 }
 
-.feed__left-content {
-  height: 100%;
-  width: 55%;
-  border: 1px solid black;
-}
-
-.feed__right-content {
-  height: 100%;
-  width: 45%;
-}
-
 .feed__comment-right-content {
   display: flex;
 }
