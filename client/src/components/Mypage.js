@@ -11,7 +11,7 @@ export default function Mypage() {
             className="input__email"
             type="email"
             placeholder="Email"
-            readonly
+            readOnly
           />
           <input
             className="input__nickname"
