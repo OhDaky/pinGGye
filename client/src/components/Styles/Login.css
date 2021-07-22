@@ -1,0 +1,58 @@
+
+#container {
+  display: flex;
+}
+
+#imgBox {
+  margin-top: 10rem;
+  margin-left: 30%;
+  width: 25rem;
+  height: 25rem;
+  border : 1px solid black;
+}
+
+#title {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+#loginBox {
+  font-size: 1rem;
+  margin-left: 5rem;
+  margin-top: 10rem;
+  border : 1px solid black;
+  /* block-size: content-box; */
+  width: 20rem;
+  height: 25rem;
+}
+
+.email, .password{
+  margin: 2rem;
+  text-align: left;
+}
+
+button {
+  display: inline-block;
+  position: relative;
+  margin-bottom: 0.5rem;
+  margin-left: 10%;
+  width: 80%;
+}
+
+
+.btn-signup {
+  margin-left: 70%;
+  width: 20%;
+}
+
+input {
+  margin-top: 0.5rem;
+  position: relative;
+  width: 95%;
+}
+
+#alert-box {
+  margin-top: 0.5rem;
+  text-align: center;
+}
