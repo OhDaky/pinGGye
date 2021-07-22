@@ -1,9 +1,4 @@
-const {
-  Feed: FeedModel,
-  Tag: TagModel,
-  User: UserModel,
-  FeedComment: FCModel,
-} = require("../../models");
+const { User: UserModel } = require("../../models");
 const crypto = require("crypto");
 
 const generateAccessToken = require("../../token/generateAccessToken");
@@ -16,10 +11,12 @@ module.exports = async (req, res) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
-    return res.status(400).json({ message: "Insufficient parameters supplied" });
+    return res
+      .status(400)
+      .json({ message: "Insufficient parameters supplied" });
   }
 
-  const salt = "123";
+  const salt = process.env.PASSWORD_SALT;
   const hashedPassword = crypto
     .createHash("sha512")
     .update(password + salt)
@@ -31,11 +28,13 @@ module.exports = async (req, res) => {
 
   if (!userInfo) {
     console.log("잘못된 유저 정보 입력");
-    return res.status(401).json({ data: null, message: "not authorized" });
+    return res.status(401).json({ data: null, message: "Not authorized" });
   }
   delete userInfo.dataValues.password;
   const accessToken = await generateAccessToken(userInfo.id, userInfo.email);
 
-  // console.log(accessToken);
-  return res.status(201).json({ data: { accessToken, userInfo }, message: "ok" });
+  //* 리프레시 토큰 전송 가능
+  return res
+    .status(201)
+    .json({ data: { accessToken, userInfo }, message: "Login succeed" });
 };

@@ -1,4 +1,3 @@
-const jwt = require("jsonwebtoken");
 const verifyAccessToken = require("../token/verifyAccessToken");
 // const dotenv = require("dotenv");
 // dotenv.config();
@@ -13,11 +12,11 @@ const getUserInfo = async (accessToken, loginType) => {
   if (loginType === "email") {
     const decoded = await verifyAccessToken(accessToken);
 
-    if (decoded === "TokenExpiredError") {
-      res.status(403).json({ message: "Expired token" });
-    } else if (decoded === "JsonWebTokenError") {
-      res.status(403).json({ message: "Invalid token" });
+    if (decoded.error) {
+      if (decoded.error === "expired") userInfo.error = "expired";
+      if (decoded === "invalid") userInfo.error = "invalid";
     } else {
+      console.log(decoded);
       userInfo.userId = decoded.userId;
       userInfo.email = decoded.email;
     }

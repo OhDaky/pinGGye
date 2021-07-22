@@ -8,7 +8,9 @@ const authUser = require("../middlewares/authUser");
 feedRouter.use("/", authUser);
 
 // 피드 업로드 /feeds/upload
-feedRouter.post("/upload", upload.single("image"), controller.createFeed);
+feedRouter.post("/image", upload.single("image"), controller.createFeedImage);
+
+feedRouter.post("/upload", controller.createFeed);
 
 // 피드 조회 /feeds/:id
 feedRouter.get("/:id", controller.readFeed);

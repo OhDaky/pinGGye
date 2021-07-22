@@ -1,9 +1,14 @@
-const { Feed: FeedModel, Tag: TagModel, User: UserModel, FeedComment: FCModel } = require("../../models");
+const { Tag: TagModel } = require("../../models");
 
-const readAllTags = async (tag) => {
-  const result = await TagModel.findAll();
+const readAllTags = async (req, res) => {
+  try {
+    const tags = await TagModel.findAll();
 
-  console.log('모든 태그 조회', result);
+    res.status(200).json({ data: { tags: tags }, message: "Send all tags" });
+
+  } catch (error) {
+    return res.status(500).json({ data: null, message: "Server error" });
+  }
 }
 
 module.exports = readAllTags;

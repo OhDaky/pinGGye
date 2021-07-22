@@ -6,6 +6,7 @@ module.exports = {
   signup: require("./user/signup"),
 
   // feed
+  createFeedImage: require("./feed/createFeedImage"),
   createFeed: require("./feed/createFeed"),
   readFeed: require("./feed/readFeed"),
   updateFeed: require("./feed/updateFeed"),
