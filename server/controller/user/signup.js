@@ -1,7 +1,6 @@
 const { Feed: FeedModel, Tag: TagModel, User: UserModel, FeedComment: FCModel } = require("../../models");
 const crypto = require('crypto');
 
-
 module.exports = async (req, res) => {
   const { email, password, nickname } = req.body;
   const salt = '123';

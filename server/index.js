@@ -6,7 +6,7 @@ const cookieParser = require("cookie-parser");
 const express = require("express");
 const morgan = require("morgan");
 
-// const feedRouter = require("./router/feedRouter");
+const feedRouter = require("./router/feedRouter");
 const mainRouter = require("./router/mainRouter");
 const userRouter = require("./router/userRouter");
 
@@ -28,10 +28,11 @@ app.use(cookieParser());
 // Routing
 app.use("/main", mainRouter);
 app.use("/users", userRouter);
-// app.use("/feeds", feedRouter);
+app.use("/feeds", feedRouter);
 
 app.get("/", (req, res) => {
   res.status(200).send('Hello World');
 });
 
 app.listen(PORT, () => console.log(`http server is runnning on ${PORT}`));
+

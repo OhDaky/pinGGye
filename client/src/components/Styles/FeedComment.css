@@ -1,0 +1,12 @@
+.feed__comment {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  margin: 10px;
+  border: 1px solid black;
+}
+
+.feed__comment-right-content {
+  display: flex;
+}

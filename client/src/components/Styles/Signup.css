@@ -6,7 +6,7 @@
   height: 100vh;
 }
 
-.mypage {
+.sign-up {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -17,13 +17,13 @@
   font-size: 1rem;
 }
 
-.mypage > input {
+.sign-up > input {
   width: 70%;
   height: 30px;
   margin: 15px 0px;
 }
 
-.mypage__btn {
+.sign-in__btn {
   width: 70%;
   height: 30px;
 }
