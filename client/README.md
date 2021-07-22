@@ -1,1 +1,1 @@
-# pinGGye!
+# client readme
