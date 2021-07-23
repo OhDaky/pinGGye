@@ -3,7 +3,7 @@ const { Feed: FeedModel, User: UserModel, Tag: TagModel } = require("../../model
 module.exports = async (req, res) => {
 
   if (!req.file) {
-    return res.status(500).json({ message: "Image does not exist" });
+    return res.status(400).json({ message: "Image does not exist" });
   }
   const imagesInfo = req.file.transforms;
 
@@ -31,8 +31,6 @@ module.exports = async (req, res) => {
   const tags = tagsText.split(',');
   console.log(subject);
   console.log(tags);
-
-  
 
   try {
     //* DB에 피드 입력
