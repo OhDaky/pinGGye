@@ -33,7 +33,7 @@ module.exports = async (req, res) => {
   }
   
   delete userInfo.dataValues.password;
-  const accessToken = await generateAccessToken(userInfo.id, userInfo.email);
+  const accessToken = await generateAccessToken(userInfo);
 
   //* 리프레시 토큰 전송 가능
   return res

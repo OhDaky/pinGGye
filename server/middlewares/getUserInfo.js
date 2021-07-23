@@ -2,11 +2,12 @@ const verifyAccessToken = require("../token/verifyAccessToken");
 // const dotenv = require("dotenv");
 // dotenv.config();
 
-//* 현재 기존 회원만 인증 가능
+//* 현재 기존 회원만 인증 가능 (소셜 로그인 미구현)
 const getUserInfo = async (accessToken, loginType) => {
   const userInfo = {
     userId: null,
     email: null,
+    accountType: null,
   };
 
   if (loginType === "email") {
@@ -20,6 +21,7 @@ const getUserInfo = async (accessToken, loginType) => {
     } else {
       userInfo.userId = decoded.userId;
       userInfo.email = decoded.email;
+      userInfo.accountType = decoded.accountType;
     }
 
     //! DB 조회 필요성?
