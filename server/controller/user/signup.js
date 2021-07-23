@@ -21,7 +21,8 @@ module.exports = async (req, res) => {
     defaults: {
       password: hashedPassword, // 비밀번호 해싱값으로 저장!
       nickname,
-      type: "email",
+      signUpType: "email",
+      accountType: "user"
     },
   })
     .then(([result, created]) => {

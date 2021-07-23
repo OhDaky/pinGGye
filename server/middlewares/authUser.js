@@ -15,7 +15,7 @@ const authUser = async (req, res, next) => {
   const accessToken = authorization.split(" ")[1];
 
   const userInfo = await getUserInfo(accessToken, loginType);
-  console.log(userInfo);
+  console.log('userInfo', userInfo);
   if (userInfo.error === "expired") {
     //* 리프레시 토큰 사용 가능
     return res.status(403).json({ message: "Expired token" });
@@ -23,8 +23,8 @@ const authUser = async (req, res, next) => {
     return res.status(403).json({ message: "Invalid token" });
   }
 
-  const { userId, email } = userInfo;
-  if (!userId || !email) {
+  const { userId, email, accountType } = userInfo;
+  if (!userId || !email || !accountType) {
     // 토큰 검증은 되었지만 올바른 데이터가 들어있지 않음
     return res.status(403).json({ message: "Invalid token" });
   }

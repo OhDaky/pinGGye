@@ -1,7 +1,11 @@
-const { Feed: FeedModel, User: UserModel, Tag: TagModel } = require("../../models");
+const {
+  Feed: FeedModel,
+  User: UserModel,
+  Tag: TagModel,
+} = require("../../models");
+const db = require("../queryFunction");
 
 module.exports = async (req, res) => {
-
   if (!req.file) {
     return res.status(400).json({ message: "Image does not exist" });
   }
@@ -9,7 +13,7 @@ module.exports = async (req, res) => {
 
   let imageSrc, thumbnailSrc;
 
-  // S3 이미지 서버에 저장된 이미지의 url 경로 획득
+  //* S3 이미지 서버에 저장된 이미지의 url 경로 획득
   imagesInfo.forEach((imageInfo) => {
     if (imageInfo.id === "thumbnail") thumbnailSrc = imageInfo.location;
     else if (imageInfo.id === "original") imageSrc = imageInfo.location;
@@ -22,19 +26,15 @@ module.exports = async (req, res) => {
   const { userId } = req.userInfo;
   const { subject, tagsText } = req.body;
 
-  if (!userId || !subject || !tagsText || !imageSrc || !thumbnailSrc) {
+  if (!subject || !tagsText || !imageSrc || !thumbnailSrc) {
     return res
       .status(400)
       .json({ message: "Insufficient parameters supplied" });
   }
 
-  const tags = tagsText.split(',');
-  console.log(subject);
-  console.log(tags);
-
   try {
     //* DB에 피드 입력
-    const feedInfo = await FeedModel.create({
+    const feed = await FeedModel.create({
       userId: userId,
       subject: subject,
       image: imageSrc,
@@ -43,8 +43,10 @@ module.exports = async (req, res) => {
     });
 
     //* DB에 태그 입력 및 피드와 연결
+    const tags = tagsText.split(",");
+
     const tagInfo = await addTagRows(tags);
-    await Promise.all(tagInfo.map((tag) => feedInfo.addTags(tag[0])));  // 피드-태그 조인 테이블에 입력
+    await Promise.all(tagInfo.map((tag) => feed.addTags(tag[0]))); // 피드-태그 조인 테이블에 입력
 
     // bulk find or create function
     async function addTagRows(tags) {
@@ -56,36 +58,11 @@ module.exports = async (req, res) => {
       });
     }
 
-    //* 모든 피드 조회
-    const feeds = await FeedModel.findAll({
-      attributes: [
-        "id",
-        "subject",
-        "image",
-        "thumbnail",
-        "download",
-        "createdAt",
-        "updatedAt",
-      ],
-      include: [
-        { model: TagModel, required: false, through: { attributes: [] } },
-        { model: UserModel },
-      ],
-    });
+    //* 모든 피드 조회 및 응답
+    const feeds = await db.findAllFeeds();
 
-    // 피드 포맷 변경
-    const formattedFeeds = feeds.map((feed) => {
-      feed.dataValues.Tags = feed.dataValues.Tags.map((tag) => tag.name);
-      feed.dataValues.nickname = feed.dataValues.User.nickname;
-      feed.dataValues.User = feed.dataValues.User.email;
-      return feed.dataValues;
-    });
-
-    res
-      .status(201)
-      .json({ data: formattedFeeds, message: "Feed upload succeed" });
+    res.status(201).json({ data: feeds, message: "Feed upload succeed" });
   } catch (error) {
-    console.log(error);
     return res.status(500).json({ message: "Feed upload failed" });
   }
 };
