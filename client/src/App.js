@@ -1,6 +1,5 @@
 import axios from "axios";
 import { Route, Switch } from "react-router-dom";
-import Nav from "./components/Nav";
 import FeedDetail from "./pages/FeedDetail";
 import FeedUpload from "./pages/FeedUpload";
 import Home from "./pages/Home";
@@ -19,7 +18,6 @@ function App() {
 
   return (
     <>
-      <Nav />
       <Switch>
         <Route path="/" exact>
           <Home />

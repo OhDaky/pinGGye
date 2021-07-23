@@ -1,31 +1,85 @@
-import React from "react";
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import "./Styles/Mypage.css";
+import Nav from "../components/Nav";
+import Footer from "../components/Footer";
+import axios from "axios";
 
+// TODO : Home에서 user.email, nickname을 props로 받아와서 state로 저장
 export default function Mypage() {
+  // ? ###### 메인 페이지로 redirect ######
+  const history = useHistory();
+
+  // ? ###### 에러 메세지 state ######
+  const [nicknameError, setNicknameError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const resetErrorMsg = () => {
+    setNicknameError("");
+    setPasswordError("");
+  };
+
+  // ? ###### 유저정보 state ######
+  const [userInfo, setUserInfo] = useState({
+    email: "dummy@email.com", // Home에서 받아온 데이터 입력
+    nickname: "dummy_user_name", // Home에서 받아온 데이터 입력
+    password: "",
+  });
+  const handleInputValue = (key) => (e) => {
+    setUserInfo({ ...userInfo, [key]: e.target.value });
+  };
+
+  // ? ###### 회원 정보 수정 handler ######
+  const handleUserInfo = () => {
+    resetErrorMsg();
+    const { nickname, password } = userInfo;
+    if (!nickname) setNicknameError("닉네임을 입력해주세요");
+    else if (!password) setPasswordError("비밀번호를 입력해주세요");
+    else {
+      // axios({
+      //   method: "patch",
+      //   url: "http://pinggye.com/users/mypage",
+      //   data: userInfo,
+      // }).then((resp) => {
+      //   // 잘 수정되었다면
+      //   history.push("/");
+      // });
+      history.push("/");
+    }
+  };
+
   return (
     <>
+      <Nav />
       <div className="main">
         <div className="mypage">
           <div className="mypage__message">마이 페이지</div>
           <input
             className="input__email"
             type="email"
-            placeholder="Email"
+            value={userInfo.email}
             readOnly
           />
           <input
             className="input__nickname"
             type="text"
             placeholder="Nickname"
+            value={userInfo.nickname}
+            onChange={handleInputValue("nickname")}
           />
+          <div className="signup__alert-box">{nicknameError}</div>
           <input
             className="input__password"
             type="password"
             placeholder="Password"
+            onChange={handleInputValue("password")}
           />
-          <button className="mypage__btn">회원 정보 수정</button>
+          <div className="signup__alert-box">{passwordError}</div>
+          <button onClick={handleUserInfo} className="mypage__btn">
+            회원 정보 수정
+          </button>
         </div>
       </div>
+      <Footer />
     </>
   );
 }

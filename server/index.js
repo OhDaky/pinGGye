@@ -29,7 +29,6 @@ app.use(cookieParser());
 app.use("/main", mainRouter);
 app.use("/users", userRouter);
 app.use("/feeds", feedRouter);
-
 app.get("/", (req, res) => {
   res.status(200).send('Hello World');
 });
