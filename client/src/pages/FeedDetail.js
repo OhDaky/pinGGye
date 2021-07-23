@@ -25,10 +25,8 @@ export default function FeedDetail() {
             </div>
           </div>
           <div className="feed__right-content">
-            <div className="feed__main-contents">
-              <div className="feed__writter">글 올린 사람</div>
-              <div className="feed__main-content">사진에 대한 내용</div>
-            </div>
+            <div className="feed__writter">글 올린 사람</div>
+            <div className="feed__main-content">사진에 대한 내용</div>
             <div className="feed__comments">
               <div className="input-comment">
                 <input type="text" placeholder="댓글 입력창" />
