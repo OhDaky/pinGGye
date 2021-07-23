@@ -1,10 +1,13 @@
-const { Feed: FeedModel, Tag: TagModel, User: UserModel, FeedComment: FCModel } = require("../../models");
-const crypto = require('crypto');
+const { User: UserModel } = require("../../models");
+const crypto = require("crypto");
 
 module.exports = async (req, res) => {
   const { email, password, nickname } = req.body;
-  const salt = '123';
-  const hashedPassword = crypto.createHash('sha512').update(password + salt).digest('hex');
+  const salt = process.env.PASSWORD_SALT;
+  const hashedPassword = crypto
+    .createHash("sha512")
+    .update(password + salt)
+    .digest("hex");
 
   if (!email || !password || !nickname) {
     console.log(req.body);
@@ -16,22 +19,22 @@ module.exports = async (req, res) => {
       email,
     },
     defaults: {
-      password : hashedPassword, // 비밀번호 해싱값으로 저장! 
+      password: hashedPassword, // 비밀번호 해싱값으로 저장!
       nickname,
-      type : "email"
+      type: "email",
     },
   })
     .then(([result, created]) => {
-      console.log('회원가입 요청');
+      console.log("회원가입 요청");
       if (!created) {
-        return res.status(409).send("email exists");
+        return res.status(409).json({ message: "Email already exists"});
       }
       // const userInfo = result.dataValues;
       // delete userInfo.password;
-      res.status(201).json({ message: "ok" });
+      res.status(201).json({ message: "User registration completed" });
     })
     .catch((err) => {
-      console.log(err, '실패');
+      console.log(err, "실패");
       res.sendStatus(500);
     });
 };

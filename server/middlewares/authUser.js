@@ -1,19 +1,27 @@
 const getUserInfo = require("./getUserInfo");
 
 const authUser = async (req, res, next) => {
-  const { authorization, loginType } = req.headers;
+  const { authorization, logintype: loginType } = req.headers;
+
   if (!authorization) {
     // 액세스 토큰 없음
     return res.status(403).json({ message: "Token does not exist" });
-  } 
+  }
   if (!loginType) {
     // 요청에 로그인 타입 없음
     return res.status(403).json({ message: "Type does not exist" });
   }
-  
+
   const accessToken = authorization.split(" ")[1];
 
   const userInfo = await getUserInfo(accessToken, loginType);
+  console.log(userInfo);
+  if (userInfo.error === "expired") {
+    //* 리프레시 토큰 사용 가능
+    return res.status(403).json({ message: "Expired token" });
+  } else if (userInfo.error === "invalid") {
+    return res.status(403).json({ message: "Invalid token" });
+  }
 
   const { userId, email } = userInfo;
   if (!userId || !email) {

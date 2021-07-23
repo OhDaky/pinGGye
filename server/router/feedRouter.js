@@ -1,12 +1,13 @@
 const controller = require("../controller");
-
+const authUser = require("../middlewares/authUser");
 const upload = require("../middlewares/uploadImage");
 const express = require("express");
 const feedRouter = express.Router();
-const authUser = require("../middlewares/authUser");
 
 feedRouter.use("/", authUser);
 
+// 이미지 업로드 /feeds/image
+// feedRouter.post("/image", upload.single("image"), controller.createFeedImage);
 // 피드 업로드 /feeds/upload
 feedRouter.post("/upload", upload.single("image"), controller.createFeed);
 

@@ -1,6 +1,9 @@
 const controller = require("../controller");
+const authUser = require("../middlewares/authUser");
 const express = require("express");
 const mainRouter = express.Router();
+
+mainRouter.use("/", authUser);
 
 // 피드 데이터 읽기 (조회)  /feed
 mainRouter.get("/feed", controller.readAllFeeds);

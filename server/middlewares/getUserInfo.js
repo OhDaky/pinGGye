@@ -1,4 +1,3 @@
-const jwt = require("jsonwebtoken");
 const verifyAccessToken = require("../token/verifyAccessToken");
 // const dotenv = require("dotenv");
 // dotenv.config();
@@ -6,17 +5,18 @@ const verifyAccessToken = require("../token/verifyAccessToken");
 //* 현재 기존 회원만 인증 가능
 const getUserInfo = async (accessToken, loginType) => {
   const userInfo = {
-    userId,
-    email,
+    userId: null,
+    email: null,
   };
 
   if (loginType === "email") {
     const decoded = await verifyAccessToken(accessToken);
 
-    if (decoded === "TokenExpiredError") {
-      res.status(403).json({ message: "Expired token" });
-    } else if (decoded === "JsonWebTokenError") {
-      res.status(403).json({ message: "Invalid token" });
+    console.log(decoded);
+    if (decoded.error === "expired") {
+      userInfo.error = "expired";
+    } else if (decoded.error === "invalid") {
+      userInfo.error = "invalid";
     } else {
       userInfo.userId = decoded.userId;
       userInfo.email = decoded.email;
@@ -25,7 +25,6 @@ const getUserInfo = async (accessToken, loginType) => {
     //! DB 조회 필요성?
   } else if (loginType === "google") {
   }
-
   return userInfo;
 };
 
