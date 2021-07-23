@@ -13,6 +13,7 @@ export default function Signup() {
     email: "",
     nickname: "",
     password: "",
+    social: false,
   });
   const handleInputValue = (key) => (e) => {
     setSignupInfo({ ...signupInfo, [key]: e.target.value });
