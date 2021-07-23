@@ -2,6 +2,7 @@ import React from "react";
 import HomeHashtags from "../components/HomeHashtags";
 import HomeFeed from "../components/HomeFeed";
 import "./Styles/Home.css";
+import Footer from "../components/Footer";
 
 export default function Home() {
   const tags = [
@@ -31,6 +32,7 @@ export default function Home() {
         })}
       </div>
       <div className="home__feed-add-button">+</div>
+      <Footer />
     </center>
   );
 }
