@@ -1,22 +1,46 @@
 const { Feed: FeedModel, User: UserModel, Tag: TagModel } = require("../../models");
 
 module.exports = async (req, res) => {
-  const { userId } = req.userInfo;
-  const { subject, tags, imageSrc: image, thumbnailSrc: thumbnail } = req.body;
 
-  if (!userId || !subject || !tags || !image || !thumbnail) {
+  if (!req.file) {
+    return res.status(500).json({ message: "Image does not exist" });
+  }
+  const imagesInfo = req.file.transforms;
+
+  let imageSrc, thumbnailSrc;
+
+  // S3 이미지 서버에 저장된 이미지의 url 경로 획득
+  imagesInfo.forEach((imageInfo) => {
+    if (imageInfo.id === "thumbnail") thumbnailSrc = imageInfo.location;
+    else if (imageInfo.id === "original") imageSrc = imageInfo.location;
+  });
+
+  if (!imageSrc || !thumbnailSrc) {
+    return res.status(500).json({ data: null, message: "Image upload failed" });
+  }
+
+  const { userId } = req.userInfo;
+  const { subject, tagsText } = req.body;
+
+  if (!userId || !subject || !tagsText || !imageSrc || !thumbnailSrc) {
     return res
       .status(400)
       .json({ message: "Insufficient parameters supplied" });
   }
+
+  const tags = tagsText.split(',');
+  console.log(subject);
+  console.log(tags);
+
+  
 
   try {
     //* DB에 피드 입력
     const feedInfo = await FeedModel.create({
       userId: userId,
       subject: subject,
-      image: image,
-      thumbnail: thumbnail,
+      image: imageSrc,
+      thumbnail: thumbnailSrc,
       download: 0,
     });
 

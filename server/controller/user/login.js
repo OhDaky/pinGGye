@@ -25,11 +25,13 @@ module.exports = async (req, res) => {
   const userInfo = await UserModel.findOne({
     where: { email: email, password: hashedPassword },
   });
+  //* 소셜 로그인 사용자를 위한 type 필드 검사가 필요?
 
   if (!userInfo) {
     console.log("잘못된 유저 정보 입력");
     return res.status(401).json({ data: null, message: "Not authorized" });
   }
+  
   delete userInfo.dataValues.password;
   const accessToken = await generateAccessToken(userInfo.id, userInfo.email);
 

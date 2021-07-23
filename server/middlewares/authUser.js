@@ -15,10 +15,10 @@ const authUser = async (req, res, next) => {
   const accessToken = authorization.split(" ")[1];
 
   const userInfo = await getUserInfo(accessToken, loginType);
+  console.log(userInfo);
   if (userInfo.error === "expired") {
-    return res.status(403).json({ message: "Expired token" });
     //* 리프레시 토큰 사용 가능
-
+    return res.status(403).json({ message: "Expired token" });
   } else if (userInfo.error === "invalid") {
     return res.status(403).json({ message: "Invalid token" });
   }

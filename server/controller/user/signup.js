@@ -27,11 +27,11 @@ module.exports = async (req, res) => {
     .then(([result, created]) => {
       console.log("회원가입 요청");
       if (!created) {
-        return res.status(409).send("email exists");
+        return res.status(409).json({ message: "Email already exists"});
       }
       // const userInfo = result.dataValues;
       // delete userInfo.password;
-      res.status(201).json({ message: "ok" });
+      res.status(201).json({ message: "User registration completed" });
     })
     .catch((err) => {
       console.log(err, "실패");

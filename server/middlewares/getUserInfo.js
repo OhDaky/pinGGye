@@ -12,11 +12,12 @@ const getUserInfo = async (accessToken, loginType) => {
   if (loginType === "email") {
     const decoded = await verifyAccessToken(accessToken);
 
-    if (decoded.error) {
-      if (decoded.error === "expired") userInfo.error = "expired";
-      if (decoded === "invalid") userInfo.error = "invalid";
+    console.log(decoded);
+    if (decoded.error === "expired") {
+      userInfo.error = "expired";
+    } else if (decoded.error === "invalid") {
+      userInfo.error = "invalid";
     } else {
-      console.log(decoded);
       userInfo.userId = decoded.userId;
       userInfo.email = decoded.email;
     }
