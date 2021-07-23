@@ -1,3 +1,4 @@
+const logger = require("../utils/logger");
 const getUserInfo = require("./getUserInfo");
 
 const authUser = async (req, res, next) => {
@@ -5,17 +6,17 @@ const authUser = async (req, res, next) => {
 
   if (!authorization) {
     // 액세스 토큰 없음
-    return res.status(403).json({ message: "Token does not exist" });
+    return res.status(401).json({ message: "Token does not exist" });
   }
   if (!loginType) {
     // 요청에 로그인 타입 없음
-    return res.status(403).json({ message: "Type does not exist" });
+    return res.status(401).json({ message: "Type does not exist" });
   }
 
   const accessToken = authorization.split(" ")[1];
 
   const userInfo = await getUserInfo(accessToken, loginType);
-  console.log('userInfo', userInfo);
+  logger('사용자 토큰 검증', userInfo);
   if (userInfo.error === "expired") {
     //* 리프레시 토큰 사용 가능
     return res.status(403).json({ message: "Expired token" });

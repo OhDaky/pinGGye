@@ -1,8 +1,5 @@
-const {
-  Feed: FeedModel,
-  User: UserModel,
-  Tag: TagModel,
-} = require("../../models");
+const { Feed: FeedModel, Tag: TagModel } = require("../../models");
+const logger = require("../../utils/logger");
 const db = require("../queryFunction");
 
 module.exports = async (req, res) => {
@@ -20,13 +17,15 @@ module.exports = async (req, res) => {
   });
 
   if (!imageSrc || !thumbnailSrc) {
-    return res.status(500).json({ data: null, message: "Image upload failed" });
+    return res.status(500).json({ message: "Image upload failed" });
   }
 
   const { userId } = req.userInfo;
   const { subject, tagsText } = req.body;
 
-  if (!subject || !tagsText || !imageSrc || !thumbnailSrc) {
+  //? 태그 확인 정규식 필요?
+
+  if (!subject || !tagsText) {
     return res
       .status(400)
       .json({ message: "Insufficient parameters supplied" });
@@ -41,16 +40,14 @@ module.exports = async (req, res) => {
       thumbnail: thumbnailSrc,
       download: 0,
     });
+    logger(`피드 ${feed.id}번 입력 완료`);
 
     //* DB에 태그 입력 및 피드와 연결
     const tags = tagsText.split(",");
 
-    const tagInfo = await addTagRows(tags);
-    await Promise.all(tagInfo.map((tag) => feed.addTags(tag[0]))); // 피드-태그 조인 테이블에 입력
-
     // bulk find or create function
     async function addTagRows(tags) {
-      return await Promise.all(tags.map(addTag)); // 각 태그를 태그 테이블에 생성 또는 조회
+      return await Promise.all(tags.map(addTag));
     }
     async function addTag(name) {
       return TagModel.findOrCreate({
@@ -58,11 +55,18 @@ module.exports = async (req, res) => {
       });
     }
 
+    const tagInfo = await addTagRows(tags); // 각 태그를 태그 테이블에 생성 또는 조회
+    logger("태그 입력 완료");
+    await Promise.all(tagInfo.map((tag) => feed.addTags(tag[0]))); // 태그를 기준으로 피드-태그 조인 테이블에 입력
+    logger("피드-태그 입력 완료");
+
     //* 모든 피드 조회 및 응답
     const feeds = await db.findAllFeeds();
 
-    res.status(201).json({ data: feeds, message: "Feed upload succeed" });
+    res
+      .status(201)
+      .json({ data: { feeds }, message: "Feed successfully uploaded" });
   } catch (error) {
-    return res.status(500).json({ message: "Feed upload failed" });
+    return res.status(500).json({ message: "Failed to upload feed" });
   }
 };

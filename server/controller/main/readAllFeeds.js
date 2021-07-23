@@ -6,9 +6,9 @@ const readAllFeeds = async (req, res) => {
 
     res
       .status(200)
-      .json({ data: { feeds: feeds }, message: "Send all feeds" });
+      .json({ data: { feeds }, message: "All feeds successfully read" });
   } catch (error) {
-    return res.status(500).json({ data: null, message: "Server error" });
+    return res.status(500).json({ message: "Failed to read all feeds" });
   }
 };
 

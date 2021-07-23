@@ -31,8 +31,18 @@ app.use("/users", userRouter);
 app.use("/feeds", feedRouter);
 
 app.get("/", (req, res) => {
-  res.status(200).send('Hello World');
+  res.status(200).send("Hello World");
+});
+
+app.use((req, res, next) => {
+  res.status(404).send("Page Not Found!");
+});
+
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({
+    message: "Internal Server Error",
+  });
 });
 
 app.listen(PORT, () => console.log(`http server is runnning on ${PORT}`));
-
