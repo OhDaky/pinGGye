@@ -8,7 +8,7 @@ import axios from "axios";
 // TODO : 피드의 id는 Database에서 부여?
 export default function FeedUpload() {
   // ? ###### accessToken props로 받아오기 ######
-  let accessToken = "rgkljasdflksdfaKLDJARdagklr314139";
+  let accessToken = process.env.REACT_APP_ACCESSTOKEN;
 
   // ? ###### 메인 페이지로 redirect ######
   const history = useHistory();
@@ -89,28 +89,33 @@ export default function FeedUpload() {
   // ? ###### 피드 업로드 ######
   const handleSubmitFeed = () => {
     const formData = new FormData();
-    formData.append("file", image.file);
+    formData.append("image", image.file);
     formData.append("subject", subject);
-    formData.append("hashTagSTR", hashTagSTR);
+    formData.append("tagsText", hashTagSTR);
     // ? # formData 확인하는 방법
     for (let pair of formData.entries()) {
       console.log(pair[0], pair[1]);
     }
-    history.push("/");
 
     // ? ###### formData 서버로 업로드 ######
-    // axios({
-    //   method: "post",
-    //   url: "http://ec2-13-124-173-150.ap-northeast-2.compute.amazonaws.com/feeds/upload",
-    //   data: formData,
-    //   headers: {
-    //     "Content-Type": "multipart/form-data",
-    //     accessToken,
-    //   },
-    // })
-    //   .then((resp) => console.log(resp))
-    //   .catch((err) => alert(err));
-    alert("피드가 업로드 되었습니다.");
+    axios({
+      method: "post",
+      url: "http://ec2-13-124-173-150.ap-northeast-2.compute.amazonaws.com/feeds/upload",
+      data: formData,
+      headers: {
+        "Content-Type": "multipart/form-data",
+        authorization: `bearer ${accessToken}`,
+        logintype: "email",
+      },
+    })
+      .then((resp) => {
+        console.log(resp);
+        if (resp.status === 201) {
+          alert("피드가 성공적으로 업로드 되었습니다.");
+          history.push("/");
+        }
+      })
+      .catch((err) => alert(`에러 발생! 에러코드 ${err}`));
   };
 
   return (
