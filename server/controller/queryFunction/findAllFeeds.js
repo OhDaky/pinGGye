@@ -31,4 +31,16 @@ module.exports = async () => {
   });
 
   return formattedFeeds;
+
+  //! 클라이언트 태그 필터링 로직
+  // const tags = ["회식", "졸려", "싫어"];
+  // let filtered = [];
+  // let unfiltered = formattedFeeds;
+  // for (const tag of tags) {
+  //   filtered = filtered.concat(
+  //     unfiltered.filter((feed) => feed.tags.includes(tag))
+  //   );
+  //   unfiltered = unfiltered.filter((feed) => !feed.tags.includes(tag));
+  // }
+  // return filtered;
 };

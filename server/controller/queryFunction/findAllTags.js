@@ -14,10 +14,12 @@ module.exports = async () => {
   //* 조인 후 처리
   const tags = await TagModel.findAll({
     attributes: ["id", "name"],
+    order: ["id"],
     include: [
       { model: FeedModel, attributes: ["id"], through: { attributes: [] } },
     ],
   });
+  
   const formattedTags = tags
     .map((tag) => {
       const feedCount = tag.dataValues.Feeds.length;
