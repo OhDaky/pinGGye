@@ -1,9 +1,11 @@
 import React from "react";
 import "./Styles/Mypage.css";
+import Nav from "../components/Nav";
 
 export default function Mypage() {
   return (
     <>
+      <Nav />
       <div className="main">
         <div className="mypage">
           <div className="mypage__message">마이 페이지</div>

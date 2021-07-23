@@ -1,9 +1,11 @@
 import React from "react";
 import "./Styles/FeedUpload.css";
+import Nav from "../components/Nav";
 
 export default function FeedUpload() {
   return (
     <>
+      <Nav />
       <div className="main">
         <div className="feed__content">
           <div className="feed__left-content">
