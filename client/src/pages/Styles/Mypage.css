@@ -26,8 +26,13 @@
 .mypage__btn {
   width: 70%;
   height: 30px;
+  margin: 0;
 }
 
 .input__message {
   width: 70%;
+}
+
+.signup__alert-box {
+  color: red;
 }
