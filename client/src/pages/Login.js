@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import React, { useState } from "react";
 
 import "./Styles/Login.css"
+import Footer from "../components/Footer";
   
 export default function Login({ handleResponseSuccess }) {
   const [loginInfo, setLoginInfo] = useState({
@@ -28,6 +29,7 @@ export default function Login({ handleResponseSuccess }) {
   };
 
   return (
+    <>
     <div className="login__container">
     <div className="login__img-box">로그인 페이지 이미지</div>
     <div className="login__login-box">
@@ -53,6 +55,8 @@ export default function Login({ handleResponseSuccess }) {
       </form>
       </div>
     </div>
+      <Footer></Footer>
+    </>
   );
 }
   

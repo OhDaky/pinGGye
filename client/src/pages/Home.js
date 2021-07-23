@@ -35,6 +35,7 @@ export default function Home() {
           })}
         </div>
         <div className="home__feed-add-button">+</div>
+        <Footer />
       </center>
     </>
   );
