@@ -15,7 +15,6 @@ module.exports = async (req, res) => {
       .status(400)
       .json({ message: "Insufficient parameters supplied" });
   }
-
   const salt = process.env.PASSWORD_SALT;
   const hashedPassword = crypto
     .createHash("sha512")

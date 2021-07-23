@@ -1,10 +1,13 @@
 import React from "react";
 import "./Styles/FeedDetail.css";
 import FeedComment from "../components/FeedComment";
+import Nav from "../components/Nav";
+import Footer from "../components/Footer";
 
 export default function FeedDetail() {
   return (
     <>
+      <Nav />
       <div className="main">
         <div className="feed__content">
           <div className="feed__left-content">
@@ -43,6 +46,7 @@ export default function FeedDetail() {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 }
