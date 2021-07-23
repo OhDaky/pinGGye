@@ -1,6 +1,7 @@
 import React from "react";
 import "./Styles/Mypage.css";
 import Nav from "../components/Nav";
+import Footer from "../components/Footer";
 
 export default function Mypage() {
   return (
@@ -28,6 +29,7 @@ export default function Mypage() {
           <button className="mypage__btn">회원 정보 수정</button>
         </div>
       </div>
+      <Footer />
     </>
   );
 }

@@ -1,4 +1,5 @@
 import React from "react";
+import Footer from "../components/Footer";
 import "./Styles/Signup.css";
 
 export default function Signup() {
@@ -21,6 +22,7 @@ export default function Signup() {
           <button className="sign-in__btn">Sign in</button>
         </div>
       </div>
+      <Footer />
     </>
   );
 }

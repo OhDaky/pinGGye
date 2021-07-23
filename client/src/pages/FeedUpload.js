@@ -1,6 +1,7 @@
 import React from "react";
 import "./Styles/FeedUpload.css";
 import Nav from "../components/Nav";
+import Footer from "../components/Footer";
 
 export default function FeedUpload() {
   return (
@@ -53,6 +54,7 @@ export default function FeedUpload() {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 }
