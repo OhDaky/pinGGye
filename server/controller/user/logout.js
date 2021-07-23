@@ -6,5 +6,5 @@ module.exports = (req, res) => {
     httpOnly: true,
   });
 
-  res.status(205).send("Logged out successfully");
+  res.status(205).json({message: "Logged out successfully"});
 };

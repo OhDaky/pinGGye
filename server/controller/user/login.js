@@ -1,4 +1,4 @@
-const { Feed: FeedModel, Tag: TagModel, User: UserModel, FeedComment: FCModel } = require("../../models");
+const { User: UserModel } = require("../../models");
 const crypto = require('crypto');
 
 const generateAccessToken = require('../../token/generateAccessToken')
@@ -20,9 +20,8 @@ module.exports = async (req, res) => {
   
   if (!userInfo) {
     console.log('잘못된 유저 정보 입력');
-    return res.status(401).json({ data: null, message: "not authorized" });
+    return res.status(401).json({ data: null, message: "Unauthorized" });
   } 
     const accessToken = generateAccessToken(userInfo.id, userInfo.email);
     return res.json({ data: { accessToken }, message: "ok" });
-
 };

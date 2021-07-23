@@ -1,4 +1,4 @@
-const { Feed: FeedModel, User: UserModel } = require("../../models");
+const { Feed: FeedModel, User: UserModel, Tag:TagModel } = require("../../models");
 
 module.exports = async (req, res) => {
   const imagesInfo = req.file.transforms;
@@ -15,7 +15,7 @@ module.exports = async (req, res) => {
 
   // DB에 Feed 저장
 
-  const { userId } = req.UserInfo;
+  const { userId } = req.userInfo;
   const { subject, tags } = req.body;
 
   if (!userId || !subject) {

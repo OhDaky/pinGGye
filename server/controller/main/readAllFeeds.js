@@ -1,5 +1,4 @@
-
-const { Feed: FeedModel, Tag: TagModel, User: UserModel, FeedComment: FCModel } = require("../../models");
+const { Feed: FeedModel, Tag: TagModel, User: UserModel} = require("../../models");
 
 const readAllFeeds= async () => {
   const result = await FeedModel.findAll({ attributes: ["id", "subject", "image", "thumbnail", "download", "createdAt", "updatedAt"], include: [{ model: TagModel, required: false, through: { attributes: [] } }, {model: UserModel}] });
@@ -10,7 +9,6 @@ const readAllFeeds= async () => {
     feed.dataValues.User = feed.dataValues.User.email;
     return feed.dataValues;
   })
-  console.log('모든 피드 조회');
   return formatted;
 }
   
