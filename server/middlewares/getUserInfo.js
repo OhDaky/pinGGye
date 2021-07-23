@@ -12,7 +12,7 @@ const getUserInfo = async (accessToken, loginType) => {
   if (loginType === "email") {
     const decoded = await verifyAccessToken(accessToken);
 
-    console.log(decoded);
+    // console.log(decoded);
     if (decoded.error === "expired") {
       userInfo.error = "expired";
     } else if (decoded.error === "invalid") {
