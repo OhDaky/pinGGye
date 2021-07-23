@@ -1,8 +1,5 @@
-const {
-  Feed: FeedModel,
-  User: UserModel,
-  FeedComment: FeedCommentModel,
-} = require("../../models");
+const { FeedComment: FeedCommentModel } = require("../../models");
+const logger = require("../../utils/logger");
 const db = require("../queryFunction");
 
 module.exports = async (req, res) => {
@@ -18,7 +15,7 @@ module.exports = async (req, res) => {
 
   try {
     //* 존재하는 피드인지 확인
-    const feed = db.findFeed(feedId);
+    const feed = await db.findFeed(feedId);
     if (!feed) {
       return res.status(400).json({ message: "Invalid feed" });
     }
@@ -29,14 +26,15 @@ module.exports = async (req, res) => {
       userId: userId,
       textContent: textContent,
     });
+    logger(`피드 ${feedId}번 댓글 ${comment.id}번 입력 완료`);
 
     // * 해당 피드의 모든 댓글 전송
     const comments = await db.findFeedComments(feedId);
 
     res
       .status(201)
-      .json({ data: comments, message: "Feed comment create succeed" });
+      .json({ data: { comments }, message: "Comment successfully registerd" });
   } catch (error) {
-    return res.status(500).json({ message: "Feed comment create failed" });
+    return res.status(500).json({ message: "Failed to register comment" });
   }
 };

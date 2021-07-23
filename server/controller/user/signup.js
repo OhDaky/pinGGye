@@ -10,7 +10,7 @@ module.exports = async (req, res) => {
     .digest("hex");
 
   if (!email || !password || !nickname) {
-    console.log(req.body);
+    // console.log(req.body);
     return res.status(422).send("insufficient parameters supplied");
   }
 

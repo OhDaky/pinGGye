@@ -1,9 +1,8 @@
 const jwt = require("jsonwebtoken");
-// const dotenv = require("dotenv");
-// dotenv.config();
+const logger = require("../utils/logger");
 
 const generateAccessToken = async (userInfo) => {
-  console.log('사용자 액세스 토큰 생성', userInfo.dataValues);
+  logger('사용자 액세스 토큰 생성', userInfo.dataValues);
   return jwt.sign(
     {
       userId: userInfo.id,

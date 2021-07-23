@@ -1,3 +1,4 @@
+const logger = require("../../utils/logger");
 const db = require("../queryFunction");
 
 module.exports = async (req, res) => {
@@ -12,12 +13,17 @@ module.exports = async (req, res) => {
     const feed = await db.findFeed(feedId);
     //* 해당 피드의 다운로드 횟수(알) 증가
     await feed.update({ download: feed.download + 1 });
-
+    logger(`피드 ${feedId}번 이미지 다운로드 횟수 갱신 완료`);
     //* 모든 피드 조회 및 응답
     const feeds = await db.findAllFeeds();
 
-    res.status(201).json({ data: feeds, message: "Egg count succeed" });
+    res
+      .status(201)
+      .json({
+        data: { feeds },
+        message: "Feed download count successfully updated",
+      });
   } catch (error) {
-    res.status(201).json({ message: "Egg count failed" });
+    res.status(500).json({ message: "Failed to update feed download cound" });
   }
 };
