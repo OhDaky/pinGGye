@@ -3,6 +3,7 @@ import HomeHashtags from "../components/HomeHashtags";
 import HomeFeed from "../components/HomeFeed";
 import "./Styles/Home.css";
 import Nav from "../components/Nav";
+import Footer from "../components/Footer";
 
 export default function Home() {
   const tags = [
