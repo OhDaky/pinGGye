@@ -1,12 +1,13 @@
 .home__feed {
-  margin: 1rem;
+  margin: 2rem;
   display: flex;
   float: left;
   text-align: center;
-  /* align-content: center; */
+  align-content: center;
   width: 200px;
   height: 200px;
   border: 1px solid black;
+  /* background-image: ; */
 }
 
 .home__feed-tags {

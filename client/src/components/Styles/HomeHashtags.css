@@ -1,10 +1,11 @@
 .home__hashtag {
   margin: 1rem;
   display: flex;
+  /* flex-direction: row; */
   float: left;
   text-align: center;
   padding: 10px;
-  /* align-content: center; */
+  align-content: center;
   border-radius: 20px;
   width: fit-content;
   height: fit-content;

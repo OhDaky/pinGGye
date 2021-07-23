@@ -3,8 +3,8 @@ import "./Styles/HomeHashtags.css"
 
 export default function HomeHashtags({ input }) {
   return (
-    <center>
-      <span className="home__hashtag">#{ input }</span>
-    </center>
+    <>
+      <button className="home__hashtag">#{ input }</button>
+    </>
   )
 }

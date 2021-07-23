@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import HomeHashtags from "../components/HomeHashtags";
 import HomeFeed from "../components/HomeFeed";
 import "./Styles/Home.css";
@@ -19,15 +19,21 @@ export default function Home() {
     "집",
   ];
 
+  // 초기 전체사진. setFeeds로 해시태그 필터 -> 필터된 사진
+  const [feeds, setFeeds] = useState({}); 
+  const [selectedHashtag, setSelectedHashtag] = useState('');
+
   return (
     <>
       <Nav />
-      <center>
+      <main>
         <div className="home__hashtag-container">
           <div className="home__hashtag-title">해시태그</div>
-          {tags.map((tag, i) => {
-            return <HomeHashtags input={tag} />;
-          })}
+          <span className="home__hashtag-table">
+            {tags.map((tag, i) => {
+              return <HomeHashtags input={tag} />;
+            })}
+          </span>
         </div>
         <div className="home__feeds-container">
           {tags.map((tag, i) => {
@@ -36,7 +42,7 @@ export default function Home() {
         </div>
         <div className="home__feed-add-button">+</div>
         <Footer />
-      </center>
+      </main>
     </>
   );
 }
