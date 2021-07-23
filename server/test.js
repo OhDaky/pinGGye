@@ -1,109 +1,75 @@
-const { Feed: FeedModel, Tag: TagModel, User: UserModel, FeedComment: FCModel } = require("./models");
+import { Request, Response } from 'express';
+import axios from 'axios';
+import * as dotenv from 'dotenv';
+import { Users } from '../../src/entity/Users';
+dotenv.config();
 
-//! 유저 회원가입
-const usercreate = async () => {
-  // email과 type을 이용한 조건 검사 필요
-  await UserModel.create({ email: "kim@mail.com", nickname: "김", password: "1234", type: "email" });
-}
-// usercreate();
+const googleLoginURL = 'https://accounts.google.com/o/oauth2/token';
+const googleInfoURL = 'https://www.googleapis.com/oauth2/v3/userinfo';
 
-//! 피드 업로드
-const insert = async (user, feed) => {
-  const userInfo = await UserModel.findOne({ where: { email: user.email } });
+const loginGoogle = async (req, res) => {
+	// 로그인 - OAuth 방식: google
+	console.log('💙loginGoogle-', req.body);
+	// authorization code를 이용해 access token을 발급받음
+	await axios
+		.post(googleLoginURL, {
+			client_id: process.env.GOOGLE_CLIENT_ID,
+			client_secret: process.env.GOOGLE_CLIENT_SECRET,
+			code: req.body.authorizationCode,
+			redirect_uri: `${process.env.CLIENT_URL}/loginloading`,
+			grant_type: 'authorization_code',
+		})
+		.then(async result => {
+			let accessToken = result.data.access_token;
+			let refreshToken = result.data.refresh_token;
+			// accessToken을 통해 로그인한 유저 정보 가져오기
+			const resInfo = await axios
+				.get(googleInfoURL, {
+					headers: {
+						authorization: `Bearer ${accessToken}`,
+					},
+				})
+				.then(result => result.data.email)
+				.catch(err => {
+					console.log('💙loginGoogle-err:', err.message);
+				});
+			// 유저정보 확인하여 새로운 유저면 데이터베이스에 저장
+			const userInfo = await Users.findOne({
+				email: resInfo,
+			});
+			if (userInfo == null && resInfo !== undefined) {
+				let newUser = new Users();
+				newUser.email = resInfo;
+				newUser.name = resInfo.split('@')[0];
+				newUser.profileColor = randomColorGenerator();
+				try {
+					newUser.save();
+				} catch (err) {
+					console.log('💙loginGoogle-err:', err.message);
+				}
+			}
+			// cookie에 refresh token 저장
+			res.cookie('refreshToken', refreshToken, {
+				maxAge: 1000 * 60 * 60 * 24 * 7,
+				httpOnly: true,
+				secure: true,
+				sameSite: 'none',
+			});
 
-  const feedInfo = await FeedModel.create({
-    userId: userInfo.id,
-    subject: feed.subject,
-    image: "이미지",    // 이미지 및 섬네일은 multerS3 연동하여 가져옴
-    thumbnail: "섬넬",
-    download: 0
-  });
+			// access token과 loginType, email을 응답으로 보내줌
+			//console.log('💙loginGoogle-at:', accessToken, '\n💙loginGoogle-rt:', refreshToken);
+			res.status(200).json({
+				accessToken,
+				loginType: 'google',
+				email: resInfo,
+			});
+		})
+		.catch(err => {
+			console.log('💙loginGoogle-err:', err.message);
+			res.status(401).json({
+				message: 'authorizationCode Error!' + err.message,
+			});
+		});
+};
 
-  await addTagRows(feed.tags).then((result) => {
-    result.forEach((el) => {
-      feedInfo.addTags(el[0]);
-    })
-  });
-
-  async function addTagRows(tags) {
-    return await Promise.all(
-      tags.map(addTag)
-    );
-  }
-  async function addTag(name) {
-    return TagModel.findOrCreate({
-      where: { name }
-    });
-  }
-}
-
-const user = { email: "kim@mail.com" }
-const feed = { subject: "으악", tags: ["3차", "술자리", "회식"] };
-
-// insert(user,feed)
-
-//! 피드 조회
-const findAll = async () => {
-  const result = await FeedModel.findAll({ attributes: ["id", "subject", "image", "thumbnail", "download", "createdAt", "updatedAt"], include: [{ model: TagModel, required: false, through: { attributes: [] } }, {model: UserModel}] });
-  
-  const formatted = result.map((feed) => {
-    feed.dataValues.Tags = feed.dataValues.Tags.map((tag) => tag.name);
-    feed.dataValues.nickname = feed.dataValues.User.nickname;
-    feed.dataValues.User = feed.dataValues.User.email;
-    return feed.dataValues;
-  })
-  console.log(formatted);
-}
-
-// findAll();
-
-//! 피드 태그로 조회 -> 클라이언트에서 필터링
-const findFeedFilter = async (tag) => {
-  const result = await FeedModel.findAll({ attributes: ["id", "subject", "image", "thumbnail", "download", "createdAt", "updatedAt"], include: [{ model: TagModel, required: false, through: { attributes: [] } }, {model: UserModel}] });
-  
-  const formatted = result.map((feed) => {
-    feed.dataValues.Tags = feed.dataValues.Tags.map((tag) => tag.name);
-    feed.dataValues.nickname = feed.dataValues.User.nickname;
-    feed.dataValues.User = feed.dataValues.User.email;
-    return feed.dataValues;
-  })
-
-  //* 필터링 -> 클라이언트 단에서 처리
-  const filtered = formatted.filter((feed) => feed.Tags.includes(tag));
-  console.log(filtered)
-}
-
-// findFeedFilter("술자리");
-
-
-//! 피드 댓글 저장
-const createFeedComment = async (feedId, user, comment) => {
-  const userInfo = await UserModel.findOne({ where: { email: user.email } });
-
-  await FeedModel.findOne({
-    where: {
-      id: feedId
-    }
-  }).then((result) => {
-    if (result) { // 해당 피드가 존재하면
-      FCModel.create({ feedId: feedId, userId: userInfo.id, textContent: comment });
-    }
-  });
-}
-
-//* 토큰에 id가 있다면 email 대신 바로 userId로 입력 가능!
-// createFeedComment(5, { email: "kim@mail.com" }, "5번이네요");
-
-//! 피드 댓글 조회
-const findFeedComment = async (feedId) => {
-  const comment = await FCModel.findAll({ attributes: ["id", "feedId", "textContent", "createdAt"], where: { feedId: feedId }, include: [{ model: UserModel }] });
-  
-  const formatted = comment.map((comment) => {
-    comment.dataValues.nickname = comment.dataValues.User.nickname;
-    comment.dataValues.User = comment.dataValues.User.email;
-    return comment.dataValues;
-  })
-  console.log(formatted);
-}
-
-findFeedComment(5);
+export default loginGoogle;

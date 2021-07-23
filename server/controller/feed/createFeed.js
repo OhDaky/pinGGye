@@ -32,8 +32,6 @@ module.exports = async (req, res) => {
   console.log(subject);
   console.log(tags);
 
-  
-
   try {
     //* DB에 피드 입력
     const feedInfo = await FeedModel.create({
