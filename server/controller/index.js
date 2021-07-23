@@ -4,6 +4,8 @@ module.exports = {
   login: require("./user/login"),
   logout: require("./user/logout"),
   signup: require("./user/signup"),
+  readUserInfo: require("./user/readUserInfo"),
+  updateUserInfo: require("./user/updateUserInfo"),
 
   // feed
   createFeedImage: require("./feed/createFeedImage"),
