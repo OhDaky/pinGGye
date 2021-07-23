@@ -38,17 +38,13 @@ module.exports = async (req, res) => {
     const tags = tagsText.split(",");
 
     // bulk find or create function
-    async function addTagRows(tags) {
-      return await Promise.all(tags.map(addTag)); // 각 태그를 태그 테이블에 생성 또는 조회
-    }
-    async function addTag(name) {
-      return TagModel.findOrCreate({
-        where: { name },
+    for (const tag of tags) {
+      const [tagInfo, created] = await TagModel.findOrCreate({
+        where: { name: tag },
       });
+      await feed.addTags((tagInfo));
     }
 
-    const tagInfo = await addTagRows(tags);
-    await Promise.all(tagInfo.map((tag) => feed.addTags(tag[0]))); // 피드-태그 조인 테이블에 입력
     logger(`피드 ${feedId}번 새로운 태그 입력 완료`);
 
     //* 모든 피드 조회 및 응답
@@ -58,6 +54,6 @@ module.exports = async (req, res) => {
       .status(200)
       .json({ data: { feeds }, message: "Feed successfully updated" });
   } catch (error) {
-    return res.status(400).json({ message: "Failed to update feed" });
+    return res.status(500).json({ message: "Failed to update feed" });
   }
 };
