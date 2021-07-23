@@ -1,7 +1,7 @@
 const { User: UserModel } = require("../../models");
-const crypto = require('crypto');
+const crypto = require("crypto");
 
-const generateAccessToken = require('../../token/generateAccessToken')
+const generateAccessToken = require("../../token/generateAccessToken");
 // const generateRefreshToken = require('../../token/generateRefreshToken')
 
 module.exports = async (req, res) => {
@@ -10,18 +10,33 @@ module.exports = async (req, res) => {
 
   const { email, password } = req.body;
 
-  const salt = '123';
-  const hashedPassword = crypto.createHash('sha512').update(password + salt).digest('hex');
+  if (!email || !password) {
+    return res
+      .status(400)
+      .json({ message: "Insufficient parameters supplied" });
+  }
+
+  const salt = process.env.PASSWORD_SALT;
+  const hashedPassword = crypto
+    .createHash("sha512")
+    .update(password + salt)
+    .digest("hex");
 
   const userInfo = await UserModel.findOne({
-    where: { email: email, password: hashedPassword},
+    where: { email: email, password: hashedPassword },
   });
-  console.log('유저 정보', userInfo);
-  
+  //* 소셜 로그인 사용자를 위한 type 필드 검사가 필요?
+
   if (!userInfo) {
-    console.log('잘못된 유저 정보 입력');
-    return res.status(401).json({ data: null, message: "Unauthorized" });
-  } 
-    const accessToken = generateAccessToken(userInfo.id, userInfo.email);
-    return res.json({ data: { accessToken }, message: "ok" });
+    console.log("잘못된 유저 정보 입력");
+    return res.status(401).json({ data: null, message: "Not authorized" });
+  }
+  
+  delete userInfo.dataValues.password;
+  const accessToken = await generateAccessToken(userInfo.id, userInfo.email);
+
+  //* 리프레시 토큰 전송 가능
+  return res
+    .status(201)
+    .json({ data: { accessToken, userInfo }, message: "Login succeed" });
 };

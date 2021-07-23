@@ -6,6 +6,7 @@ module.exports = {
   signup: require("./user/signup"),
 
   // feed
+  createFeedImage: require("./feed/createFeedImage"),
   createFeed: require("./feed/createFeed"),
   readFeed: require("./feed/readFeed"),
   updateFeed: require("./feed/updateFeed"),
@@ -19,7 +20,7 @@ module.exports = {
   updateFeedComment: require("./feed/updateFeedComment"),
   deleteFeedComment: require("./feed/deleteFeedComment"),
 
-  // main page 
+  // main
   readAllFeeds: require("./main/readAllFeeds"),
   readAllTags: require("./main/readAllTags"),
 };

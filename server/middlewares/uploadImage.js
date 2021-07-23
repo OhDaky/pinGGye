@@ -42,5 +42,6 @@ const upload = multer({
     acl: "public-read",
   }),
 });
+console.log("Image server connected");
 
 module.exports = upload;
