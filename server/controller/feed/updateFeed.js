@@ -19,7 +19,7 @@ module.exports = async (req, res) => {
   try {
     //* 변경할 피드 조회
     const feed = await FeedModel.findOne({
-      where: { id: feedId, userId: userId },
+      where: { id: feedId },  //! 작성자 확인
       include: [
         { model: TagModel, required: false, through: { attributes: [] } },
       ],

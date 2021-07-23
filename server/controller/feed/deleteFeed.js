@@ -14,7 +14,7 @@ module.exports = async (req, res) => {
 
   try {
     //* 삭제할 피드 조회
-    const feed = await FeedModel.findOne({ where: { id: feedId, userId: userId } });
+    const feed = await FeedModel.findOne({ where: { id: feedId, userId: userId } });  //! 작성자 확인 (관리자)
     if (!feed) {
       return res.status(400).json({ message: "Invalid feed" });
     }

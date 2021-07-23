@@ -7,7 +7,7 @@ const db = require("../queryFunction");
 
 module.exports = async (req, res) => {
   if (!req.file) {
-    return res.status(500).json({ message: "Image does not exist" });
+    return res.status(400).json({ message: "Image does not exist" });
   }
   const imagesInfo = req.file.transforms;
 

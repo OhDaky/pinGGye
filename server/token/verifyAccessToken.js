@@ -4,7 +4,6 @@ const jwt = require("jsonwebtoken");
 
 const verifyAccessToken = async (token) => {
   try {
-    console.log('흐음')
     return jwt.verify(token, process.env.ACCESS_SECRET);
   } catch (error) {
     console.log('token errer:', error.name);
