@@ -12,6 +12,6 @@ mainRouter.get("/feed", controller.readAllFeeds);
 mainRouter.get("/tag", controller.readAllTags);
 
 // 다운받은(북마크) 피드 데이터 읽기
-mainRouter.get("/likefeed", controller.readAllLikeFeeds);
+mainRouter.get("/feed/like", controller.readAllLikeFeeds);
 
 module.exports =  mainRouter;

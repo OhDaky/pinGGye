@@ -5,6 +5,7 @@ module.exports = {
     queryInterface.createTable("Feeds_Tags", {
       feedId: {
         allowNull: false,
+        primaryKey: true,
         type: Sequelize.INTEGER,
         onUpdate: "CASCADE",
         onDelete: "CASCADE",
@@ -12,6 +13,7 @@ module.exports = {
       },
       tagId: {
         allowNull: false,
+        primaryKey: true,
         type: Sequelize.INTEGER,
         references: { model: "Tags", key: "id" },
       },
