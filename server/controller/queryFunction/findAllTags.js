@@ -1,6 +1,8 @@
 const { Feed: FeedModel, Tag: TagModel } = require("../../models");
 
-module.exports = async () => {
+module.exports = async (order) => {
+  if (order !== "ASC" && order !== "DESC") order = "ASC";
+
   //* COUNT 쿼리 방법
   // const tags = await TagModel.findAll({
   //   attributes: ["id", "name", sequelize.fn("COUNT", sequelize.col("Feeds.id"))],
@@ -18,8 +20,9 @@ module.exports = async () => {
     include: [
       { model: FeedModel, attributes: ["id"], through: { attributes: [] } },
     ],
+    order: [["id", order]],
   });
-  
+
   const formattedTags = tags
     .map((tag) => {
       const feedCount = tag.dataValues.Feeds.length;
