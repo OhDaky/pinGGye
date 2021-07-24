@@ -66,17 +66,24 @@
   border: 1px solid black;
 }
 
-.input-comment {
+.input-comment-box {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   width: 100%;
   height: 50px;
-  background-color: red;
 }
-.input-comment > button {
+
+.input-comment-box > input {
   margin: 0;
   height: 100%;
+  width: 80%;
+}
+
+.input-comment-box > button {
+  margin: 0;
+  height: 100%;
+  width: 20%;
 }
 
 .feed__comments-box {
