@@ -11,4 +11,7 @@ mainRouter.get("/feed", controller.readAllFeeds);
 // 해시태그 가져오기 (조회) /hashtag
 mainRouter.get("/tag", controller.readAllTags);
 
+// 다운받은(북마크) 피드 데이터 읽기
+mainRouter.get("/likefeed", controller.readAllLikeFeeds);
+
 module.exports =  mainRouter;

@@ -3,4 +3,5 @@ module.exports = {
   findAllTags: require("./findAllTags"),
   findFeed: require("./findFeed"),
   findFeedComments: require("./findFeedComments"),
+  findAllLikeFeeds: require("./findAllLikeFeeds"),
 };

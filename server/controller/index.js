@@ -26,4 +26,5 @@ module.exports = {
   // main
   readAllFeeds: require("./main/readAllFeeds"),
   readAllTags: require("./main/readAllTags"),
+  readAllLikeFeeds: require("./main/readAllLikeFeeds"),
 };

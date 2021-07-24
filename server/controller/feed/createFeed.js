@@ -61,7 +61,7 @@ module.exports = async (req, res) => {
       const [tagInfo, created] = await TagModel.findOrCreate({
         where: { name: tag },
       });
-      await feed.addTags((tagInfo));
+      await feed.addTags(tagInfo);
     }
     logger("태그, 피드-태그 입력 완료");
 

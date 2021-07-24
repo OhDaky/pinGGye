@@ -2,7 +2,7 @@ module.exports = async (req, res) => {
   // 이미지 서버에 이미지 저장
   // console.log(req.body.subject);
   // console.log(req.body.tags);
-  // //! 필요없을듯
+  //! unnecessary
   // if (!req.file) {
   //   return res.status(500).json({ message: "Image does not exist" });
   // }
