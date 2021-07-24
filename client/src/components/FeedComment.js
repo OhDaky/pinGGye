@@ -11,11 +11,15 @@ export default function FeedComment({ feedId, comment, getComment, userInfo }) {
 
   // ? ###### 본인인증 state ######
   // ? # 본인 글에만 수정 / 삭제 기능이 보임.
-  // TODO : 프론트 -> 백앤드 요청 : 피드1번의 댓글에 다른 유저의 데이터 넣어주세요
   const [isMe, setIsMe] = useState(false);
   const handleIsMe = () => {
-    if (userInfo.email === comment.email) {
-      setIsMe(true);
+    // ? # admin의 경우 모든 댓글에 접근 가능
+    if (userInfo.accountType === "admin") setIsMe(true);
+    else {
+      // ? # 본인 이메일과 댓글 이메일이 같을 경우 수정 가능
+      if (userInfo.email === comment.email) {
+        setIsMe(true);
+      }
     }
   };
   useEffect(() => {
