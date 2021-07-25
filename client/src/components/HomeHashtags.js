@@ -1,10 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Styles/HomeHashtags.css"
 
-export default function HomeHashtags({ input }) {
+export default function HomeHashtags({ hashtag }) {
+  const [isSelected, setIsSelected] = useState(false);
+  const handleHashtagClick = () => {
+    console.log('태그 클릭');
+    if (isSelected === false) {
+      setIsSelected(true);      
+    } else {
+      setIsSelected(false);
+    }
+  }
   return (
-    <>
-      <button className="home__hashtag">#{ input }</button>
+    <>{
+      isSelected ? (
+        <button className="home__hashtag-selected" onClick={ handleHashtagClick }>#{ hashtag }</button>
+      ): (
+        <button className="home__hashtag" onClick={ handleHashtagClick }>#{ hashtag }</button>
+      )
+    }
     </>
   )
 }

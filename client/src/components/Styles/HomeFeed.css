@@ -6,7 +6,9 @@
   align-content: center;
   width: 200px;
   height: 200px;
+  /* flex-basis: auto; */
   border: 1px solid black;
+  /* overflow: auto; */
   /* background-image: ; */
 }
 

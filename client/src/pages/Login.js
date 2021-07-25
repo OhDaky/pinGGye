@@ -2,9 +2,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
 
-import "./Styles/Login.css"
-import Footer from "../components/Footer";
-  
+import "./Styles/Login.css"  
 export default function Login({ handleResponseSuccess }) {
   const [loginInfo, setLoginInfo] = useState({
     email: '',
@@ -13,8 +11,7 @@ export default function Login({ handleResponseSuccess }) {
   const [errorMessage, setErrorMessage] = useState('');
   const handleInputValue = (key) => (e) => {
     setLoginInfo({ ...loginInfo, [key]: e.target.value });
-  }
-
+  };
   const handleLogin = () => {
     const { email, password } = loginInfo;
     if (!email && !password) {
@@ -26,6 +23,14 @@ export default function Login({ handleResponseSuccess }) {
     } else if (!password) {
       setErrorMessage('비밀번호를 입력하세요');
     }
+
+    axios
+      .post('http;//localhost:3000/login', loginInfo, {
+        withCredentials: true,
+      })
+      .then((data) => {
+        handleResponseSuccess();
+    })
   };
 
   return (
@@ -55,7 +60,6 @@ export default function Login({ handleResponseSuccess }) {
           <div className="login__alert-box">{errorMessage}</div>
         </div>
       </div>
-      <Footer />
     </>
   );
 }

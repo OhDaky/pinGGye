@@ -1,14 +1,29 @@
 import axios from "axios";
+import { useState } from "react";
 import { Route, Switch } from "react-router-dom";
 import FeedDetail from "./pages/FeedDetail";
 import FeedUpload from "./pages/FeedUpload";
 import Home from "./pages/Home";
 import Landing from "./pages/Landing";
-import Login from "./pages/Login";
 import Mypage from "./pages/Mypage";
 import Signup from "./pages/Signup";
 
 function App() {
+
+  const [isLogin, setIsLogin] = useState(true);
+  const [userInfo, setUserInfo] = useState({
+    email: "kim@google.com",
+    password: "1234",
+    nickname: "kim",
+  });
+
+  // setIsLogin(true);
+  // setUserInfo({
+  //   email: "kim@google.com",
+  //   password: "1234",
+  //   nickname: "kim",
+  // })
+
   axios
     .get(`${process.env.REACT_APP_API_URL}/`)
     .then((res) => {
@@ -20,7 +35,10 @@ function App() {
     <>
       <Switch>
         <Route path="/" exact>
-          <Home />
+          <Home
+            isLogin={isLogin}
+            userInfo={userInfo}
+          />
         </Route>
         <Route path="/feed" exact>
           <FeedDetail />
@@ -30,9 +48,6 @@ function App() {
         </Route>
         <Route path="/landing">
           <Landing />
-        </Route>
-        <Route path="/login">
-          <Login />
         </Route>
         <Route path="/mypage">
           <Mypage />
