@@ -5,6 +5,9 @@ import Footer from "../components/Footer";
 import "./Styles/Signup.css";
 
 export default function Signup() {
+  // ? ###### Default Value ######
+  let pinGGyeURL = process.env.REACT_APP_API_URL;
+
   // ? ###### 로그인 페이지로 redirect ######
   const history = useHistory();
 
@@ -13,7 +16,6 @@ export default function Signup() {
     email: "",
     nickname: "",
     password: "",
-    social: false,
   });
   const handleInputValue = (key) => (e) => {
     setSignupInfo({ ...signupInfo, [key]: e.target.value });
@@ -41,17 +43,21 @@ export default function Signup() {
     else if (!nickname) setNicknameError("닉네임을 입력하세요");
     else if (!password) setPasswordError("비밀번호를 입력하세요");
     else {
-      history.push("/login");
       // TODO : 서버와 연결 후 axios 요청 주석풀기
-      //   axios({
-      //     method: "post",
-      //     url: "http://pinggye.com/users/signin",
-      //     data: signupInfo,
-      //   }).then((resp) => {
-      //     // 이미 있는 회원일때와 아닐때 메세지 출력
-      //     if (resp.isExist) setExistError("이미 회원입니다.");
-      // else history.push("/login");
-      //   });
+      axios({
+        method: "post",
+        url: `${pinGGyeURL}/users/signup`,
+        data: signupInfo,
+      })
+        .then(() => {
+          // 이미 있는 회원일때와 아닐때 메세지 출력
+          alert(
+            `${nickname}님 회원가입이 완료되었습니다! 최고의 핑계사진을 찾으러 가볼까요?`
+          );
+          history.push("/login");
+        })
+        // TODO : 이미 있는 회원이라면, 모달창을 띄워서 로그인하러 가시겠습니까? 만들면 좋을듯.
+        .catch(() => alert("이미 있는 회원입니다!"));
     }
   };
 
