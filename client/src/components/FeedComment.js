@@ -2,9 +2,14 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import "./Styles/FeedComment.css";
 
-export default function FeedComment({ feedId, comment, getComment, userInfo }) {
+export default function FeedComment({
+  feedId,
+  comment,
+  getComment,
+  userInfo,
+  accessToken,
+}) {
   // ? ###### Default value ######
-  let accessToken = process.env.REACT_APP_ACCESSTOKEN;
   let pinGGyeURL = process.env.REACT_APP_API_URL;
   const { nickname, textContent, id } = comment;
   let commentId = id;
@@ -13,7 +18,11 @@ export default function FeedComment({ feedId, comment, getComment, userInfo }) {
   // ? # 본인 글에만 수정 / 삭제 기능이 보임.
   const [isMe, setIsMe] = useState(false);
   const handleIsMe = () => {
+    setIsMe(false);
     // ? # admin의 경우 모든 댓글에 접근 가능
+    // ! [BUG] admin계정은 수정과 삭제 버튼은 보이나, 실제로 작동하지 않음.
+    // ! 서버측에서 김군의 토큰을 받았을 때 admin 기능을 제대로 하는지 (다른 사람의 글 접근권한) 확인해보기
+    // TODO : admin에 대한 요청을 따로 구현해야 할듯
     if (userInfo.accountType === "admin") setIsMe(true);
     else {
       // ? # 본인 이메일과 댓글 이메일이 같을 경우 수정 가능

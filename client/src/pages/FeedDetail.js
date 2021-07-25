@@ -7,7 +7,6 @@ import axios from "axios";
 
 export default function FeedDetail() {
   // ? ###### Default Value ######
-  let accessToken = process.env.REACT_APP_ACCESSTOKEN;
   let pinGGyeURL = process.env.REACT_APP_API_URL;
 
   // TODO : Home에서 클릭한 feedId 받아오기. 임시로 1로 저장
@@ -15,6 +14,7 @@ export default function FeedDetail() {
 
   // ! @@@@@@@@@@ Test Zone @@@@@@@@@@
   // ! 원래는 Home에서 받아와야함. 사용자 인증을 위해 임시로 해놓은 것.
+  let accessToken = process.env.REACT_APP_ACCESSTOKEN;
   const [userInfo, setUserInfo] = useState({});
   const getUserInfo = async () => {
     await axios({
@@ -31,7 +31,6 @@ export default function FeedDetail() {
       .catch((err) => console.log(err));
   };
   // ! @@@@@@@@@@ Test Zone @@@@@@@@@@
-
   // ? ###### input comment State ######
   const [inputComment, setInputComment] = useState("");
 
@@ -55,8 +54,8 @@ export default function FeedDetail() {
   };
   // ? # 최초 랜더링 시 서버에서 comments 불러오기
   useEffect(() => {
-    getComment();
     getUserInfo();
+    getComment();
   }, []);
 
   // ? # 댓글 입력시 입력칸 초기화
@@ -137,6 +136,7 @@ export default function FeedDetail() {
                     feedId={feedId}
                     getComment={getComment}
                     userInfo={userInfo}
+                    accessToken={accessToken}
                   />
                 ))}
               </div>
