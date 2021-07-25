@@ -22,6 +22,8 @@ const authUser = async (req, res, next) => {
     return res.status(403).json({ message: "Expired token" });
   } else if (userInfo.error === "invalid") {
     return res.status(403).json({ message: "Invalid token" });
+  } else if (userInfo.error === "error") {
+    return res.status(500).json({ message: "Server error" });
   }
 
   const { userId, email, accountType } = userInfo;
