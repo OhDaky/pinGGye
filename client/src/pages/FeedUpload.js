@@ -2,12 +2,22 @@ import React, { useState } from "react";
 import "./Styles/FeedUpload.css";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 
 // TODO : 피드의 id는 Database에서 부여?
 export default function FeedUpload() {
+  // ? ###### accessToken props로 받아오기 ######
+  let accessToken = process.env.REACT_APP_ACCESSTOKEN;
+
+  // ? ###### 메인 페이지로 redirect ######
+  const history = useHistory();
+
   // ? ###### 피드 이미지 state ######
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState({
+    file: "",
+    previewURL: "",
+  });
 
   // ? ###### 피드 제목 state ######
   const [subject, setSubject] = useState("");
@@ -19,19 +29,26 @@ export default function FeedUpload() {
   const [inputHashTag, setInputHashTag] = useState("");
   const [hashTags, setHashTags] = useState([]);
 
-  // ? # 해시태그 array -> string
-  // ? # ['이것은', '해시태그', '입니다'] -> '이것은,해시태그,입니다'
-  let temp = "";
-  hashTags.forEach((el) => (temp += "," + el));
-  let hashTagSTR = temp.slice(1);
-
   // ? ###### 이미지 업로드 ######
-  // TODO : 이미지 업로드한거 메인페이지에 보여주기
-  const handleFileChange = (e) => {
-    setImage(e.target.files[0]);
+  const handleFileOnChange = (event) => {
+    event.preventDefault();
+    let reader = new FileReader();
+    let file = event.target.files[0];
+    reader.onloadend = () => {
+      setImage({
+        file: file,
+        previewURL: reader.result,
+      });
+    };
+    reader.readAsDataURL(file);
+  };
+  const hiddenFileInput = React.useRef(null);
+
+  // ? # 이미지 업로드 버튼 커스터마이징
+  const handleClick = (event) => {
+    hiddenFileInput.current.click();
   };
 
-  console.log(image);
   // ? ###### 해시태그 로직 ######
   // ? # 해시태그 엔터 입력
   const handleKeypress = (e) => {
@@ -63,19 +80,42 @@ export default function FeedUpload() {
     setHashTags([...hashTags.slice(0, i), ...hashTags.slice(i + 1)]);
   };
 
+  // ? # 해시태그 array -> string
+  // ? # ['이것은', '해시태그', '입니다'] -> '이것은,해시태그,입니다'
+  let temp = "";
+  hashTags.forEach((el) => (temp += "," + el));
+  let hashTagSTR = temp.slice(1);
+
   // ? ###### 피드 업로드 ######
   const handleSubmitFeed = () => {
-    let payload = {
-      subject,
-      image,
-      hashTagSTR,
-    };
-    // axios({
-    //   method: "post",
-    //   url: "http://pinggye.com/feeds/upload",
-    //   data: payload,
-    //   headers: { "Content-Type": "multipart/form-data" },
-    // });
+    const formData = new FormData();
+    formData.append("image", image.file);
+    formData.append("subject", subject);
+    formData.append("tagsText", hashTagSTR);
+    // ? # formData 확인하는 방법
+    for (let pair of formData.entries()) {
+      console.log(pair[0], pair[1]);
+    }
+
+    // ? ###### formData 서버로 업로드 ######
+    axios({
+      method: "post",
+      url: "http://ec2-13-124-173-150.ap-northeast-2.compute.amazonaws.com/feeds/upload",
+      data: formData,
+      headers: {
+        "Content-Type": "multipart/form-data",
+        authorization: `bearer ${accessToken}`,
+        logintype: "email",
+      },
+    })
+      .then((resp) => {
+        console.log(resp);
+        if (resp.status === 201) {
+          alert("피드가 성공적으로 업로드 되었습니다.");
+          history.push("/");
+        }
+      })
+      .catch((err) => alert(`에러 발생! 에러코드 ${err}`));
   };
 
   return (
@@ -85,15 +125,22 @@ export default function FeedUpload() {
         <div className="feed__content">
           <div className="feed__left-content">
             <div className="feed__main-img">
-              <div className="feed__main-img__topbar" />
-              <h1>사진</h1>
-              <input type="file" onChange={handleFileChange} />
-              <div className="feed__main-img__underbar">
-                <div className="feed__main-img__underbar__left-content"></div>
-                <div className="feed__main-img__underbar__right-content">
-                  <button className="feed__btn">업로드</button>
-                </div>
-              </div>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleFileOnChange}
+                style={{ display: "none" }}
+                ref={hiddenFileInput}
+              />
+              <img
+                className="feed__profile_preview"
+                src={image.previewURL}
+              ></img>
+            </div>
+            <div className="feed__main-underbar">
+              <button className="feed__btn" onClick={handleClick}>
+                업로드
+              </button>
             </div>
           </div>
           <div className="feed__right-content">
