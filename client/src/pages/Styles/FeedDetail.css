@@ -1,4 +1,4 @@
-.main {
+.feed-upload__main {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -6,22 +6,22 @@
   height: 100vh;
 }
 
-.feed__content {
+.feed-upload__content {
   display: flex;
   justify-content: space-around;
   align-items: center;
   width: 80%;
-  height: 60%;
+  height: 80vh;
   border: 1px solid;
 }
 
-.feed__left-content {
+.feed-upload__left-content {
   height: 500px;
   width: 500px;
   border: 1px solid black;
 }
 
-.feed__right-content {
+.feed-upload__right-content {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -30,21 +30,59 @@
   border: 1px solid black;
 }
 
-.feed__main-img {
+.feed-upload__main-img {
   height: 100%;
+  width: 100%;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   text-align: center;
 }
 
-.feed__main-img__underbar {
+.feed-upload__main-img__underbar {
+  position: fixed;
+  z-index: 999;
+  width: 500px;
+  margin-top: 400px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 100px;
+  background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.6));
 }
 
-.feed__writter {
+.feed-upload__main-img__underbar__left-content {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 80%;
+  height: 100%;
+  margin-left: 30px;
+  color: white;
+  font-size: 1.5rem;
+  white-space: nowrap;
+  overflow-x: auto;
+}
+
+.feed-upload__main-img__underbar__right-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20%;
+  height: 100%;
+}
+
+.egg-img {
+  width: 80%;
+  height: 80%;
+}
+
+.egg-count {
+  position: fixed;
+  color: white;
+  font-size: 2rem;
+}
+
+.feed-upload__writter {
   display: flex;
   align-items: center;
   width: 100%;
@@ -52,7 +90,7 @@
   border-bottom: 1px solid black;
 }
 
-.feed__main-content {
+.feed-upload__main-content {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -60,7 +98,7 @@
   height: 100px;
 }
 
-.feed__comments {
+.feed-upload__comments {
   width: 100%;
   height: 60%;
   border: 1px solid black;
@@ -86,7 +124,7 @@
   width: 20%;
 }
 
-.feed__comments-box {
+.feed-upload__comments-box {
   width: 100%;
   height: 230px;
   margin-top: 10px;
