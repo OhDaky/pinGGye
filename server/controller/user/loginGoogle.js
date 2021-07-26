@@ -10,6 +10,9 @@ module.exports = async (req, res) => {
   const { authorizationCode } = req.body;
 
   if (!authorizationCode) {
+    logger(
+      `소셜 로그인 - Authorization Code 없음. authorizationCode: ${authorizationCode}`
+    );
     return res
       .status(400)
       .json({ message: "Authorization code does not exist" });
@@ -26,12 +29,14 @@ module.exports = async (req, res) => {
       redirect_uri: process.env.CLIENT_REDIRECT_URL,
     });
   } catch (error) {
+    logger(`소셜 로그인 - 토큰 교환 실패. 유효하지 않은 Authorization Code`);
     console.error(error.response.data);
     return res.status(400).json({ message: "Invalid authorization code" });
   }
 
-  const { access_token: accessToken } = googleToken.data;
-  logger("소셜 로그인 - Google 유저 토큰 발급 완료: ", googleToken.data);
+  const { access_token: accessToken, refresh_token: refreshToken } =
+    googleToken.data;
+  logger("소셜 로그인 - Google 유저 토큰 발급 완료");
 
   //* access token으로 유저 정보 획득
   let googleUserInfo;
@@ -59,7 +64,9 @@ module.exports = async (req, res) => {
         return res.status(409).json({ message: "You already sign up" });
       } else if (userInfo.signUpType === "google") {
         // 로그인 성공
-        logger(`소셜 로그인 - Google 유저 ${userInfo.email} 로그인 성공`);
+        logger(
+          `소셜 로그인 - 유저 ${userInfo.id}: Google 이메일 ${userInfo.email} 로그인 성공`
+        );
 
         delete userInfo.dataValues.id;
         delete userInfo.dataValues.password;
@@ -83,9 +90,12 @@ module.exports = async (req, res) => {
         nickname: nickname,
         signUpType: "google",
         accountType: "user",
+        // refreshToken: refreshToken
       });
 
-      logger(`소셜 로그인 - Google 유저 ${userInfo.email} 가입, 로그인 성공`);
+      logger(
+        `소셜 로그인 - 유저 ${newUserInfo.id}: Google ${newUserInfo.email} 회원가입 완료, 로그인 성공`
+      );
 
       delete newUserInfo.dataValues.id;
       delete newUserInfo.dataValues.password;
@@ -95,6 +105,7 @@ module.exports = async (req, res) => {
       });
     }
   } catch (error) {
+    logger(`[ERROR] 소셜 로그인 - 서버 에러. 로그인 실패`);
     console.error(error);
     return res.status(500).json({ message: "Server error" });
   }

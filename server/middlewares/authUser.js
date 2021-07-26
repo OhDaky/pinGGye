@@ -6,19 +6,21 @@ const authUser = async (req, res, next) => {
 
   if (!authorization) {
     // 액세스 토큰 없음
-    logger("유저 토큰 검증 - 액세스 토큰 없음");
+    logger("유저 토큰 검증 - 인증 헤더 없음");
     return res.status(401).json({ message: "Token does not exist" });
   }
   if (!loginType) {
     // 요청에 로그인 타입 없음
-    logger("유저 토큰 검증 - 로그인 타입 없음");
+    logger("유저 토큰 검증 - 로그인 타입 헤더 없음");
     return res.status(401).json({ message: "Type does not exist" });
   }
 
-  const accessToken = authorization.split(" ")[1];
+  const accessToken = authorization.split("Bearer ")[1];
 
+  // const { refreshToken } = req.cookies;
+  
   const userInfo = await getUserInfo(accessToken, loginType);
-  logger("유저 토큰 검증 - 유저 정보", userInfo);
+  // logger("유저 토큰 검증 - 유저 정보:", userInfo);
   if (userInfo.error === "expired") {
     //* 리프레시 토큰 사용 가능
     logger("유저 토큰 검증 - 만료된 토큰");
@@ -38,6 +40,12 @@ const authUser = async (req, res, next) => {
     return res.status(403).json({ message: "Invalid token" });
   }
 
+  // if (userInfo.accessToken) {
+  //   logger("유저 토큰 검증 - 재발급 완료: ", userInfo);
+  //   res.write({ accessToken });
+  // } else {
+  // }
+  
   logger("유저 토큰 검증 - 검증 완료: ", userInfo);
   req.userInfo = userInfo; // 요청 객체에 유저 정보 입력
   next();

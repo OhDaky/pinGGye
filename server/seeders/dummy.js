@@ -22,6 +22,7 @@ const truncateAll = async () => {
 const createDummy = async () => {
   const ADMIN_PW = process.env.DUMMY_ADMIN_PW;
   const USER_PW = process.env.DUMMY_USER_PW;
+  //! DB 테이블 초기화
   // await truncateAll();
 
   // email id, nickname
@@ -32,11 +33,12 @@ const createDummy = async () => {
   ];
 
   // user id,
-  const dummyFeedsInfo = [[]];
+  // const dummyFeedsInfo = [["사진 제목", "사진 url", "섬네일 url", "태그1,태그2"]];
 
   console.log("Dummy data 생성 시작");
   //! 유저 생성
   //* createUserData(email, password, nickname, signUpType?, accountType?);
+  //? 어드민 유저 입력
   const userAdmin = await db.createUserData(
     "admin@mail.com",
     ADMIN_PW,
@@ -48,7 +50,7 @@ const createDummy = async () => {
     console.log("Dummy data 존재, 종료");
     return; // 관리자 계정 존재 시, 더미 입력 금지
   }
-
+  //? 일반 유저 입력
   const userInfoArr = [];
   for (let user of dummyUsersInfo) {
     const userInfo = await db.createUserData(

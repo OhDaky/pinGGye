@@ -1,5 +1,5 @@
-const { Feed: FeedModel, Tag: TagModel } = require("../../models");
-const logger = require("../../utils/logger");
+const { Feed: FeedModel, Tag: TagModel } = require("../../../models");
+const logger = require("../../../utils/logger");
 
 module.exports = async (userId, subject, imageSrc, thumbnailSrc, tagsText) => {
   //* DB에 피드 입력
@@ -10,7 +10,7 @@ module.exports = async (userId, subject, imageSrc, thumbnailSrc, tagsText) => {
     thumbnail: thumbnailSrc,
     download: 0,
   });
-  logger(`피드 ${feed.id}번 입력 완료`);
+  logger(`유저 ${userId}: 피드 ${feed.id}번 입력 완료`);
 
   //* DB에 태그 입력 및 피드와 연결
   const tags = tagsText.split(",");
@@ -21,7 +21,7 @@ module.exports = async (userId, subject, imageSrc, thumbnailSrc, tagsText) => {
     });
     await feed.addTags(tagInfo);
   }
-  logger(`피드 ${feed.id}번 태그 입력 및 연결 완료`);
+  logger(`유저 ${userId}: 피드 ${feed.id}번 태그 입력 및 연결 완료`);
 
   return feed;
 };

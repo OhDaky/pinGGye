@@ -1,5 +1,5 @@
 const logger = (...values) => {
-  console.log(...values);
+  console.log("[LOG]",...values);
 };
 
 module.exports = logger;

@@ -1,4 +1,4 @@
-const { Feed: FeedModel, Tag: TagModel } = require("../../models");
+const { Feed: FeedModel, Tag: TagModel } = require("../../../models");
 const { Op } = require("sequelize");
 
 module.exports = async (limit, order) => {

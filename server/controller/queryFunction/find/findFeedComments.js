@@ -1,7 +1,7 @@
 const {
   User: UserModel,
   FeedComment: FeedCommentModel,
-} = require("../../models");
+} = require("../../../models");
 
 module.exports = async (feedId) => {
   const comment = await FeedCommentModel.findAll({

@@ -1,6 +1,5 @@
 const { Feed: FeedModel } = require("../../models");
 const s3 = require("../../aws/s3");
-const db = require("../queryFunction");
 const logger = require("../../utils/logger");
 
 module.exports = async (req, res) => {
@@ -8,6 +7,9 @@ module.exports = async (req, res) => {
   const { id: feedId } = req.params;
 
   if (!feedId) {
+    logger(
+      `[ERROR] 피드 삭제 - 유저 ${userId}: 요청 파라미터 부족. feedId: ${feedId}`
+    );
     return res
       .status(400)
       .json({ message: "Insufficient parameters supplied" });
@@ -18,11 +20,18 @@ module.exports = async (req, res) => {
     let feed;
     if (accountType === "admin") {
       //! 관리자 권한
+      logger(
+        `피드 삭제 - 유저 ${userId}: 피드 ${feedId}번 관리자 권한 삭제 요청`
+      );
       feed = await FeedModel.findOne({ where: { id: feedId } }); // 작성자에 관계 없이 삭제 가능
     } else {
+      logger(`피드 삭제 - 유저 ${userId}: 피드 ${feedId}번 삭제 요청`);
       feed = await FeedModel.findOne({ where: { id: feedId, userId: userId } });
     }
     if (!feed) {
+      logger(
+        `[ERROR] 피드 삭제 - 유저 ${userId}: 유효하지 않거나 삭제 권한이 없는 피드 ${feedId}번 삭제 요청`
+      );
       return res.status(400).json({ message: "Invalid request" }); // 유효하지 않은 피드 번호 또는 권한 오류
     }
 
@@ -32,7 +41,7 @@ module.exports = async (req, res) => {
 
     //* 피드 삭제
     await feed.destroy();
-    logger(`피드 삭제 - 피드 ${feedId}번 삭제 완료`);
+    logger(`피드 삭제 - 유저 ${userId}: 피드 ${feedId}번 삭제 완료`);
 
     //* 피드 이미지 삭제
     const deleteImage = async (filename) => {
@@ -48,16 +57,17 @@ module.exports = async (req, res) => {
     };
     deleteImage(image);
     deleteImage(thumbnail);
-    logger(`피드 삭제 - 피드 ${feedId}번 이미지 삭제 완료`);
+    logger(`피드 삭제 - 유저 ${userId}: 피드 ${feedId}번 이미지 삭제 완료`);
 
     //! 피드 조회 및 응답
-    const feeds = await db.findAllFeeds();
-    logger("피드 삭제 - 모든 피드 조회");
+    // const feeds = await db.findAllFeeds();
+    // logger("피드 삭제 - 모든 피드 조회");
 
-    res
-      .status(201)
-      .json({ data: { feeds }, message: "Feed successfully deleted" });
+    res.status(201).json({ message: "Feed successfully deleted" });
   } catch (error) {
+    logger(
+      `[ERROR] 피드 삭제 - 유저 ${userId}: 서버 에러. 피드 ${feedId} 삭제 요청 실패`
+    );
     console.error(error);
     return res.status(500).json({ message: "Failed to delete feed" });
   }

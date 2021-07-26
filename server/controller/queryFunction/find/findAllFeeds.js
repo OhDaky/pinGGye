@@ -2,11 +2,10 @@ const {
   Feed: FeedModel,
   User: UserModel,
   Tag: TagModel,
-  LikeFeed: LikeFeedModel,
-} = require("../../models");
+} = require("../../../models");
 const { Op } = require("sequelize");
 
-module.exports = async (userId, start, end, limit, order) => {
+module.exports = async (start, end, limit, order) => {
   //* 입력값 핸들링
   if (start && !isNaN(Number(start))) start = Number(start);
   else start = 1;
@@ -36,12 +35,6 @@ module.exports = async (userId, start, end, limit, order) => {
     include: [
       { model: TagModel, required: false, through: { attributes: [] } },
       { model: UserModel },
-      {
-        model: LikeFeedModel,
-        where: {
-          userId: userId,
-        },
-      },
     ],
     where: {
       id: {
@@ -58,10 +51,8 @@ module.exports = async (userId, start, end, limit, order) => {
     feed.dataValues.tags = feed.dataValues.Tags.map((tag) => tag.name);
     feed.dataValues.nickname = feed.dataValues.User.nickname;
     feed.dataValues.email = feed.dataValues.User.email;
-    feed.dataValues.downloadAt = feed.dataValues.LikeFeeds[0].createdAt;
     delete feed.dataValues.Tags;
     delete feed.dataValues.User;
-    delete feed.dataValues.LikeFeeds;
     return feed.dataValues;
   });
 
