@@ -13,13 +13,15 @@ module.exports = async (req, res) => {
 
   try {
     const feed = await db.createLikeFeedData(userId, feedId);
-    if (feed.error === "invalid") {
-      return res.status(400).json({ message: "Invalid feedId" });
-    } else if (feed.error === "exceed") {
+    if (feed.error === "invalid") { // 존재하지 않는 피드
+      return res.status(400).json({ message: "Invalid feed" });
+    } else if (feed.error === "mine") { // 자신이 작성한 피드
+      return res.status(200).json({ message: "It's your feed!" });
+    } else if (feed.error === "exceed") { // 다운 횟수가 초과한 피드
       return res
         .status(400)
         .json({ message: "You can't downloaded the image" });
-    } else if (feed.error === "exist") {
+    } else if (feed.error === "exist") {  // 이미 다운로드를 누른 피드
       return res
         .status(200)
         .json({ message: "You have already downloaded the image" });

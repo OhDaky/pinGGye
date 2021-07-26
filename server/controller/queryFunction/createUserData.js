@@ -8,6 +8,9 @@ module.exports = async (email, password, nickname, signUpType, accountType) => {
     .createHash("sha512")
     .update(password + salt)
     .digest("hex");
+  
+  signUpType = signUpType || "email";
+  accountType = accountType || "user";
 
   const [userInfo, created] = await UserModel.findOrCreate({
     where: {

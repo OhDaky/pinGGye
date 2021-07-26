@@ -6,10 +6,12 @@ const authUser = async (req, res, next) => {
 
   if (!authorization) {
     // 액세스 토큰 없음
+    logger("유저 토큰 검증 - 액세스 토큰 없음");
     return res.status(401).json({ message: "Token does not exist" });
   }
   if (!loginType) {
     // 요청에 로그인 타입 없음
+    logger("유저 토큰 검증 - 로그인 타입 없음");
     return res.status(401).json({ message: "Type does not exist" });
   }
 

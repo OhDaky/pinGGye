@@ -8,6 +8,11 @@ module.exports = async (userId, feedId) => {
     feed.error = "invalid";
     return feed;
   }
+  if (userId === feed.userId) {
+    feed.error = "mine";
+    return feed
+  }
+
   if (feed.download > 10) {
     feed.error = "exceed";
     return feed;

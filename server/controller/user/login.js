@@ -1,6 +1,6 @@
 const { User: UserModel } = require("../../models");
 const crypto = require("crypto");
-
+const logger = require("../../utils/logger");
 const generateAccessToken = require("../../token/generateAccessToken");
 // const generateRefreshToken = require('../../token/generateRefreshToken');
 
