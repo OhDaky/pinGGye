@@ -1,10 +1,11 @@
 const db = require("../queryFunction");
 
 module.exports = async (req, res) => {
-  const  { start, end, limit, order } = req.query;
-  
+  const { userId } = req.userInfo;
+  const { start, end, limit, order } = req.query;
+
   try {
-    const feeds = await db.findAllFeeds(start, end, limit, order);
+    const feeds = await db.findAllLikeFeeds(userId, start, end, limit, order);
 
     res
       .status(200)

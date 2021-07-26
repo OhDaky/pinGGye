@@ -1,4 +1,5 @@
 const { User: UserModel } = require("../../models");
+const crypto = require("crypto");
 
 // 유저 정보 수정
 // 클라이언트로부터 PATCH 요청을 받는다 (payload: 수정된 이메일 or 수정된 닉네임, 토큰)
@@ -7,14 +8,27 @@ const { User: UserModel } = require("../../models");
 // 수정된 유저 정보를 응답으로 보낸다.
 
 module.exports = async (req, res) => {
-  const { nickname } = req.body;
-  const { id } = req.userInfo;
+  const { userId } = req.userInfo;
+  const { nickname, password } = req.body;
 
-  const result = await UserModel.findOne({ where: id });
-  result.nickname = nickname;
+  const salt = process.env.PASSWORD_SALT;
+  const hashedPassword = crypto
+    .createHash("sha512")
+    .update(password + salt)
+    .digest("hex");
 
-  if (!result) {
-    return res.status(404).json({ message: "User not found" })
+  const userInfo = await UserModel.findOne({
+    where: { id: userId, password: hashedPassword },
+  });
+
+  if (!userInfo) {
+    return res.status(400).json({ message: "User not found" });
   }
-  return res.status(201).json({ data: {result} , message: "Successfully updated userinfo"});
-}
+
+  userInfo.dataValues.nickname = nickname;
+  delete userInfo.dataValues.password;
+
+  res
+    .status(201)
+    .json({ data: { userInfo }, message: "User info successfully updated" });
+};

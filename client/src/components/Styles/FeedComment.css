@@ -7,6 +7,10 @@
   border: 1px solid black;
 }
 
+.feed__comment-content {
+  border: none;
+}
+
 .feed__comment-right-content {
   display: flex;
 }
