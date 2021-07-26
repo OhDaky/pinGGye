@@ -20,22 +20,22 @@ module.exports = async (req, res) => {
     .digest("hex");
   try {
     const userInfo = await UserModel.findOne({
-      where: { email: email },
+      where: { email: email, signUpType: "email" },
     });
 
     //! 소셜 로그인 사용자를 위한 type 필드 검사가 필요? (유저 통합 - nightmare)
 
     if (!userInfo) {
-      logger(`[ERROR] 로그인 - 가입하지 않은 유저 이메일 ${email}`);
+      logger(`[ERROR] 로그인 - 존재하지 않거나 소셜 로그인으로 가입한 유저 이메일 ${email}`);
       return res.status(401).json({ message: "Not authorized" });
     }
 
-    if (userInfo.signUpType !== "email") {
-      logger(`[ERROR] 로그인 - 소셜 로그인 가입 유저 이메일 ${email}`);
-      return res
-        .status(409)
-        .json({ message: `You sign up with ${userInfo.signUpType}` });
-    }
+    // if (userInfo.signUpType !== "email") {
+    //   logger(`[ERROR] 로그인 - 소셜 로그인 가입 유저 이메일 ${email}`);
+    //   return res
+    //     .status(409)
+    //     .json({ message: "You sign up with social login" });
+    // }
 
     if (userInfo.password !== hashedPassword) {
       logger(
