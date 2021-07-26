@@ -1,18 +1,19 @@
 import axios from "axios";
+import { useState } from "react";
 import { Route, Switch } from "react-router-dom";
 import FeedDetail from "./pages/FeedDetail";
 import FeedUpload from "./pages/FeedUpload";
 import Home from "./pages/Home";
 import Landing from "./pages/Landing";
-import Login from "./pages/Login";
 import Mypage from "./pages/Mypage";
 import Signup from "./pages/Signup";
 
 function App() {
+
   axios
     .get(`${process.env.REACT_APP_API_URL}/`)
     .then((res) => {
-      console.log(res);
+    console.log(res);
     })
     .catch((err) => console.error(err));
 
@@ -30,9 +31,6 @@ function App() {
         </Route>
         <Route path="/landing">
           <Landing />
-        </Route>
-        <Route path="/login">
-          <Login />
         </Route>
         <Route path="/mypage">
           <Mypage />
