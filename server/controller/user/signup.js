@@ -36,6 +36,6 @@ module.exports = async (req, res) => {
     })
     .catch((err) => {
       console.log(err, "실패");
-      res.sendStatus(500);
+      res.status(500).json({ message: "User registration failed" });
     });
 };

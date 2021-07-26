@@ -4,6 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon index.js",
+    "start-pm2": "authbind --deep pm2 start index.js",
+    "stop-pm2": "authbind --deep pm2 stop index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
