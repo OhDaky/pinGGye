@@ -10,24 +10,10 @@ import Signup from "./pages/Signup";
 
 function App() {
 
-  const [isLogin, setIsLogin] = useState(true);
-  const [userInfo, setUserInfo] = useState({
-    email: "kim@google.com",
-    password: "1234",
-    nickname: "kim",
-  });
-
-  // setIsLogin(true);
-  // setUserInfo({
-  //   email: "kim@google.com",
-  //   password: "1234",
-  //   nickname: "kim",
-  // })
-
   axios
     .get(`${process.env.REACT_APP_API_URL}/`)
     .then((res) => {
-      console.log(res);
+    console.log(res);
     })
     .catch((err) => console.error(err));
 
@@ -35,10 +21,7 @@ function App() {
     <>
       <Switch>
         <Route path="/" exact>
-          <Home
-            isLogin={isLogin}
-            userInfo={userInfo}
-          />
+          <Home />
         </Route>
         <Route path="/feed" exact>
           <FeedDetail />

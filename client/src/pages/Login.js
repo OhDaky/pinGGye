@@ -3,15 +3,19 @@ import { Link } from "react-router-dom";
 import React, { useState } from "react";
 
 import "./Styles/Login.css"  
-export default function Login({ handleResponseSuccess }) {
+export default function Login({ handleResponseSuccess}) {
+  
   const [loginInfo, setLoginInfo] = useState({
     email: '',
     password: '',
   });
+
   const [errorMessage, setErrorMessage] = useState('');
   const handleInputValue = (key) => (e) => {
     setLoginInfo({ ...loginInfo, [key]: e.target.value });
+    // console.log(loginInfo);
   };
+
   const handleLogin = () => {
     const { email, password } = loginInfo;
     if (!email && !password) {
@@ -24,13 +28,28 @@ export default function Login({ handleResponseSuccess }) {
       setErrorMessage('비밀번호를 입력하세요');
     }
 
-    axios
-      .post('http;//localhost:3000/login', loginInfo, {
-        withCredentials: true,
-      })
-      .then((data) => {
-        handleResponseSuccess();
+    // axios
+    //   .post(`${process.env.REACT_APP_API_URL}/users/login`, loginInfo, {
+    //     withCredentials: true,
+    //   })
+    //   .then((data) => {
+    //     handleResponseSuccess();
+    //   })
+    //   .catch((err) => {
+    //     setErrorMessage('이메일과 비밀번호를 다시 확인하세요');
+    // })
+    axios({
+      method: "post",
+      url: `${process.env.REACT_APP_API_URL}/users/login`,
+      data: { email, password },
+      withCredentials: true,
     })
+    .then((data) => {
+      handleResponseSuccess();
+    })
+    .catch((err) => {
+      setErrorMessage('이메일과 비밀번호를 다시 확인하세요');
+  })
   };
 
   return (

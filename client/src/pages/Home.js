@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 
@@ -7,8 +8,9 @@ import "./Styles/Home.css";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 import Login from "./Login";
+import handleResponseSuccess from "../App";
 
-export default function Home({ isLogin, userInfo, selectedHashtags, feeds }) {
+export default function Home() {
   let history = useHistory();
   const tags = [
     "야근",
@@ -37,6 +39,32 @@ export default function Home({ isLogin, userInfo, selectedHashtags, feeds }) {
     "집",
     "쇼핑"
   ];
+  const [loginInfo, setLoginInfo] = useState({
+    email: '',
+    password: '',
+  });
+  const [isLogin, setIsLogin] = useState(false);
+  const isAuthenticated = () => {
+    axios.get(`${process.env.REACT_APP_API_URL}`, {
+      withCredentials: true,
+      headers: {
+        'Set-Cookie': document.cookie,
+        secure: true,
+        httponly: true,
+        samesite: 'None',
+      }
+    })
+      .then((res) => {
+        setLoginInfo(loginInfo);
+        setIsLogin(true);
+        console.log(loginInfo);
+        // console.log(isLogin);
+        console.log(res);
+    })
+  }
+  const handleResponseSuccess = () => {
+    isAuthenticated();
+  };
 
   // 초기 전체사진. setFeeds로 해시태그 필터 -> 필터된 사진
   // const [feeds, setFeeds] = useState({});
@@ -49,9 +77,9 @@ export default function Home({ isLogin, userInfo, selectedHashtags, feeds }) {
   //   // setSelectedHashtag
   // }
   
-  const handleResponseSuccess = () => {
+  // const handleResponseSuccess = () => {
     
-  };
+  // };
 
   const handleAddButton = () => {
     history.push("/feed/upload")
