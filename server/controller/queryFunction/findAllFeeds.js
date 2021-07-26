@@ -6,6 +6,7 @@ const {
 const { Op } = require("sequelize");
 
 module.exports = async (start, end, limit, order) => {
+  //* 입력값 핸들링
   if (start && !isNaN(Number(start))) start = Number(start);
   else start = 1;
 
@@ -16,11 +17,11 @@ module.exports = async (start, end, limit, order) => {
   else limit = null;
 
   if (typeof order === "string") order = order.toUpperCase();
-
   if (order !== "ASC" && order !== "DESC") order = "ASC";
 
   let feeds;
 
+  //* 피드-태그-유저 조인 쿼리
   feeds = await FeedModel.findAll({
     attributes: [
       "id",
@@ -45,7 +46,7 @@ module.exports = async (start, end, limit, order) => {
     order: [["id", order]],
   });
 
-  // 피드 포맷 변경
+  //* 피드 포맷 변경
   const formattedFeeds = feeds.map((feed) => {
     feed.dataValues.tags = feed.dataValues.Tags.map((tag) => tag.name);
     feed.dataValues.nickname = feed.dataValues.User.nickname;
@@ -56,16 +57,4 @@ module.exports = async (start, end, limit, order) => {
   });
 
   return formattedFeeds;
-
-  //! 클라이언트 태그 필터링 로직
-  // const tags = ["회식", "졸려", "싫어"];
-  // let filtered = [];
-  // let unfiltered = formattedFeeds;
-  // for (const tag of tags) {
-  //   filtered = filtered.concat(
-  //     unfiltered.filter((feed) => feed.tags.includes(tag))
-  //   );
-  //   unfiltered = unfiltered.filter((feed) => !feed.tags.includes(tag));
-  // }
-  // return filtered;
 };

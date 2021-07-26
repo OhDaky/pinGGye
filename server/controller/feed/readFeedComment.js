@@ -17,11 +17,13 @@ module.exports = async (req, res) => {
     }
 
     const comments = await db.findFeedComments(feedId);
+    logger(`피드 댓글 조회 - 피드 ${feedId} 댓글 조회`);
 
     res
       .status(200)
       .json({ data: { comments }, message: "Comments successfully read" });
   } catch (error) {
+    console.error(error);
     res.status(500).json({ message: "Failed to read comments" });
   }
 };

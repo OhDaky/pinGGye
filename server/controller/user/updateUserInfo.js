@@ -1,5 +1,6 @@
 const { User: UserModel } = require("../../models");
 const crypto = require("crypto");
+const logger = require("../../utils/logger");
 
 // 유저 정보 수정
 // 클라이언트로부터 PATCH 요청을 받는다 (payload: 수정된 이메일 or 수정된 닉네임, 토큰)
@@ -8,7 +9,7 @@ const crypto = require("crypto");
 // 수정된 유저 정보를 응답으로 보낸다.
 
 module.exports = async (req, res) => {
-  const { userId } = req.userInfo;
+  const { userId, email } = req.userInfo;
   const { nickname, password } = req.body;
 
   const salt = process.env.PASSWORD_SALT;
@@ -22,11 +23,13 @@ module.exports = async (req, res) => {
   });
 
   if (!userInfo) {
+    logger(`유저 정보 수정 - 유저 ${email} 없음`);
     return res.status(400).json({ message: "User not found" });
   }
 
   userInfo.dataValues.nickname = nickname;
   delete userInfo.dataValues.password;
+  logger(`유저 정보 수정 - 유저 ${email} 닉네임 수정 완료`);
 
   res
     .status(201)

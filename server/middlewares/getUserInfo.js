@@ -1,10 +1,10 @@
 const { User: UserModel } = require("../models");
 const verifyAccessToken = require("../token/verifyAccessToken");
 const axios = require("axios");
+const logger = require("../utils/logger");
 
 const googleProfileUrl = "https://www.googleapis.com/oauth2/v3/userinfo";
 
-//* 현재 기존 회원만 인증 가능 (소셜 로그인 미구현)
 const getUserInfo = async (accessToken, loginType) => {
   const userInfo = {
     userId: null,
@@ -15,7 +15,6 @@ const getUserInfo = async (accessToken, loginType) => {
   if (loginType === "email") {
     const decoded = await verifyAccessToken(accessToken);
 
-    // console.log(decoded);
     if (decoded.error === "expired") {
       userInfo.error = "expired";
     } else if (decoded.error === "invalid") {
@@ -32,15 +31,17 @@ const getUserInfo = async (accessToken, loginType) => {
       googleUserInfo = await axios.get(googleProfileUrl, {
         headers: { Authorization: `Bearer ${accessToken}` },
       });
-      console.log(googleUserInfo.data)
+      logger("소셜 로그인 유저 토큰 검증(API 요청) - 유저 정보: ", googleUserInfo.data);
+      
     } catch (error) {
-      // console.log(error);
-      console.error("##",error.response.data);
+      console.error(error.response.data);
       //! 응답 데이터에 따라 만료, 유효하지 않음 분기 필요
-      userInfo.error = "expired";
+      // userInfo.error = "expired";
+      userInfo.error = "invalid";
       return userInfo;
     }
 
+    //* DB에서 사용자 정보 조회
     const { email } = googleUserInfo.data;
     try {
       googleUserInfo = await UserModel.findOne({

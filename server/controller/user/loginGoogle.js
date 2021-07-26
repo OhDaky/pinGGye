@@ -1,6 +1,7 @@
 const { User: UserModel } = require("../../models");
 const crypto = require("crypto");
 const axios = require("axios");
+const logger = require("../../utils/logger");
 
 const googleTokenUrl = "https://oauth2.googleapis.com/token";
 const googleProfileUrl = "https://www.googleapis.com/oauth2/v3/userinfo";
@@ -30,7 +31,7 @@ module.exports = async (req, res) => {
   }
 
   const { access_token: accessToken } = googleToken.data;
-  console.log("Google 유저 Token", googleToken.data);
+  logger("소셜 로그인 - Google 유저 토큰 발급 완료: ", googleToken.data);
 
   //* access token으로 유저 정보 획득
   let googleUserInfo;
@@ -44,7 +45,7 @@ module.exports = async (req, res) => {
   }
 
   const { name: nickname, email } = googleUserInfo.data;
-  console.log("Google 유저 정보", googleUserInfo.data);
+  logger("소셜 로그인 - Google 유저 정보: ", googleUserInfo.data);
 
   //* 유저 DB 조회 또는 생성
   try {
@@ -54,9 +55,11 @@ module.exports = async (req, res) => {
       // 유저 정보 DB에 존재
       if (userInfo.signUpType === "email") {
         //이미 기존 회원가입으로 가입한 유저
+        logger(`소셜 로그인 - 기존 회원가입으로 가입한 유저 ${userInfo.email}`);
         return res.status(409).json({ message: "You already sign up" });
       } else if (userInfo.signUpType === "google") {
         // 로그인 성공
+        logger(`소셜 로그인 - Google 유저 ${userInfo.email} 로그인 성공`);
 
         delete userInfo.dataValues.id;
         delete userInfo.dataValues.password;
@@ -67,7 +70,7 @@ module.exports = async (req, res) => {
     } else {
       // 유저 정보 없음 -> 회원 가입 및 로그인
       const password = Math.random().toString(18).slice(2); // 숫자와 영어로 된 랜덤한 16자리 비밀번호 생성
-      console.log(password);
+
       const salt = process.env.PASSWORD_SALT;
       const hashedPassword = crypto
         .createHash("sha512")
@@ -81,6 +84,8 @@ module.exports = async (req, res) => {
         signUpType: "google",
         accountType: "user",
       });
+
+      logger(`소셜 로그인 - Google 유저 ${userInfo.email} 가입, 로그인 성공`);
 
       delete newUserInfo.dataValues.id;
       delete newUserInfo.dataValues.password;

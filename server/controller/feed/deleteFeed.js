@@ -32,7 +32,7 @@ module.exports = async (req, res) => {
 
     //* 피드 삭제
     await feed.destroy();
-    logger(`피드 ${feedId}번 삭제 완료`);
+    logger(`피드 삭제 - 피드 ${feedId}번 삭제 완료`);
 
     //* 피드 이미지 삭제
     const deleteImage = async (filename) => {
@@ -42,21 +42,23 @@ module.exports = async (req, res) => {
           Key: filename,
         },
         function (error, data) {
-          if (error) console.log(error);
+          if (error) console.error(error);
         }
       );
     };
     deleteImage(image);
     deleteImage(thumbnail);
-    logger(`피드 ${feedId}번 이미지 삭제 완료`);
+    logger(`피드 삭제 - 피드 ${feedId}번 이미지 삭제 완료`);
 
-    //* 모든 피드 조회 및 응답
+    //! 피드 조회 및 응답
     const feeds = await db.findAllFeeds();
+    logger("피드 삭제 - 모든 피드 조회");
 
     res
       .status(201)
       .json({ data: { feeds }, message: "Feed successfully deleted" });
   } catch (error) {
+    console.error(error);
     return res.status(500).json({ message: "Failed to delete feed" });
   }
 };

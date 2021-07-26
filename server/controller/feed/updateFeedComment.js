@@ -21,7 +21,7 @@ module.exports = async (req, res) => {
     }
 
     await comment.update({ textContent: textContent });
-    logger(`피드 ${feedId}번 댓글 ${commentId} 번 갱신 완료`);
+    logger(`피드 댓글 수정 - 피드 ${feedId}번 댓글 ${commentId} 번 갱신 완료`);
 
     const comments = await db.findFeedComments(feedId);
 
@@ -29,6 +29,7 @@ module.exports = async (req, res) => {
       .status(201)
       .json({ data: { comments }, message: "Comment successfully updated" });
   } catch {
+    console.error(error);
     res.status(500).json({ message: "Failed to update comment" });
   }
 };

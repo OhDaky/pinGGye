@@ -27,12 +27,12 @@ module.exports = async (req, res) => {
 
     //* 피드 내용 변경
     await feed.update({ subject: subject });
-    logger(`피드 ${feedId}번 갱신 완료`);
+    logger(`피드 수정 - 피드 ${feedId}번 수정 완료`);
 
     //* 기존 태그 삭제
     const existTag = feed.dataValues.Tags;
     await Promise.all(existTag.map((tag) => feed.removeTags(tag)));
-    logger(`피드 ${feedId}번 기존 태그 삭제 완료`);
+    logger(`피드 수정 - 피드 ${feedId}번 기존 태그 삭제 완료`);
 
     //* 새로운 태그 입력
     const tags = tagsText.split(",");
@@ -45,15 +45,17 @@ module.exports = async (req, res) => {
       await feed.addTags(tagInfo);
     }
 
-    logger(`피드 ${feedId}번 새로운 태그 입력 완료`);
+    logger(`피드 수정 - 피드 ${feedId}번 신규 태그 입력 완료`);
 
-    //* 모든 피드 조회 및 응답
+    //! 피드 조회 및 응답
     const feeds = await db.findAllFeeds();
+    logger("피드 수정 - 모든 피드 조회");
 
     res
       .status(200)
       .json({ data: { feeds }, message: "Feed successfully updated" });
   } catch (error) {
+    console.error(error);
     return res.status(500).json({ message: "Failed to update feed" });
   }
 };

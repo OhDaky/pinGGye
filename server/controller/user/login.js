@@ -2,12 +2,9 @@ const { User: UserModel } = require("../../models");
 const crypto = require("crypto");
 
 const generateAccessToken = require("../../token/generateAccessToken");
-// const generateRefreshToken = require('../../token/generateRefreshToken')
+// const generateRefreshToken = require('../../token/generateRefreshToken');
 
 module.exports = async (req, res) => {
-  // console.log(req.body);
-  // 입력받은 비밀번호를 해싱해서 db의 값과 비교해야 함
-
   const { email, password } = req.body;
 
   if (!email || !password) {
@@ -24,20 +21,22 @@ module.exports = async (req, res) => {
   const userInfo = await UserModel.findOne({
     where: { email: email },
   });
-  //* 소셜 로그인 사용자를 위한 type 필드 검사가 필요?
+  //! 소셜 로그인 사용자를 위한 type 필드 검사가 필요? (유저 통합 - nightmare)
 
   if (!userInfo) {
-    console.log("가입하지 않은 유저");
+    logger(`로그인 - 미가입 유저 ${email}`);
     return res.status(401).json({ message: "Not authorized" });
   }
 
   if (userInfo.signUpType !== "email") {
-    console.log("소셜 로그인으로 가입한 유저");
-    return res.status(409).json({ message: `You sign up with ${userInfo.signUpType}` });
+    logger(`로그인 - 소셜 로그인 가입 유저 ${email}`);
+    return res
+      .status(409)
+      .json({ message: `You sign up with ${userInfo.signUpType}` });
   }
 
   if (userInfo.password !== hashedPassword) {
-    console.log("비밀 번호 오류");
+    logger(`로그인 - 유저 ${email} 비밀번호 오류`);
     return res.status(401).json({ message: "Not authorized" });
   }
 
@@ -45,6 +44,7 @@ module.exports = async (req, res) => {
   const accessToken = await generateAccessToken(userInfo);
   delete userInfo.dataValues.id;
 
+  logger(`로그인 - 유저 ${email} 로그인 성공`);
   //! 리프레시 토큰 유무?
   return res
     .status(201)

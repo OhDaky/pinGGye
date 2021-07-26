@@ -29,14 +29,16 @@ module.exports = async (req, res) => {
     }
 
     await comment.destroy();
-    logger(`피드 ${feedId}번 댓글 ${commentId}번 삭제 완료`);
+    logger(`피드 댓글 삭제 - 피드 ${feedId}번 댓글 ${commentId}번 삭제 완료`);
 
     const comments = await db.findFeedComments(feedId);
+    logger("피드 댓글 삭제 - 피드 댓글 조회");
 
     res
       .status(201)
       .json({ data: { comments }, message: "Comment successfully deleted" });
-  } catch {
+  } catch (error) {
+    console.error(error);
     res.status(500).json({ message: "Failed to delete comment" });
   }
 };

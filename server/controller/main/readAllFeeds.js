@@ -1,8 +1,8 @@
 const db = require("../queryFunction");
 
 module.exports = async (req, res) => {
-  const  { start, end, limit, order } = req.query;
-  
+  const { start, end, limit, order } = req.query;
+
   try {
     const feeds = await db.findAllFeeds(start, end, limit, order);
 

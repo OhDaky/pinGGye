@@ -6,9 +6,11 @@ module.exports = async (req, res) => {
   try {
     const tags = await db.findAllTags(limit, order);
 
-    res.status(200).json({ data: { tags }, message: "All tags successfully read" });
+    res
+      .status(200)
+      .json({ data: { tags }, message: "All tags successfully read" });
   } catch (error) {
-    console.error(error)
+    console.error(error);
     return res.status(500).json({ message: "Failed to read all tags" });
   }
-}
+};

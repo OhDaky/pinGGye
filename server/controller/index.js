@@ -8,14 +8,11 @@ module.exports = {
   updateUserInfo: require("./user/updateUserInfo"),
 
   // feed
-  createFeedImage: require("./feed/createFeedImage"),
   createFeed: require("./feed/createFeed"),
-  readFeed: require("./feed/readFeed"),
   updateFeed: require("./feed/updateFeed"),
   deleteFeed: require("./feed/deleteFeed"),
 
   // feed egg
-  readFeedEgg: require("./feed/readFeedEgg"),
   updateFeedEgg: require("./feed/updateFeedEgg"),
 
   // feed comment
