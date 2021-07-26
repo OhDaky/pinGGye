@@ -1,12 +1,15 @@
 .home__feed {
-  margin: 1rem;
+  margin: 2rem;
   display: flex;
   float: left;
   text-align: center;
-  /* align-content: center; */
+  align-content: center;
   width: 200px;
   height: 200px;
+  /* flex-basis: auto; */
   border: 1px solid black;
+  /* overflow: auto; */
+  /* background-image: ; */
 }
 
 .home__feed-tags {

@@ -1,32 +1,87 @@
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+}
+
 .home__hashtag-container {
+  display: flex;
   text-align: center;
-  padding: 10px;
-  margin-left: 3rem;
-  margin-top: 1rem;
+  justify-content: center;
+  align-content: center;
+  /* flex-direction: row; */
+  margin-top: 100px;
+  margin-left: 5vw;
+  margin-right: 5vw;
   height: 150px;
-  width: 90%;
+  width: 90vw;
   position: fixed;
   border: 1px solid black;
   white-space: nowrap;
   overflow-x: auto;
 }
 
+/* 해시태그 스크롤바 */
+/* .home__hashtag-table::-webkit-scrollbar {
+  height: 10px;
+}
+.home__hashtag-table::-webkit-scrollbar-thumb {
+  background-color: darkcyan;
+}
+.home__hashtag-table::-webkit-scrollbar-track {
+  background-color: aquamarine;
+} */
+
+.home__hashtag-table {
+  margin-top: 60px;
+  /* position: sticky; */
+  display: flex;
+  justify-content: left;
+  align-content: center;
+
+  height: 90px;
+  width: 80%;
+  position: fixed;
+  white-space: nowrap;
+  overflow-x: auto;
+  /* overflow-y: hidden; */
+  /* border: 1px solid black; */
+}
+
 .home__hashtag-title {
+  position: fixed;
   margin: 1.5rem;
   font-size: 1.2rem;
 }
 
 .home__feeds-container {
-  padding: 10px;
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: center;
   align-content: center;
-  margin-left: 3rem;
-  margin-top: 13rem;
+  margin-left: 5vw;
+  margin-right: 5vw;
+  margin-top: 280px;
   height: 60%;
-  width: 90%;
+  width: 90vw;
   position: fixed;
   border: 1px solid black;
   white-space: nowrap;
-  overflow: auto;
+  overflow-y: auto;
+}
+
+.home__feeds-table {
+  /* display: flex; */
+  margin-top: 20px;
+  justify-content: left;
+  align-content: center;
+  width: 95%;
+  height: 90%;
+
+  white-space: nowrap;
+  overflow-y: auto;
 }
 
 .home__feed-add-button {
@@ -34,12 +89,12 @@
   align-items: center;
   font-size: 3rem;
   position: fixed;
-  top: 80%;
-  left: 88%;
+  top: 78vh;
+  left: 90vw;
   z-index: 100;
   border-radius: 80px;
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   border: 1px solid black;
   background-color: white;
 }
