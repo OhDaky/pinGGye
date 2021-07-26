@@ -50,7 +50,7 @@ export default function FeedComment({
         url: `${pinGGyeURL}/feeds/${feedId}/comment`,
         data: { commentId, textContent: input },
         headers: {
-          authorization: `bearer ${accessToken}`,
+          Authorization: `bearer ${accessToken}`,
           logintype: "email",
         },
       }).then(() => alert("댓글 수정 완료!"));
@@ -67,7 +67,7 @@ export default function FeedComment({
       url: `${pinGGyeURL}/feeds/${feedId}/comment`,
       data: { commentId },
       headers: {
-        authorization: `bearer ${accessToken}`,
+        Authorization: `bearer ${accessToken}`,
         logintype: "email",
       },
     })

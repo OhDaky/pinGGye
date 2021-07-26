@@ -6,12 +6,11 @@ import Footer from "../components/Footer";
 import axios from "axios";
 
 export default function FeedDetail() {
-  let feedHashTags = ["치킨", "핑크", "병아리", "해시태그", "배고프다"];
   // ? ###### Default Value ######
   let pinGGyeURL = process.env.REACT_APP_API_URL;
 
   // TODO : Home에서 클릭한 feedId 받아오기. 임시로 1로 저장
-  let feedId = "10";
+  let feedId = "11";
 
   // ! @@@@@@@@@@ Test Zone @@@@@@@@@@
   // ! 원래는 Home에서 받아와야함. 사용자 인증을 위해 임시로 해놓은 것.
@@ -91,7 +90,7 @@ export default function FeedDetail() {
       method: "get",
       url: `${pinGGyeURL}/feeds/${feedId}/comment`,
       headers: {
-        authorization: `bearer ${accessToken}`,
+        Authorization: `bearer ${accessToken}`,
         logintype: "email",
       },
     })
@@ -130,7 +129,7 @@ export default function FeedDetail() {
         url: `${pinGGyeURL}/feeds/${feedId}/comment`,
         data: { textContent: inputComment },
         headers: {
-          authorization: `bearer ${accessToken}`,
+          Authorization: `bearer ${accessToken}`,
           logintype: "email",
         },
       })
