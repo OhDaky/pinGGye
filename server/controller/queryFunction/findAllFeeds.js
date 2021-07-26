@@ -4,7 +4,7 @@ const {
   Tag: TagModel,
 } = require("../../models");
 
-module.exports = async (req, res) => {
+module.exports = async () => {
   const feeds = await FeedModel.findAll({
     attributes: [
       "id",

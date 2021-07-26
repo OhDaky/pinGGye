@@ -21,7 +21,11 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
-      type: {
+      signUpType: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
+      accountType: {
         allowNull: false,
         type: Sequelize.STRING
       },

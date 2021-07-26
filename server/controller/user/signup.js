@@ -10,7 +10,7 @@ module.exports = async (req, res) => {
     .digest("hex");
 
   if (!email || !password || !nickname) {
-    console.log(req.body);
+    // console.log(req.body);
     return res.status(422).send("insufficient parameters supplied");
   }
 
@@ -21,7 +21,8 @@ module.exports = async (req, res) => {
     defaults: {
       password: hashedPassword, // 비밀번호 해싱값으로 저장!
       nickname,
-      type: "email",
+      signUpType: "email",
+      accountType: "user"
     },
   })
     .then(([result, created]) => {

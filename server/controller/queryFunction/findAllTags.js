@@ -1,6 +1,7 @@
 const { Feed: FeedModel, Tag: TagModel } = require("../../models");
 
-module.exports = async (req, res) => {
+module.exports = async () => {
+
   //* COUNT 쿼리 방법
   // const tags = await TagModel.findAll({
   //   attributes: ["id", "name", sequelize.fn("COUNT", sequelize.col("Feeds.id"))],

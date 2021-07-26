@@ -14,7 +14,7 @@ module.exports = async (req, res) => {
   result.nickname = nickname;
 
   if (!result) {
-    return res.status(400).json({ message: "User not found" })
+    return res.status(404).json({ message: "User not found" })
   }
-  return res.status(201).json(result);
+  return res.status(201).json({ data: {result} , message: "Successfully updated userinfo"});
 }
