@@ -25,12 +25,12 @@ module.exports = async (req, res) => {
       redirect_uri: process.env.CLIENT_REDIRECT_URL,
     });
   } catch (error) {
-    console.log(error.response.data);
+    console.error(error.response.data);
     return res.status(400).json({ message: "Invalid authorization code" });
   }
 
   const { access_token: accessToken } = googleToken.data;
-  console.log(accessToken);
+  console.log("Google 유저 Token", googleToken.data);
 
   //* access token으로 유저 정보 획득
   let googleUserInfo;
@@ -39,11 +39,12 @@ module.exports = async (req, res) => {
       headers: { Authorization: `Bearer ${accessToken}` },
     });
   } catch (error) {
-    console.log(error.response.data);
+    console.error(error.response.data);
     return res.status(400).json({ message: "Invalid access token" });
   }
 
   const { name: nickname, email } = googleUserInfo.data;
+  console.log("Google 유저 정보", googleUserInfo.data);
 
   //* 유저 DB 조회 또는 생성
   try {
