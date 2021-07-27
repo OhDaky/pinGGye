@@ -1,10 +1,10 @@
 const jwt = require("jsonwebtoken");
 
-const verifyAccessToken = async (token) => {
+const verifyRefreshToken = async (token) => {
   try {
-    return jwt.verify(token, process.env.ACCESS_SECRET);
+    return jwt.verify(token, process.env.REFRESH_SECRET);
   } catch (error) {
-    console.log('액세스 토큰 검증 에러:', error.name);
+    console.log('리프레시 토큰 검증 에러:', error.name);
     // 토큰 기간 만료
     if (error.name === "TokenExpiredError") {
       return { error: "expired" }
@@ -16,4 +16,4 @@ const verifyAccessToken = async (token) => {
   }
 };
 
-module.exports = verifyAccessToken;
+module.exports = verifyRefreshToken;

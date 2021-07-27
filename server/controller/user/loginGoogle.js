@@ -1,6 +1,7 @@
 const { User: UserModel } = require("../../models");
 const crypto = require("crypto");
 const axios = require("axios");
+const logger = require("../../utils/logger");
 
 const googleTokenUrl = "https://oauth2.googleapis.com/token";
 const googleProfileUrl = "https://www.googleapis.com/oauth2/v3/userinfo";
@@ -9,6 +10,9 @@ module.exports = async (req, res) => {
   const { authorizationCode } = req.body;
 
   if (!authorizationCode) {
+    logger(
+      `소셜 로그인 - Authorization Code 없음. authorizationCode: ${authorizationCode}`
+    );
     return res
       .status(400)
       .json({ message: "Authorization code does not exist" });
@@ -25,12 +29,14 @@ module.exports = async (req, res) => {
       redirect_uri: process.env.CLIENT_REDIRECT_URL,
     });
   } catch (error) {
+    logger(`소셜 로그인 - 토큰 교환 실패. 유효하지 않은 Authorization Code`);
     console.error(error.response.data);
     return res.status(400).json({ message: "Invalid authorization code" });
   }
 
-  const { access_token: accessToken } = googleToken.data;
-  console.log("Google 유저 Token", googleToken.data);
+  const { access_token: accessToken, refresh_token: refreshToken } =
+    googleToken.data;
+  logger("소셜 로그인 - Google 유저 토큰 발급 완료");
 
   //* access token으로 유저 정보 획득
   let googleUserInfo;
@@ -44,7 +50,7 @@ module.exports = async (req, res) => {
   }
 
   const { name: nickname, email } = googleUserInfo.data;
-  console.log("Google 유저 정보", googleUserInfo.data);
+  logger("소셜 로그인 - Google 유저 정보: ", googleUserInfo.data);
 
   //* 유저 DB 조회 또는 생성
   try {
@@ -54,9 +60,13 @@ module.exports = async (req, res) => {
       // 유저 정보 DB에 존재
       if (userInfo.signUpType === "email") {
         //이미 기존 회원가입으로 가입한 유저
+        logger(`소셜 로그인 - 기존 회원가입으로 가입한 유저 ${userInfo.email}`);
         return res.status(409).json({ message: "You already sign up" });
       } else if (userInfo.signUpType === "google") {
         // 로그인 성공
+        logger(
+          `소셜 로그인 - 유저 ${userInfo.id}: Google 이메일 ${userInfo.email} 로그인 성공`
+        );
 
         delete userInfo.dataValues.id;
         delete userInfo.dataValues.password;
@@ -67,7 +77,7 @@ module.exports = async (req, res) => {
     } else {
       // 유저 정보 없음 -> 회원 가입 및 로그인
       const password = Math.random().toString(18).slice(2); // 숫자와 영어로 된 랜덤한 16자리 비밀번호 생성
-      console.log(password);
+
       const salt = process.env.PASSWORD_SALT;
       const hashedPassword = crypto
         .createHash("sha512")
@@ -80,7 +90,12 @@ module.exports = async (req, res) => {
         nickname: nickname,
         signUpType: "google",
         accountType: "user",
+        // refreshToken: refreshToken
       });
+
+      logger(
+        `소셜 로그인 - 유저 ${newUserInfo.id}: Google ${newUserInfo.email} 회원가입 완료, 로그인 성공`
+      );
 
       delete newUserInfo.dataValues.id;
       delete newUserInfo.dataValues.password;
@@ -90,6 +105,7 @@ module.exports = async (req, res) => {
       });
     }
   } catch (error) {
+    logger(`[ERROR] 소셜 로그인 - 서버 에러. 로그인 실패`);
     console.error(error);
     return res.status(500).json({ message: "Server error" });
   }
