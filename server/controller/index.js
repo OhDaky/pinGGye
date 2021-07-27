@@ -8,6 +8,7 @@ module.exports = {
   updateUserInfo: require("./user/updateUserInfo"),
 
   // feed
+  readFeed: require("./feed/reedFeed"),
   createFeed: require("./feed/createFeed"),
   updateFeed: require("./feed/updateFeed"),
   deleteFeed: require("./feed/deleteFeed"),

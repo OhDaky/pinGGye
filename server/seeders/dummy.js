@@ -87,6 +87,9 @@ const createDummy = async () => {
     const feedIdx = generateRandomNum(0, lastFeedIdx);
     const commIdx = generateRandomNum(0, lastCommnetIdx);
 
+    //자신의 게시물에는 댓글 달지 않음
+    if (feedInfoArr[feedIdx].userId === userInfoArr[userIdx].id) continue;
+
     await db.createFeedCommentData(feedInfoArr[feedIdx].id, userInfoArr[userIdx].id, dummyCommentsInfo[commIdx]);    
   }
 

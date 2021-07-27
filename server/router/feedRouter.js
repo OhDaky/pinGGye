@@ -11,6 +11,8 @@ feedRouter.use("/", authUser);
 // 피드 업로드 /feeds/upload
 feedRouter.post("/upload", upload.single("image"), controller.createFeed);
 
+// 피드 조회
+feedRouter.get("/:id", controller.readFeed);
 // 피드 수정
 feedRouter.patch("/:id", controller.updateFeed);
 // 피드 삭제
