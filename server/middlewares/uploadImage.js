@@ -19,7 +19,7 @@ const upload = multer({
           // cb(null, file.originalname); //! for dummy
         },
         transform: function (req, file, cb) {
-          cb(null, sharp()); // 원본
+          cb(null, sharp().withMetadata()); // 원본. 메타데이터를 유지하여 이미지 회전 방지
         },
       },
       {
@@ -29,7 +29,7 @@ const upload = multer({
           // cb(null, file.originalname.split(".")[0] + "_t." + file.originalname.split(".").pop()); //! for dummy
         },
         transform: function (req, file, cb) {
-          cb(null, sharp().resize(200, 200)); // 리사이징
+          cb(null, sharp().withMetadata().resize(200, 200)); // 리사이징
         },
       },
     ],

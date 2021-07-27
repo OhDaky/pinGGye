@@ -62,12 +62,12 @@ module.exports = async (req, res) => {
 
     res
       .status(200)
-      .json({ data: { feed, comments }, message: "Comments successfully read" });
+      .json({ data: { feed, comments }, message: "Feed and comments successfully read" });
   } catch (error) {
     logger(
       `[ERROR] 피드 조회 - 유저 ${userId}: 서버 에러. 피드 ${feedId} 댓글 조회 요청 실패`
     );
     console.error(error);
-    res.status(500).json({ message: "Failed to read comments" });
+    res.status(500).json({ message: "Failed to read feed and comments" });
   }
 };

@@ -42,7 +42,7 @@ const authUser = async (req, res, next) => {
 
   // if (userInfo.accessToken) {
   //   logger("유저 토큰 검증 - 재발급 완료: ", userInfo);
-  //   res.write({ accessToken });
+  //   res.write({ accessToken });    // 헤더에 담아서 보낸다?
   // } else {
   // }
   

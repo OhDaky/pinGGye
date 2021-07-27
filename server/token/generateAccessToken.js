@@ -11,7 +11,7 @@ const generateAccessToken = async (userInfo) => {
     },
     process.env.ACCESS_SECRET,
     {
-      expiresIn: "2h",
+      expiresIn: "1d",
     }
   );
 };
