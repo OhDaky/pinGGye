@@ -9,11 +9,10 @@ import Mypage from "./pages/Mypage";
 import Signup from "./pages/Signup";
 
 function App() {
-
   axios
     .get(`${process.env.REACT_APP_API_URL}/`)
     .then((res) => {
-    console.log(res);
+      console.log(res);
     })
     .catch((err) => console.error(err));
 
@@ -23,7 +22,7 @@ function App() {
         <Route path="/" exact>
           <Home />
         </Route>
-        <Route path="/feed" exact>
+        <Route path="/feed/:id" exact>
           <FeedDetail />
         </Route>
         <Route path="/feed/upload">
