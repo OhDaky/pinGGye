@@ -122,15 +122,18 @@ const getUserInfo = async (accessToken, loginType) => {
       googleUserInfo = await UserModel.findOne({
         where: { email: email, signUpType: loginType },
       });
+      if (!googleUserInfo) {
+        userInfo.error = "invalid";
+        return userInfo;
+      }
+      userInfo.userId = googleUserInfo.id;
+      userInfo.email = googleUserInfo.email;
+      userInfo.accountType = googleUserInfo.accountType;
     } catch (error) {
       console.error(error);
       userInfo.error = "error";
       return userInfo;
     }
-
-    userInfo.userId = googleUserInfo.id;
-    userInfo.email = googleUserInfo.email;
-    userInfo.accountType = googleUserInfo.accountType;
   }
   return userInfo;
 };

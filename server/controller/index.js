@@ -22,6 +22,7 @@ module.exports = {
   deleteFeedComment: require("./feed/deleteFeedComment"),
 
   // main
+  readAllData: require("./main/readAllData"),
   readAllFeeds: require("./main/readAllFeeds"),
   readAllTags: require("./main/readAllTags"),
   readAllLikeFeeds: require("./main/readAllLikeFeeds"),
