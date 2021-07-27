@@ -5,6 +5,7 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const express = require("express");
 const morgan = require("morgan");
+const createDummy = require("./seeders/dummy");
 
 const feedRouter = require("./router/feedRouter");
 const mainRouter = require("./router/mainRouter");
@@ -45,3 +46,7 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(PORT, () => console.log(`http server is runnning on ${PORT}`));
+
+if (process.env.CREATE_DUMMY) {
+  createDummy();
+}

@@ -3,19 +3,22 @@ body {
 }
 
 .nav__content {
+  position: fixed;
+  z-index: 999;
   display: flex;
   justify-content: space-between;
   width: 100%;
-  height: 60px;
-  border-bottom: 1px solid black;
-  z-index: 999;
-  position: fixed;
+  height: 90px;
+  border-bottom: 3px solid rgba(2, 7, 21, 0.1);
+  box-shadow: 1px 2px 4px rgba(2, 7, 21, 0.1);
   background-color: white;
 }
 
 .nav__left-content {
   display: flex;
   align-items: center;
+  justify-content: space-evenly;
+  margin-left: 20px;
   width: 100%;
   height: 100%;
 }
@@ -40,16 +43,34 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 50px;
-  height: 50px;
-  border: 1px solid black;
-  border-radius: 50%;
+  height: 100%;
+  cursor: pointer;
 }
 
 .nav__tab {
-  border: 1px solid black;
-  padding: 10px;
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #63504d;
+  cursor: pointer;
+  background-color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 10px;
 }
-.nav__tab:active {
-  background-color: red;
+.mypage__tab:hover {
+  color: rgb(255, 175, 175);
 }
+
+.logout__tab {
+  background-color: rgb(255, 204, 204);
+}
+
+.logout__tab:hover {
+  color: white;
+}
+
+/* pink */
+/* rgb(255, 175, 175) */
+
+/* yellow */
+/* rgb(255, 209, 110) */

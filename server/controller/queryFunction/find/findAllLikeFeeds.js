@@ -3,10 +3,11 @@ const {
   User: UserModel,
   Tag: TagModel,
   LikeFeed: LikeFeedModel,
-} = require("../../models");
+} = require("../../../models");
 const { Op } = require("sequelize");
 
 module.exports = async (userId, start, end, limit, order) => {
+  //* 입력값 핸들링
   if (start && !isNaN(Number(start))) start = Number(start);
   else start = 1;
 
@@ -17,11 +18,11 @@ module.exports = async (userId, start, end, limit, order) => {
   else limit = null;
 
   if (typeof order === "string") order = order.toUpperCase();
-
   if (order !== "ASC" && order !== "DESC") order = "ASC";
 
   let feeds;
 
+  //* 피드-태그-유저 조인 쿼리
   feeds = await FeedModel.findAll({
     attributes: [
       "id",
@@ -52,7 +53,7 @@ module.exports = async (userId, start, end, limit, order) => {
     order: [["id", order]],
   });
 
-  // 피드 포맷 변경
+  //* 피드 포맷 변경
   const formattedFeeds = feeds.map((feed) => {
     feed.dataValues.tags = feed.dataValues.Tags.map((tag) => tag.name);
     feed.dataValues.nickname = feed.dataValues.User.nickname;

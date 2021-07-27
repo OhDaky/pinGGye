@@ -31,6 +31,7 @@ export default function FeedComment({
       }
     }
   };
+
   useEffect(() => {
     handleIsMe();
     console.log("댓글 수 만큼 자기 글인지 확인");
@@ -50,7 +51,7 @@ export default function FeedComment({
         url: `${pinGGyeURL}/feeds/${feedId}/comment`,
         data: { commentId, textContent: input },
         headers: {
-          authorization: `bearer ${accessToken}`,
+          authorization: `Bearer ${accessToken}`,
           logintype: "email",
         },
       }).then(() => alert("댓글 수정 완료!"));
@@ -67,7 +68,7 @@ export default function FeedComment({
       url: `${pinGGyeURL}/feeds/${feedId}/comment`,
       data: { commentId },
       headers: {
-        authorization: `bearer ${accessToken}`,
+        authorization: `Bearer ${accessToken}`,
         logintype: "email",
       },
     })
