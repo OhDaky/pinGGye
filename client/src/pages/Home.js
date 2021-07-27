@@ -14,7 +14,7 @@ export default function Home({ getUserInfo }) {
   const isSignin = window.localStorage.getItem("isSignin");
   let history = useHistory();
 
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
   const [userInfo, setUserInfo] = useState({});
   const [feeds, setFeeds] = useState([]);
   // const [unselectedFeeds, setUnselectedFees]
