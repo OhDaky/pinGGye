@@ -31,6 +31,7 @@ export default function FeedComment({
       }
     }
   };
+
   useEffect(() => {
     handleIsMe();
     console.log("댓글 수 만큼 자기 글인지 확인");

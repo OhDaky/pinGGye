@@ -31,8 +31,8 @@ export default function FeedDetail() {
       method: "post",
       url: `${pinGGyeURL}/users/login`,
       data: {
-        email: "kim@mail.com",
-        password: "1234",
+        email: "admin@mail.com",
+        password: "12345",
       },
     })
       .then((resp) => {
@@ -103,7 +103,6 @@ export default function FeedDetail() {
   };
 
   // ? ###### feed upload function ######
-  // ! [BUG] : 현재 업데이트가 안됨.
   const patchFeed = async () => {
     await axios({
       method: "patch",
@@ -159,12 +158,12 @@ export default function FeedDetail() {
         authorization: `Bearer ${accessToken}`,
         logintype: "email",
       },
-    }).then((resp) => {
-      // ! 현재는 직접 데이터를 수정하는거고, 메인 props를 직접 받아와주기.
-      // ![BUG] : 다운로드가 referrer 정책때문에 안되는듯.
-      // TODO : 서버와 이야기해보기
-      console.log("####", resp);
-    });
+    })
+      .then((resp) => {
+        if (resp.data.message === "It's your feed!")
+          alert("자기가 쓴 글에는 좋아요를 달 수 없습니다.");
+      })
+      .catch((err) => console.log(err));
   };
 
   // ? ###### 서버에서 댓글 가져오기 ######
@@ -250,12 +249,12 @@ export default function FeedDetail() {
               />
               <div className="feed-detail__main-img__underbar">
                 <div className="feed-detail__main-img__underbar__left-content">
-                  <span>{feedData.tags}</span>
+                  <span>{feedData.tags}&nbsp;&nbsp;</span>
                 </div>
                 <a
                   className="feed-detail__main-img__underbar__right-content"
-                  href={feedData.image}
-                  download
+                  // href={feedData.image}
+                  // download
                   onClick={downloadImage}
                 >
                   <img
