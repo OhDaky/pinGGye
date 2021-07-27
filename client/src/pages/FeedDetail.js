@@ -1,19 +1,29 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import "./Styles/FeedDetail.css";
-import FeedComment from "../components/FeedComment";
 import Nav from "../components/Nav";
-import Footer from "../components/Footer";
 import axios from "axios";
+import Footer from "../components/Footer";
+import FeedComment from "../components/FeedComment";
+import UploadModal from "../components/UploadModal";
 
 export default function FeedDetail() {
   // ? ###### Default Value ######
   let pinGGyeURL = process.env.REACT_APP_API_URL;
+  const history = useHistory();
 
-  // TODO : Home에서 클릭한 feedId 받아오기. 임시로 1로 저장
-  let feedId = "11";
+  // ? ###### url의 feedId 구하는 함수 ######
+  let feedId;
+  const getFeedId = () => {
+    return window.location.pathname.split("/")[2];
+  };
+  feedId = getFeedId();
 
   // ! @@@@@@@@@@ Test Zone @@@@@@@@@@
-  // ! 원래는 Home에서 받아와야함. 사용자 인증을 위해 임시로 해놓은 것.
+  // ! @@@@@@@@@@ Test Zone @@@@@@@@@@
+  // ! @@@@@@@@@@ Test Zone @@@@@@@@@@
+  // ! @@@@@@@@@@ Test Zone @@@@@@@@@@
+
   let accessToken = process.env.REACT_APP_ACCESSTOKEN;
   const [userInfo, setUserInfo] = useState({});
   const getUserInfo = async () => {
@@ -30,33 +40,64 @@ export default function FeedDetail() {
       })
       .catch((err) => console.log(err));
   };
-  // ? # 메인에서 props로 받아올 예정인 데이터.
-  const [tempImage, setTempImage] = useState("");
-  const [tempHashTags, setTempHashTags] = useState([]);
-  const [tempEggCount, setTempEggCount] = useState(0);
-  const getEggCount = () => {
-    axios({
+
+  // ? ###### 해당 id의 모든 feed Data 불러오기  ######
+  const [feedData, setFeedData] = useState({
+    subject: "",
+    image: "",
+    nickname: "",
+    createdAt: "",
+    updatedAt: "",
+    download: 0,
+    tags: [],
+  });
+
+  // ? # 해시태그를 텍스트로 바꿔주는 과정.
+  const arrToStr = (arr) => {
+    let temp = "";
+    arr.forEach((el) => (temp += "," + el));
+    return temp.slice(1);
+  };
+
+  const handleFeedAllUpdate = async () => {
+    await axios({
       method: "get",
-      url: `${pinGGyeURL}/main/feed`,
+      url: `${pinGGyeURL}/feeds/${feedId}`,
       headers: {
-        authorization: `bearer ${accessToken}`,
+        authorization: `Bearer ${accessToken}`,
         logintype: "email",
       },
     })
       .then((resp) => {
-        console.log("이거이거", resp);
-        let feed = resp.data.data.feeds[10];
-        setTempImage(feed.image);
-        setTempHashTags(feed.tags);
-        setTempEggCount(feed.download);
+        console.log("###Update", resp);
+        const {
+          subject,
+          image,
+          nickname,
+          createdAt,
+          updatedAt,
+          download,
+          tags,
+        } = resp.data.data.feed;
+
+        setFeedData({
+          FeedComment,
+          subject,
+          image,
+          nickname,
+          createdAt,
+          updatedAt,
+          download,
+          tags: arrToStr(tags),
+        });
+        console.log("this is feed data", feedData);
       })
       .catch((err) => console.log(err));
   };
-  // TODO : 사진이 모두 불러오기 전까지는 로딩사진 보여주기
-  // TODO : 모든 사진이 불러와지면 그때 한번에 랜딩
-  useEffect(() => {
-    getEggCount();
-  }, []);
+
+  // ! @@@@@@@@@@ Test Zone @@@@@@@@@@
+  // ! @@@@@@@@@@ Test Zone @@@@@@@@@@
+  // ! @@@@@@@@@@ Test Zone @@@@@@@@@@
   // ! @@@@@@@@@@ Test Zone @@@@@@@@@@
 
   // ? ###### input comment State ######
@@ -65,7 +106,66 @@ export default function FeedDetail() {
   // ? ###### commentBox comment State ######
   const [commentBox, setCommentBox] = useState([]);
 
-  // ? ###### 알 카운트 가져오기 ######
+  // ! ###### feed update(modal) & Delete ######
+  // ! ###### feed update(modal) & Delete ######
+  // ! ###### feed update(modal) & Delete ######
+  const [isUpload, setIsUpload] = useState(false);
+
+  const handleBack = () => {
+    setIsUpload(false);
+  };
+
+  const handleInputValue = (key) => (e) => {
+    setFeedData({ ...feedData, [key]: e.target.value });
+  };
+
+  const patchFeed = async () => {
+    await axios({
+      method: "patch",
+      url: `${pinGGyeURL}/feeds/${feedId}`,
+      headers: {
+        authorization: `Bearer ${accessToken}`,
+        logintype: "email",
+      },
+      data: {
+        tagsText: feedData.tags,
+        subject: feedData.subject,
+      },
+    })
+      .then((resp) => console.log("##update", resp))
+      .catch((err) => console.log("##update", err));
+  };
+  // ? ###### feed upload function ######
+  const handleFeedUpdate = async () => {
+    if (isUpload) {
+      console.log("모달 꺼짐");
+      patchFeed();
+      setIsUpload(false);
+    } else {
+      console.log("모달 켜짐");
+      setIsUpload(true);
+    }
+  };
+
+  const deleteFeed = async () => {
+    await axios({
+      method: "delete",
+      url: `${pinGGyeURL}/feeds/${feedId}`,
+      headers: {
+        authorization: `Bearer ${accessToken}`,
+        logintype: "email",
+      },
+    })
+      .then((resp) => {
+        console.log("##delete", resp);
+        history.push("/");
+      })
+      .catch((err) => console.log("##delete", err));
+  };
+
+  // ! ###### feed update(modal) & Delete ######
+  // ! ###### feed update(modal) & Delete ######
+  // ! ###### feed update(modal) & Delete ######
 
   // ? ###### 이미지 다운로드 ######
   const downloadImage = async () => {
@@ -73,7 +173,7 @@ export default function FeedDetail() {
       method: "patch",
       url: `${pinGGyeURL}/feeds/${feedId}/egg`,
       headers: {
-        authorization: `bearer ${accessToken}`,
+        authorization: `Bearer ${accessToken}`,
         logintype: "email",
       },
     }).then((resp) => {
@@ -85,12 +185,12 @@ export default function FeedDetail() {
   };
 
   // ? ###### 서버에서 댓글 가져오기 ######
-  const getComment = () => {
-    axios({
+  const getComment = async () => {
+    await axios({
       method: "get",
       url: `${pinGGyeURL}/feeds/${feedId}/comment`,
       headers: {
-        Authorization: `bearer ${accessToken}`,
+        authorization: `Bearer ${accessToken}`,
         logintype: "email",
       },
     })
@@ -129,7 +229,7 @@ export default function FeedDetail() {
         url: `${pinGGyeURL}/feeds/${feedId}/comment`,
         data: { textContent: inputComment },
         headers: {
-          Authorization: `bearer ${accessToken}`,
+          authorization: `Bearer ${accessToken}`,
           logintype: "email",
         },
       })
@@ -140,30 +240,37 @@ export default function FeedDetail() {
         .catch((err) => console.log(err));
     }
   };
+
   return (
     <>
       <Nav />
-      <div className="feed-upload__main">
-        <div className="feed-upload__content">
-          <div className="feed-upload__left-content">
-            <div className="feed-upload__main-img">
+      {isUpload ? (
+        <UploadModal
+          feedData={feedData}
+          handleInputValue={handleInputValue}
+          handleFeedUpdate={handleFeedUpdate}
+          handleBack={handleBack}
+        />
+      ) : null}
+      <div className="feed-detail__main">
+        <div className="feed-detail__content">
+          <div className="feed-detail__left-content">
+            <div className="feed-detail__main-img">
               <img
-                className="feed-upload__main-img"
+                className="feed-detail__main-img"
                 referrerPolicy="no-referrer"
-                src={tempImage}
+                src={feedData.image}
                 alt="사진"
               />
-              <div className="feed-upload__main-img__underbar">
-                <div className="feed-upload__main-img__underbar__left-content">
-                  {tempHashTags.map((hashtag, i) => (
-                    <span key={i}>#{hashtag}&nbsp;&nbsp;</span>
-                  ))}
+              <div className="feed-detail__main-img__underbar">
+                <div className="feed-detail__main-img__underbar__left-content">
+                  <span>{feedData.tags}</span>
                 </div>
                 <a
-                  className="feed-upload__main-img__underbar__right-content"
-                  href={tempImage}
+                  className="feed-detail__main-img__underbar__right-content"
+                  // href={feedData.image}
+                  href={feedData.image}
                   download
-                  target="_blank"
                   onClick={downloadImage}
                 >
                   <img
@@ -171,15 +278,22 @@ export default function FeedDetail() {
                     src="https://cdn0.iconfinder.com/data/icons/easter-color-1/100/egg_pink-512.png"
                     alt="계란쓰"
                   />
-                  <div className="egg-count">{tempEggCount}</div>
+                  <div className="egg-count">{feedData.download}</div>
                 </a>
               </div>
             </div>
           </div>
-          <div className="feed-upload__right-content">
-            <div className="feed-upload__writter">글 올린 사람</div>
-            <div className="feed-upload__main-content">사진에 대한 내용</div>
-            <div className="feed-upload__comments">
+          <div className="feed-detail__right-content">
+            <div className="feed-detail__writter">
+              <div>{feedData.nickname}</div>
+              <div className="feed-detail__UD-box">
+                <button onClick={handleFeedAllUpdate}>업데이트</button>
+                <button onClick={handleFeedUpdate}>수정</button>
+                <button onClick={deleteFeed}>삭제</button>
+              </div>
+            </div>
+            <div className="feed-detail__main-content">{feedData.subject}</div>
+            <div className="feed-detail__comments">
               <div className="input-comment-box">
                 <input
                   className="input-comment"
@@ -192,7 +306,7 @@ export default function FeedDetail() {
                   댓글 달기
                 </button>
               </div>
-              <div className="feed-upload__comments-box">
+              <div className="feed-detail__comments-box">
                 {commentBox.map((comment, i) => (
                   <FeedComment
                     key={i}
