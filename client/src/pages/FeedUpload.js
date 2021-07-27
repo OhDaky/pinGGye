@@ -122,10 +122,10 @@ export default function FeedUpload() {
   return (
     <>
       <Nav />
-      <div className="main">
-        <div className="feed__content">
-          <div className="feed__left-content">
-            <div className="feed__main-img">
+      <div className="feed-upload-main">
+        <div className="feed-upload__content">
+          <div className="feed-upload__left-content">
+            <div className="feed-upload__main-img">
               <input
                 type="file"
                 accept="image/*"
@@ -134,18 +134,18 @@ export default function FeedUpload() {
                 ref={hiddenFileInput}
               />
               <img
-                className="feed__profile_preview"
+                className="feed-upload__profile_preview"
                 src={image.previewURL}
               ></img>
             </div>
-            <div className="feed__main-underbar">
-              <button className="feed__btn" onClick={handleClick}>
+            <div className="feed-upload__main-underbar">
+              <button className="feed-upload__btn" onClick={handleClick}>
                 업로드
               </button>
             </div>
           </div>
-          <div className="feed__right-content">
-            <div className="feed__main-contents">
+          <div className="feed-upload__right-content">
+            <div className="feed-upload__main-contents">
               <div id="feed-upload__img-content">
                 <div className="feed-upload__main-message">
                   피드 제목(subject)
@@ -185,7 +185,7 @@ export default function FeedUpload() {
               </div>
 
               <div className="feed-upload__underbar">
-                <button className="feed__btn" onClick={handleSubmitFeed}>
+                <button className="feed-upload__btn" onClick={handleSubmitFeed}>
                   제 출
                 </button>
               </div>
