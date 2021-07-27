@@ -13,33 +13,7 @@ import handleResponseSuccess from "../App";
 export default function Home({ getUserInfo }) {
   const isSignin = window.localStorage.getItem("isSignin");
   let history = useHistory();
-  const tags = [
-    "야근",
-    "술자리",
-    "결혼식",
-    "고양이",
-    "시험",
-    "영화관",
-    "제사",
-    "데이트",
-    "수리",
-    "집",
-    "쇼핑",
-    "시험",
-    "영화관",
-    "제사",
-    "데이트",
-    "수리",
-    "집",
-    "쇼핑",
-    "시험",
-    "영화관",
-    "제사",
-    "데이트",
-    "수리",
-    "집",
-    "쇼핑"
-  ];
+
   const [isLogin, setIsLogin] = useState(true);
   const [userInfo, setUserInfo] = useState({});
   const [feeds, setFeeds] = useState([]);
@@ -63,19 +37,19 @@ export default function Home({ getUserInfo }) {
         setUserInfo(res.data.data.userInfo);
         // getUserInfo(userInfo);
         setIsLogin(true);
-        const isSignin = localStorage.getItem("isSignin")
+        const isSignin = localStorage.getItem("isSignin");
         console.log("=== home ===\n" + token);
       })
       .catch((err) => {
         console.log("=== home ===\n" + token);
-      })
-  }
+      });
+  };
 
   // ### 토큰 응답을 제대로 받았는지 확인
   const handleResponseSuccess = () => {
     isAuthenticated();
     // setIsLogin(true);
-  }
+  };
 
   // ### 전체 해시태그 불러오기
   const getHashtags = () => {
@@ -88,22 +62,21 @@ export default function Home({ getUserInfo }) {
         logintype: "email",
       },
       withCredentials: true,
-    })
-      .then((res) => {
-        // console.log(res.data.data.tags);
-        const hash = Object.entries(res.data.data.tags);
-        const hashArr = [];
-        const arr = [];
-        for (let i in hash) {
-          hashArr.push([Object.entries(hash[i][1])]);
-        }
-        for (let i in hashArr) {
-          arr.push([hashArr[i][0][0][1], hashArr[i][0][1][1]]);
-        }
-        setHashtags(arr);
-        console.log(hashtags);
-    })
-  }
+    }).then((res) => {
+      // console.log(res.data.data.tags);
+      const hash = Object.entries(res.data.data.tags);
+      const hashArr = [];
+      const arr = [];
+      for (let i in hash) {
+        hashArr.push([Object.entries(hash[i][1])]);
+      }
+      for (let i in hashArr) {
+        arr.push([hashArr[i][0][0][1], hashArr[i][0][1][1]]);
+      }
+      setHashtags(arr);
+      console.log(hashtags);
+    });
+  };
 
   // ### 전체 피드 불러오기
   const getFeeds = () => {
@@ -116,18 +89,17 @@ export default function Home({ getUserInfo }) {
         logintype: "email",
       },
       withCredentials: true,
-    })
-      .then((res) => {
-        // console.log(res.data.data.feeds)
-        const data = Object.entries(res.data.data.feeds);
-        const newFeeds = [];
-        for (let i in data) {
-          newFeeds.push([Object.entries(data[i][1])]);
-        }
-        setFeeds(newFeeds);
-        // console.log(newFeeds);
-    })
-  }
+    }).then((res) => {
+      // console.log(res.data.data.feeds)
+      const data = Object.entries(res.data.data.feeds);
+      const newFeeds = [];
+      for (let i in data) {
+        newFeeds.push([Object.entries(data[i][1])]);
+      }
+      setFeeds(newFeeds);
+      // console.log(newFeeds);
+    });
+  };
 
   useEffect(() => {
     getFeeds();
@@ -137,63 +109,61 @@ export default function Home({ getUserInfo }) {
 
   useEffect(() => {
     window.localStorage.setItem("isSign", isSignin);
-  })
+  });
 
   // ### 필터링할 해시태그 선택
   const selectHashtags = () => {
-
     // setFeeds
     console.log(selectedHashtags);
-  }
+  };
 
   const handleAddButton = () => {
-    history.push("/feed/upload")
+    history.push("/feed/upload");
   };
 
   console.log(userInfo);
   console.log(isSignin);
   return (
     <>
-    {
-      isLogin === true || isSignin === true ?
-      (
+      {isLogin === true || isSignin === true ? (
         <>
-        <Nav />
-        <main>
-          <div className="home__hashtag-container">
-            <div className="home__hashtag-title">해시태그</div>
-            <span className="home__hashtag-table">
-              {hashtags.map((tag, i) => {
-                // return <HomeHashtags hashtag={tag} onClick={() => setSelectedHashtags([...selectedHashtags, hashtags[i]])} />;
-                return <HomeHashtags hashtag={tag} onClick={ selectHashtags } />;
-              })}
-            </span>
-          </div>
-          <div className="home__feeds-container">
-            <span className="home__feeds-table">
-              {feeds.map((id, i) => (
-                <HomeFeed feedId={id[0]} />)
-              )}
-            </span>
-          </div>
-          <button className="home__feed-add-button" onClick={ handleAddButton }>+</button>
+          <Nav />
+          <main>
+            <div className="home__hashtag-container">
+              <div className="home__hashtag-title">해시태그</div>
+              <span className="home__hashtag-table">
+                {hashtags.map((tag, i) => {
+                  // return <HomeHashtags hashtag={tag} onClick={() => setSelectedHashtags([...selectedHashtags, hashtags[i]])} />;
+                  return (
+                    <HomeHashtags hashtag={tag} onClick={selectHashtags} />
+                  );
+                })}
+              </span>
+            </div>
+            <div className="home__feeds-container">
+              <span className="home__feeds-table">
+                {feeds.map((id, i) => (
+                  <HomeFeed feedId={id[0]} />
+                ))}
+              </span>
+            </div>
+            <button className="home__feed-add-button" onClick={handleAddButton}>
+              +
+            </button>
           </main>
-          </>
+        </>
       ) : (
-            <Login
-              handleResponseSuccess={handleResponseSuccess}
-              setUserInfo={setUserInfo}
-              userInfo={userInfo}
-              getHashtags={getHashtags}
-            />
-      )
-      }
+        <Login
+          handleResponseSuccess={handleResponseSuccess}
+          setUserInfo={setUserInfo}
+          userInfo={userInfo}
+          getHashtags={getHashtags}
+        />
+      )}
       <Footer />
-      </>
-    );
+    </>
+  );
 }
-
-
 
 /*
   feedInfo 에서 사용 feeds - id, thumnail, tags[0], tags[1] (있다면). 없으면 tags[0]
