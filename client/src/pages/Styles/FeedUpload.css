@@ -1,4 +1,4 @@
-.main {
+.feed-upload-main {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -6,7 +6,7 @@
   height: 100vh;
 }
 
-.feed__content {
+.feed-upload__content {
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -15,18 +15,18 @@
   border: 1px solid;
 }
 
-.feed__left-content {
+.feed-upload__left-content {
   height: 500px;
   width: 500px;
   border: 1px solid black;
 }
 
-.feed__right-content {
+.feed-upload__right-content {
   height: 500px;
   width: 45%;
 }
 
-.feed__main-img {
+.feed-upload__main-img {
   height: 80%;
   display: flex;
   flex-direction: column;
@@ -37,19 +37,19 @@
   background-image: url(./pinGGyeMarket.png);
 }
 
-.feed__profile_preview {
+.feed-upload__profile_preview {
   width: 100%;
   height: 100%;
 }
 
-.feed__main-underbar {
+.feed-upload__main-underbar {
   height: 20%;
   display: flex;
   justify-content: flex-end;
   align-items: center;
 }
 
-.feed__main-contents {
+.feed-upload__main-contents {
   width: 100%;
   height: 100%;
   border: 1px solid black;
@@ -58,7 +58,7 @@
   justify-content: space-between;
 }
 
-.feed__btn {
+.feed-upload__btn {
   display: flex;
   justify-content: center;
   align-items: center;

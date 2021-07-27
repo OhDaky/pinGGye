@@ -36,11 +36,11 @@ function App() {
         <Route path="/" exact>
           <Home getUserInfo={getUserInfo} />
         </Route>
-        <Route path="/feed/:id" exact>
-          <FeedDetail />
-        </Route>
         <Route path="/feed/upload">
           <FeedUpload />
+        </Route>
+        <Route path="/feed/:id" exact>
+          <FeedDetail />
         </Route>
         <Route path="/landing">
           <Landing />
