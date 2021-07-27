@@ -47,11 +47,13 @@ module.exports = async (req, res) => {
     const deleteImage = async (filename) => {
       s3.deleteObject(
         {
-          Bucket: "pinggye-image/image",
+          Bucket: "pinggye-image/image",  //! dummy 이미지는 삭제되지 않음
           Key: filename,
         },
         function (error, data) {
-          if (error) console.error(error);
+          if (error) {
+            console.error(error);
+          }
         }
       );
     };
