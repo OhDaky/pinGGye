@@ -1,4 +1,4 @@
-const { Feed: FeedModel } = require("../../models");
+const { Feed: FeedModel } = require("../../../models");
 
 module.exports = async (feedId) => {
   const feed = await FeedModel.findOne({ where: { id: feedId } });

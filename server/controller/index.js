@@ -2,19 +2,18 @@ module.exports = {
   // user
   auth: require("./user/login"),
   login: require("./user/login"),
+  loginGoogle: require("./user/loginGoogle"),
   logout: require("./user/logout"),
   signup: require("./user/signup"),
   updateUserInfo: require("./user/updateUserInfo"),
 
   // feed
-  createFeedImage: require("./feed/createFeedImage"),
+  readFeed: require("./feed/reedFeed"),
   createFeed: require("./feed/createFeed"),
-  readFeed: require("./feed/readFeed"),
   updateFeed: require("./feed/updateFeed"),
   deleteFeed: require("./feed/deleteFeed"),
 
   // feed egg
-  readFeedEgg: require("./feed/readFeedEgg"),
   updateFeedEgg: require("./feed/updateFeedEgg"),
 
   // feed comment
@@ -24,6 +23,8 @@ module.exports = {
   deleteFeedComment: require("./feed/deleteFeedComment"),
 
   // main
+  readAllData: require("./main/readAllData"),
   readAllFeeds: require("./main/readAllFeeds"),
   readAllTags: require("./main/readAllTags"),
+  readAllLikeFeeds: require("./main/readAllLikeFeeds"),
 };

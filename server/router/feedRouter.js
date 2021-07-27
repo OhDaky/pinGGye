@@ -11,15 +11,13 @@ feedRouter.use("/", authUser);
 // 피드 업로드 /feeds/upload
 feedRouter.post("/upload", upload.single("image"), controller.createFeed);
 
-// 피드 조회 /feeds/:id
+// 피드 조회
 feedRouter.get("/:id", controller.readFeed);
 // 피드 수정
 feedRouter.patch("/:id", controller.updateFeed);
 // 피드 삭제
 feedRouter.delete("/:id", controller.deleteFeed);
 
-// 알 카운트 조회 /feeds/:id/egg //? 통합 가능할 듯
-feedRouter.get("/:id/egg", controller.readFeedEgg);
 // 알 카운트 수정
 feedRouter.patch("/:id/egg", controller.updateFeedEgg);
 

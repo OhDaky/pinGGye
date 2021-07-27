@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const logger = require("../utils/logger");
 
 const generateAccessToken = async (userInfo) => {
-  logger('사용자 액세스 토큰 생성', userInfo.dataValues);
+  logger("토큰 생성 - 유저 액세스 토큰 생성: ", userInfo.dataValues);
   return jwt.sign(
     {
       userId: userInfo.id,
@@ -11,7 +11,7 @@ const generateAccessToken = async (userInfo) => {
     },
     process.env.ACCESS_SECRET,
     {
-      expiresIn: "12h",
+      expiresIn: "1d",
     }
   );
 };

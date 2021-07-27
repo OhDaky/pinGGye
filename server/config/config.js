@@ -14,6 +14,7 @@ module.exports = {
       dateStrings: true,
       typeCast: true,
     },
+    logging: false,
   },
   test: {
     username: "root",
@@ -39,5 +40,6 @@ module.exports = {
       dateStrings: true,
       typeCast: true,
     },
+    logging: false,
   },
 };

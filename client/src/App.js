@@ -23,13 +23,20 @@ function App() {
     setUserInfo(input);
   }
   
+  axios
+    .get(`${process.env.REACT_APP_API_URL}/`)
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => console.error(err));
+
   return (
     <>
       <Switch>
         <Route path="/" exact>
           <Home getUserInfo={ getUserInfo }/>
         </Route>
-        <Route path="/feed" exact>
+        <Route path="/feed/:id" exact>
           <FeedDetail />
         </Route>
         <Route path="/feed/upload">
