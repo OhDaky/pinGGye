@@ -7,6 +7,7 @@ import axios from "axios";
 
 // TODO : 피드의 id는 Database에서 부여?
 export default function FeedUpload() {
+  let pinGGyeURL = process.env.REACT_APP_API_URL;
   // ? ###### accessToken props로 받아오기 ######
   let accessToken = process.env.REACT_APP_ACCESSTOKEN;
 
@@ -100,11 +101,11 @@ export default function FeedUpload() {
     // ? ###### formData 서버로 업로드 ######
     axios({
       method: "post",
-      url: "http://ec2-13-124-173-150.ap-northeast-2.compute.amazonaws.com/feeds/upload",
+      url: `${pinGGyeURL}/feeds/upload`,
       data: formData,
       headers: {
         "Content-Type": "multipart/form-data",
-        authorization: `bearer ${accessToken}`,
+        authorization: `Bearer ${accessToken}`,
         logintype: "email",
       },
     })
