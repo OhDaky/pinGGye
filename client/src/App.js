@@ -9,19 +9,25 @@ import Mypage from "./pages/Mypage";
 import Signup from "./pages/Signup";
 
 function App() {
+  const token = localStorage.getItem("accessToken");
+  // ### 전체에서 사용되는 유저의 정보 state
+  const [userInfo, setUserInfo] = useState({
+    id: '',
+    email: '',
+    nickname: '',
+    signUpType: '',
+    accountType: '',
+  })
 
-  axios
-    .get(`${process.env.REACT_APP_API_URL}/`)
-    .then((res) => {
-    console.log(res);
-    })
-    .catch((err) => console.error(err));
-
+  const getUserInfo = (input) => {
+    setUserInfo(input);
+  }
+  
   return (
     <>
       <Switch>
         <Route path="/" exact>
-          <Home />
+          <Home getUserInfo={ getUserInfo }/>
         </Route>
         <Route path="/feed" exact>
           <FeedDetail />

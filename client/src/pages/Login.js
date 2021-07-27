@@ -3,17 +3,14 @@ import { Link } from "react-router-dom";
 import React, { useState } from "react";
 
 import "./Styles/Login.css"  
-export default function Login({ handleResponseSuccess}) {
-  
+export default function Login({ handleResponseSuccess, userInfo, setUserInfo, getHashtags }) {
   const [loginInfo, setLoginInfo] = useState({
     email: '',
     password: '',
-  });
-
+  })
   const [errorMessage, setErrorMessage] = useState('');
   const handleInputValue = (key) => (e) => {
     setLoginInfo({ ...loginInfo, [key]: e.target.value });
-    // console.log(loginInfo);
   };
 
   const handleLogin = () => {
@@ -28,29 +25,46 @@ export default function Login({ handleResponseSuccess}) {
       setErrorMessage('비밀번호를 입력하세요');
     }
 
-    // axios
-    //   .post(`${process.env.REACT_APP_API_URL}/users/login`, loginInfo, {
-    //     withCredentials: true,
-    //   })
-    //   .then((data) => {
-    //     handleResponseSuccess();
-    //   })
-    //   .catch((err) => {
-    //     setErrorMessage('이메일과 비밀번호를 다시 확인하세요');
-    // })
     axios({
       method: "post",
       url: `${process.env.REACT_APP_API_URL}/users/login`,
-      data: { email, password },
+      data: {
+        email: email,
+        password: password
+      },
       withCredentials: true,
     })
-    .then((data) => {
-      handleResponseSuccess();
+      .then((res) => {
+      // 액세스토큰 로컬 스토리지에 저장
+        const isSignin = true;
+        const accessToken = res.data.data.accessToken;
+        localStorage.setItem("accessToken", accessToken);
+        localStorage.setItem("isSignin", isSignin);
+        setLoginInfo(res.data.data.userInfo);
+        handleResponseSuccess();
     })
     .catch((err) => {
       setErrorMessage('이메일과 비밀번호를 다시 확인하세요');
+      console.log(err);
   })
   };
+
+  // // ### 새로고침 했을 때 로그인 풀리는 것을 막기위해
+  // const getLoginInfo = () => {
+  //   const token = localStorage.getItem("accessToken")
+  //   let config = {
+  //     headers: {
+  //       "access-token": token,
+  //       authorization: `Bearer ${token}`,
+  //       logintype: "email",
+  //     }
+  //   }
+  //   axios
+  //     .post(`${process.env.REACT_APP_API_URL}/main`, config)
+  //     .then((res) => {
+  //       console.log(res);
+  //   })
+  // }
 
   return (
     <>

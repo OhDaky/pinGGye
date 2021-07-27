@@ -1,22 +1,26 @@
 import React, { useState } from "react";
 import "./Styles/HomeHashtags.css"
 
-export default function HomeHashtags({ hashtag }) {
+export default function HomeHashtags({ hashtag, getSelectedTags }) {
   const [isSelected, setIsSelected] = useState(false);
+  const tag = hashtag[1];
   const handleHashtagClick = () => {
-    console.log('태그 클릭');
     if (isSelected === false) {
-      setIsSelected(true);      
+      console.log('태그 선택');
+      setIsSelected(true);
+      
     } else {
+      console.log('태그 선택 해제');
       setIsSelected(false);
     }
   }
+
   return (
     <>{
       isSelected ? (
-        <button className="home__hashtag-selected" onClick={ handleHashtagClick }>#{ hashtag }</button>
+        <button className="home__hashtag-selected" onClick={ handleHashtagClick }>#{ tag }</button>
       ): (
-        <button className="home__hashtag" onClick={ handleHashtagClick }>#{ hashtag }</button>
+        <button className="home__hashtag" onClick={ handleHashtagClick }>#{ tag }</button>
       )
     }
     </>
