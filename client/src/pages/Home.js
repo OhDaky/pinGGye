@@ -11,7 +11,7 @@ import Login from "./Login";
 import handleResponseSuccess from "../App";
 
 export default function Home({ getUserInfo }) {
-  const isSignin = localStorage.getItem("isSignin");
+  const isSignin = window.localStorage.getItem("isSignin");
   let history = useHistory();
   const tags = [
     "야근",
@@ -40,9 +40,10 @@ export default function Home({ getUserInfo }) {
     "집",
     "쇼핑"
   ];
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
   const [userInfo, setUserInfo] = useState({});
   const [feeds, setFeeds] = useState([]);
+  // const [unselectedFeeds, setUnselectedFees]
   const [hashtags, setHashtags] = useState([]);
   const [selectedHashtags, setSelectedHashtags] = useState([]);
 
@@ -63,6 +64,7 @@ export default function Home({ getUserInfo }) {
         // getUserInfo(userInfo);
         setIsLogin(true);
         const isSignin = localStorage.getItem("isSignin")
+        console.log("=== home ===\n" + token);
       })
       .catch((err) => {
         console.log("=== home ===\n" + token);
@@ -99,7 +101,7 @@ export default function Home({ getUserInfo }) {
           arr.push([hashArr[i][0][0][1], hashArr[i][0][1][1]]);
         }
         setHashtags(arr);
-        // console.log(hashtags);
+        console.log(hashtags);
     })
   }
 
@@ -130,7 +132,12 @@ export default function Home({ getUserInfo }) {
   useEffect(() => {
     getFeeds();
     getHashtags();
+    window.localStorage.getItem("isSign");
   }, []);
+
+  useEffect(() => {
+    window.localStorage.setItem("isSign", isSignin);
+  })
 
   // ### 필터링할 해시태그 선택
   const selectHashtags = () => {
@@ -142,6 +149,9 @@ export default function Home({ getUserInfo }) {
   const handleAddButton = () => {
     history.push("/feed/upload")
   };
+
+  console.log(userInfo);
+  console.log(isSignin);
   return (
     <>
     {

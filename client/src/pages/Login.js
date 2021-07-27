@@ -36,10 +36,10 @@ export default function Login({ handleResponseSuccess, userInfo, setUserInfo, ge
     })
       .then((res) => {
       // 액세스토큰 로컬 스토리지에 저장
-        const isSignin = true;
+        const isLogin = true;
         const accessToken = res.data.data.accessToken;
         localStorage.setItem("accessToken", accessToken);
-        localStorage.setItem("isSignin", isSignin);
+        window.localStorage.setItem("isSignin", isLogin);
         setLoginInfo(res.data.data.userInfo);
         handleResponseSuccess();
     })
