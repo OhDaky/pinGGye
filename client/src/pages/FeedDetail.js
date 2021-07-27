@@ -19,13 +19,13 @@ export default function FeedDetail() {
   };
   feedId = getFeedId();
 
-  // ! @@@@@@@@@@ Test Zone @@@@@@@@@@
-  // ! @@@@@@@@@@ Test Zone @@@@@@@@@@
-  // ! @@@@@@@@@@ Test Zone @@@@@@@@@@
-  // ! @@@@@@@@@@ Test Zone @@@@@@@@@@
-
   let accessToken = process.env.REACT_APP_ACCESSTOKEN;
   const [userInfo, setUserInfo] = useState({});
+
+  // ? ###### USER INFO는 받아와야할듯?
+  // ? ###### USER INFO는 받아와야할듯?
+  // ? ###### USER INFO는 받아와야할듯?
+  // ? ###### USER INFO는 받아와야할듯?
   const getUserInfo = async () => {
     await axios({
       method: "post",
@@ -69,36 +69,19 @@ export default function FeedDetail() {
       },
     })
       .then((resp) => {
-        console.log("###Update", resp);
-        const {
-          subject,
-          image,
-          nickname,
-          createdAt,
-          updatedAt,
-          download,
-          tags,
-        } = resp.data.data.feed;
-
+        const { subject, image, nickname, download, tags } =
+          resp.data.data.feed;
         setFeedData({
           FeedComment,
           subject,
           image,
           nickname,
-          createdAt,
-          updatedAt,
           download,
           tags: arrToStr(tags),
         });
-        console.log("this is feed data", feedData);
       })
       .catch((err) => console.log(err));
   };
-
-  // ! @@@@@@@@@@ Test Zone @@@@@@@@@@
-  // ! @@@@@@@@@@ Test Zone @@@@@@@@@@
-  // ! @@@@@@@@@@ Test Zone @@@@@@@@@@
-  // ! @@@@@@@@@@ Test Zone @@@@@@@@@@
 
   // ? ###### input comment State ######
   const [inputComment, setInputComment] = useState("");
@@ -106,19 +89,21 @@ export default function FeedDetail() {
   // ? ###### commentBox comment State ######
   const [commentBox, setCommentBox] = useState([]);
 
-  // ! ###### feed update(modal) & Delete ######
-  // ! ###### feed update(modal) & Delete ######
-  // ! ###### feed update(modal) & Delete ######
+  // ? ###### feed update modal관련 ######
   const [isUpload, setIsUpload] = useState(false);
 
+  // ? # 모달창에서 뒤로가기 클릭
   const handleBack = () => {
     setIsUpload(false);
   };
 
+  // ? # 모달창에서 값 수정시, 해당 피드의 state 변경
   const handleInputValue = (key) => (e) => {
     setFeedData({ ...feedData, [key]: e.target.value });
   };
 
+  // ? ###### feed upload function ######
+  // ! [BUG] : 현재 업데이트가 안됨.
   const patchFeed = async () => {
     await axios({
       method: "patch",
@@ -135,7 +120,8 @@ export default function FeedDetail() {
       .then((resp) => console.log("##update", resp))
       .catch((err) => console.log("##update", err));
   };
-  // ? ###### feed upload function ######
+
+  // ? ###### 수정버튼 누를 시 모달창 켜짐 ######
   const handleFeedUpdate = async () => {
     if (isUpload) {
       console.log("모달 꺼짐");
@@ -163,11 +149,8 @@ export default function FeedDetail() {
       .catch((err) => console.log("##delete", err));
   };
 
-  // ! ###### feed update(modal) & Delete ######
-  // ! ###### feed update(modal) & Delete ######
-  // ! ###### feed update(modal) & Delete ######
-
   // ? ###### 이미지 다운로드 ######
+  // ! [BUG] : 현재 이미지 다운로드가 안됨.
   const downloadImage = async () => {
     await axios({
       method: "patch",
@@ -199,11 +182,6 @@ export default function FeedDetail() {
       })
       .catch((err) => console.log(err));
   };
-  // ? # 최초 랜더링 시 서버에서 comments 불러오기
-  useEffect(() => {
-    getUserInfo();
-    getComment();
-  }, []);
 
   // ? # 댓글 입력시 입력칸 초기화
   const resetInput = () => {
@@ -220,8 +198,6 @@ export default function FeedDetail() {
   };
 
   // ? ###### 서버로 데이터 제출 기능 ######
-  // TODO : Require value
-  // TODO : params = {:id}, Headers = logintype, Authentication, Body = textContent
   const handleCommentSubmit = async () => {
     if (inputComment.length) {
       await axios({
@@ -240,6 +216,16 @@ export default function FeedDetail() {
         .catch((err) => console.log(err));
     }
   };
+
+  // ? ###### 최초 랜더링 ######
+  // ? # 해당 feedId를 가진 feed의 내용
+  // ? # 로그인한 user info
+  // ? # 해당 feedId를 가진 feed의 댓글
+  useEffect(() => {
+    handleFeedAllUpdate();
+    getUserInfo();
+    getComment();
+  }, []);
 
   return (
     <>
@@ -268,7 +254,6 @@ export default function FeedDetail() {
                 </div>
                 <a
                   className="feed-detail__main-img__underbar__right-content"
-                  // href={feedData.image}
                   href={feedData.image}
                   download
                   onClick={downloadImage}
@@ -287,7 +272,6 @@ export default function FeedDetail() {
             <div className="feed-detail__writter">
               <div>{feedData.nickname}</div>
               <div className="feed-detail__UD-box">
-                <button onClick={handleFeedAllUpdate}>업데이트</button>
                 <button onClick={handleFeedUpdate}>수정</button>
                 <button onClick={deleteFeed}>삭제</button>
               </div>
