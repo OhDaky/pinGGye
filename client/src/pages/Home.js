@@ -13,13 +13,13 @@ import handleResponseSuccess from "../App";
 export default function Home({ getUserInfo }) {
   const isSignin = window.localStorage.getItem("isSignin");
   const history = useHistory();
-  const [isLogin, setIsLogin] = useState(false);              // 로그인 여부
-  const [userInfo, setUserInfo] = useState({});               // 로그인한 유저 정보 
-  const [feeds, setFeeds] = useState([]);                     // 전체 피드
+  const [isLogin, setIsLogin] = useState(false); // 로그인 여부
+  const [userInfo, setUserInfo] = useState({}); // 로그인한 유저 정보
+  const [feeds, setFeeds] = useState([]); // 전체 피드
   // const [unselectedFeeds, setUnselectedFeeds] = useState([]); // 선택되지 않은 피드
-  const [hashtags, setHashtags] = useState([]);               // 전체 해시태그
-  const [selectedTags, setSelectedTags] = useState([]);       // 선택된 해시태그
-  const [selectedFeeds, setSelectedFeeds] = useState([]);     // 해시태그에 해당하는 피드
+  const [hashtags, setHashtags] = useState([]); // 전체 해시태그
+  const [selectedTags, setSelectedTags] = useState([]); // 선택된 해시태그
+  const [selectedFeeds, setSelectedFeeds] = useState([]); // 해시태그에 해당하는 피드
 
   // ### 토큰으로 인증이 되었는지 확인
   const isAuthenticated = () => {
@@ -104,27 +104,29 @@ export default function Home({ getUserInfo }) {
     if (selectedTags.includes(input) === false) {
       setSelectedTags([...selectedTags, input]);
       console.log(selectedTags);
-      let filtered = feeds.filter(feed => feed[0][7][1].includes(input));
-      let difference = filtered.filter(feed => !selectedFeeds.includes(feed));
+      let filtered = feeds.filter((feed) => feed[0][7][1].includes(input));
+      let difference = filtered.filter((feed) => !selectedFeeds.includes(feed));
       setSelectedFeeds([...selectedFeeds, ...difference]);
     }
   };
 
   // ### 선택된 해시태그 지우기
   const deleteSelectedHashtags = (input) => {
-    let filteredTag = selectedTags.filter(tag => tag !== input);
+    let filteredTag = selectedTags.filter((tag) => tag !== input);
     setSelectedTags([...filteredTag]);
-    let filteredFeeds = selectedFeeds.filter(feed => !feed[0][7][1].includes(input));
+    let filteredFeeds = selectedFeeds.filter(
+      (feed) => !feed[0][7][1].includes(input)
+    );
     //! 선택된 태그와 제외한 태그 모두 포함한 피드가 사라짐 -> 해결방법
     setSelectedFeeds([...filteredFeeds]);
-  }
+  };
 
   const handleAddButton = () => {
     history.push("/feed/upload");
   };
 
-   // ### 로그인 되고 받아오는 한번만 실행되는 함수
-   useEffect(() => {
+  // ### 로그인 되고 받아오는 한번만 실행되는 함수
+  useEffect(() => {
     isAuthenticated();
     getFeeds();
     getHashtags();
@@ -134,10 +136,7 @@ export default function Home({ getUserInfo }) {
   useEffect(() => {
     // selectTags(selectedTags);
     // deleteSelectedHashtags(selectedTags);
-  }, [selectedTags])
-
-  console.log(selectedTags);
-  // console.log(selectedFeeds);
+  }, [selectedTags]);
 
   return (
     <>
@@ -161,22 +160,19 @@ export default function Home({ getUserInfo }) {
             </div>
             <div className="home__feeds-container">
               <span className="home__feeds-table">
-                {selectedTags.length === 0 ?
-                  (<>
-                    {
-                      feeds.map((id, i) => (
-                        <HomeFeed feedId={id[0]} />
-                      ))}
-                    </>
-                  ) : (
-                    <>
-                    {
-                      selectedFeeds.map((id, i) => (
-                        <HomeFeed feedId={id[0]} />
-                      ))}
-                    </>
-                  )
-                }
+                {selectedTags.length === 0 ? (
+                  <>
+                    {feeds.map((id, i) => (
+                      <HomeFeed feedId={id[0]} />
+                    ))}
+                  </>
+                ) : (
+                  <>
+                    {selectedFeeds.map((id, i) => (
+                      <HomeFeed feedId={id[0]} />
+                    ))}
+                  </>
+                )}
               </span>
             </div>
             <button className="home__feed-add-button" onClick={handleAddButton}>

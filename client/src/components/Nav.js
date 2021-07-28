@@ -2,8 +2,8 @@ import React from "react";
 import "./Styles/Nav.css";
 import logo from "./Styles/pinGGyeLogo.png";
 import { useHistory } from "react-router-dom";
-import logout from "./Styles/logout.png"
-import mypage from "./Styles/mypage.png"
+import logout from "./Styles/logout.png";
+import mypage from "./Styles/mypage.png";
 
 export default function Nav() {
   // ? ###### router function ######
@@ -18,7 +18,6 @@ export default function Nav() {
   // ? ###### logout handler function ######
   const handleLogOut = () => {
     localStorage.removeItem("accessToken");
-    // history.push("/");
     window.location.replace("/");
   };
   return (
@@ -36,8 +35,18 @@ export default function Nav() {
           <button className="nav__tab logout__tab" onClick={handleLogOut}>
             로그아웃
           </button>
-          <img className="nav__mypage" src={mypage} alt="mypage" onClick={goToMypage}></img>
-          <img className="nav__logout" src={logout} alt="logout" onClick={handleLogOut} />
+          <img
+            className="nav__mypage"
+            src={mypage}
+            alt="mypage"
+            onClick={goToMypage}
+          ></img>
+          <img
+            className="nav__logout"
+            src={logout}
+            alt="logout"
+            onClick={handleLogOut}
+          />
         </div>
       </div>
     </>

@@ -6,10 +6,10 @@ import Footer from "../components/Footer";
 import axios from "axios";
 
 // TODO : Home에서 user.email, nickname을 props로 받아와서 state로 저장
-export default function Mypage({user}) {
+export default function Mypage({ user }) {
   // ? ###### Default Value ######
   let pinGGyeURL = process.env.REACT_APP_API_URL;
-  let accessToken = process.env.REACT_APP_ACCESSTOKEN;
+  let accessToken = localStorage.getItem("accessToken");
 
   // ? ###### 메인 페이지로 redirect ######
   const history = useHistory();
@@ -24,8 +24,8 @@ export default function Mypage({user}) {
 
   // ? ###### 유저정보 state ######
   const [userInfo, setUserInfo] = useState({
-    email: "kim@mail.com", // Home에서 받아온 데이터 입력
-    nickname: "김군", // Home에서 받아온 데이터 입력
+    email: user.email, // Home에서 받아온 데이터 입력
+    nickname: user.nickname, // Home에서 받아온 데이터 입력
     password: "",
   });
   const handleInputValue = (key) => (e) => {
@@ -44,15 +44,12 @@ export default function Mypage({user}) {
         url: `${pinGGyeURL}/users/mypage`,
         data: { nickname, password },
         headers: {
-          authorization: `bearer ${accessToken}`,
+          authorization: `Bearer ${accessToken}`,
           logintype: "email",
         },
       })
-        .then((resp) => {
-          // 잘 수정되었다면
-          // ! [BUG] : 비밀번호가 일치하지 않아도 회원정보가 수정이 되는듯?
-          console.log("#####", resp);
-          // history.push("/");
+        .then(() => {
+          history.push("/");
           alert("회원정보가 수정되었습니다.");
         })
         .catch((err) => alert(err));
@@ -68,14 +65,14 @@ export default function Mypage({user}) {
           <input
             className="input__email"
             type="email"
-            value={user.email}
+            value={userInfo.email}
             readOnly
           />
           <input
             className="input__nickname"
             type="text"
             placeholder="Nickname"
-            value={user.nickname}
+            value={userInfo.nickname}
             onChange={handleInputValue("nickname")}
           />
           <div className="signup__alert-box">{nicknameError}</div>
