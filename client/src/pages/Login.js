@@ -99,3 +99,35 @@ export default function Login({ handleResponseSuccess, userInfo, setUserInfo, ge
   );
 }
   
+
+<>
+
+<div className="login__container">
+<img className="login__logo" src={logo} alt="logo" />
+
+<div className="login__img-box" />
+
+<div className="login__login-box">
+  <div className="login__container-title">Login</div>
+  <form onSubmit={(e) => e.preventDefault()}>
+    <div className="login__input-email">
+      <div>이메일</div>
+      <input type="email" onChange={handleInputValue("email")}></input>
+    </div>
+    <div className="login__input-password">
+      <div>비밀번호</div>
+        <input type="password" onChange={handleInputValue("password")}/>
+    </div>
+    <div>
+      <button className="login__btn-login" type="submit" onClick={handleLogin}>
+        로그인
+      </button>
+    </div>
+    <div>
+      <button className="login__btn-signup"><Link to="/signup">회원가입</Link></button>
+    </div>
+    </form>
+    <div className="login__alert-box">{errorMessage}</div>
+  </div>
+</div>
+</>
