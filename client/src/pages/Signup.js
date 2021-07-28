@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import Footer from "../components/Footer";
 import "./Styles/Signup.css";
+import logo from "../components/Styles/pinGGyeLogo.png";
 
 export default function Signup() {
   // ? ###### Default Value ######
@@ -63,6 +64,7 @@ export default function Signup() {
 
   return (
     <>
+      <img className="signup__logo" src={logo} alt="logo" />
       <div className="main">
         <form className="sign-up" onSubmit={(e) => e.preventDefault()}>
           <div className="main__message">회원가입</div>

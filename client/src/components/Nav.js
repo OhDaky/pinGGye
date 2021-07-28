@@ -36,7 +36,7 @@ export default function Nav() {
           <button className="nav__tab logout__tab" onClick={handleLogOut}>
             로그아웃
           </button>
-          <img className="nav__mypage" src={mypage} alt="mypage" onClick={goToMypage}></img>
+          <img className="nav__mypage" src={mypage} alt="mypage" onClick={goToMypage} />
           <img className="nav__logout" src={logout} alt="logout" onClick={handleLogOut} />
         </div>
       </div>
