@@ -29,7 +29,6 @@ export default function FeedUpload() {
   // ? ###### 해시태그 state ######
   const [inputHashTag, setInputHashTag] = useState("");
   const [hashTags, setHashTags] = useState([]);
-
   // ? ###### 이미지 업로드 ######
   const handleFileOnChange = (event) => {
     event.preventDefault();
@@ -70,9 +69,16 @@ export default function FeedUpload() {
       setHashTagError("해시태그는 최대 5개입니다.");
       resetInput();
     } else {
-      if (inputHashTag) {
-        setHashTags([...hashTags, inputHashTag]);
-        resetInput();
+      if (inputHashTag.includes(" "))
+        setHashTagError("해시태그에_띄워쓰기는_하지않습니다.");
+      else if (inputHashTag) {
+        if (hashTags.includes(inputHashTag))
+          setHashTagError("이미 있는 해시태그 입니다.");
+        else {
+          setHashTags([...hashTags, inputHashTag]);
+          resetInput();
+          setHashTagError("");
+        }
       }
     }
   };
@@ -140,16 +146,14 @@ export default function FeedUpload() {
             </div>
             <div className="feed-upload__main-underbar">
               <button className="feed-upload__btn" onClick={handleClick}>
-                업로드
+                Select Image
               </button>
             </div>
           </div>
           <div className="feed-upload__right-content">
             <div className="feed-upload__main-contents">
               <div id="feed-upload__img-content">
-                <div className="feed-upload__main-message">
-                  피드 제목(subject)
-                </div>
+                <div className="feed-upload__main-title">피드 제목</div>
                 <input
                   className="feed-upload__subject"
                   type="text"
@@ -157,7 +161,7 @@ export default function FeedUpload() {
                 />
               </div>
               <div id="feed-upload__hashtag">
-                <div className="feed-upload__main-message">해시태그 입력</div>
+                <div className="feed-upload__main-title">해시태그 입력</div>
                 <div className="feed-upload__hashtag-input">
                   <input
                     className="hashtag-input"
@@ -174,19 +178,30 @@ export default function FeedUpload() {
                   </button>
                 </div>
                 <div className="signup__alert-box">{hashTagError}</div>
-                <div className="feed-upload__hashtag-box">
-                  {hashTags.map((hashTag, i) => (
-                    <div key={i} className="hashtag">
-                      #{hashTag}
-                      <button onClick={() => handleDeleteTag(i)}>X</button>
-                    </div>
-                  ))}
-                </div>
+                {hashTags.length > 0 ? (
+                  <div className="feed-upload__hashtag-box">
+                    {hashTags.map((hashTag, i) => (
+                      <div key={i} className="hashtag">
+                        # {hashTag}
+                        <img
+                          onClick={() => {
+                            handleDeleteTag(i);
+                            setHashTagError("");
+                          }}
+                          src="https://cdn1.iconfinder.com/data/icons/smallicons-controls/32/614397-x-256.png"
+                          alt="X"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="no-hashtag">해시태그를 입력하세요!</div>
+                )}
               </div>
 
               <div className="feed-upload__underbar">
                 <button className="feed-upload__btn" onClick={handleSubmitFeed}>
-                  제 출
+                  Submit
                 </button>
               </div>
             </div>

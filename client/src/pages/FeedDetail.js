@@ -289,19 +289,19 @@ export default function FeedDetail({ userInfo }) {
           </div>
           <div className="feed-detail__right-content">
             <div className="feed-detail__topbar">
-              <div className="feed-detail__writter">{feedData.nickname}</div>
+              <div className="feed-detail__feedId">{feedId}</div>
               <div className="feed-detail__main-content">
                 제목 : {feedData.subject}
               </div>
               <div className="feed-detail__UD-box">
                 <img
-                  className="icon"
+                  className="main__icon"
                   src="https://cdn2.iconfinder.com/data/icons/vivid/48/pencil-512.png"
                   alt="update"
                   onClick={handleFeedUpdate}
                 />
                 <img
-                  className="icon"
+                  className="main__icon"
                   src="https://cdn1.iconfinder.com/data/icons/feather-2/24/trash-2-512.png"
                   alt="trash can"
                   onClick={deleteFeed}
