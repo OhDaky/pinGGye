@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import Footer from "../components/Footer";
 import "./Styles/Signup.css";
-import logo from "../components/Styles/pinGGyeLogo.png";
+import logo from "../static/images/pinGGyeLogo.png";
 
 export default function Signup() {
   // ? ###### Default Value ######
