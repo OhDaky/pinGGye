@@ -16,7 +16,8 @@ export default function Nav() {
   // ? ###### logout handler function ######
   const handleLogOut = () => {
     localStorage.removeItem("accessToken");
-    history.push("/");
+    // history.push("/");
+    window.location.replace("/");
   };
   return (
     <>

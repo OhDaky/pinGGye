@@ -42,6 +42,7 @@ export default function Login({ handleResponseSuccess, userInfo, setUserInfo, ge
         window.localStorage.setItem("isSignin", isLogin);
         setLoginInfo(res.data.data.userInfo);
         handleResponseSuccess();
+        window.location.replace("/");
     })
     .catch((err) => {
       setErrorMessage('이메일과 비밀번호를 다시 확인하세요');
@@ -49,27 +50,10 @@ export default function Login({ handleResponseSuccess, userInfo, setUserInfo, ge
   })
   };
 
-  // // ### 새로고침 했을 때 로그인 풀리는 것을 막기위해
-  // const getLoginInfo = () => {
-  //   const token = localStorage.getItem("accessToken")
-  //   let config = {
-  //     headers: {
-  //       "access-token": token,
-  //       authorization: `Bearer ${token}`,
-  //       logintype: "email",
-  //     }
-  //   }
-  //   axios
-  //     .post(`${process.env.REACT_APP_API_URL}/main`, config)
-  //     .then((res) => {
-  //       console.log(res);
-  //   })
-  // }
-
   return (
     <>
     <div className="login__container">
-      <div className="login__img-box">로그인 페이지 이미지 예시</div>
+      <div className="login__img-box" />
       <div className="login__login-box">
         <div className="login__container-title">Login</div>
         <form onSubmit={(e) => e.preventDefault()}>
