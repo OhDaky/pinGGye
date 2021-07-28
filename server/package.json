@@ -5,8 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",
+    "start-dummy": "nodemon index.js dummy",
     "start-pm2": "authbind --deep pm2 start index.js",
     "stop-pm2": "authbind --deep pm2 stop index.js",
+    "start-pm2-dummy": "authbind --deep pm2 start index.js dummy",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

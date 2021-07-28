@@ -72,9 +72,9 @@ export default function FeedComment({
         logintype: "email",
       },
     })
-      .then((resp) => {
-        console.log("delete complete", resp.data.data.comments);
+      .then(() => {
         getComment();
+        window.location.replace(`/feed/${feedId}`);
       })
       .catch((err) => console.log(err));
   };
@@ -82,13 +82,12 @@ export default function FeedComment({
     <>
       <div className="feed__comment">
         <div className="feed__comment-left-content">
-          <div className="feed__comment-userName">{commentId}</div>
           <div className="feed__comment-userName">{nickname}</div>
         </div>
         <div className="feed__comment-center-content">
           {isUpdate ? (
             <input
-              className="feed__comment-content"
+              className="feed__comment-content border"
               onChange={(e) => setInput(e.target.value)}
               value={input}
             />
@@ -103,22 +102,20 @@ export default function FeedComment({
         </div>
         {isMe ? (
           <div className="feed__comment-right-content">
-            <button
-              className="feed__comment-update"
+            <img
+              className="icon"
+              src="https://cdn2.iconfinder.com/data/icons/vivid/48/pencil-512.png"
+              alt="update"
               onClick={handleUpdateComment}
-            >
-              수정
-            </button>
-            <button
-              className="feed__comment-delete"
+            />
+            <img
+              className="icon"
+              src="https://cdn1.iconfinder.com/data/icons/feather-2/24/trash-2-512.png"
+              alt="trash can"
               onClick={handleDeleteComment}
-            >
-              삭제
-            </button>
+            />
           </div>
-        ) : (
-          <div className="feed__comment-right-content">내꺼 아님~</div>
-        )}
+        ) : null}
       </div>
     </>
   );

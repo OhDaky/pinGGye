@@ -45,8 +45,9 @@ app.use((err, req, res, next) => {
   });
 });
 
-app.listen(PORT, () => console.log(`http server is runnning on ${PORT}`));
-
-if (process.env.CREATE_DUMMY) {
+// 첫번째 실행 인자가 dummy인 경우 더미 생성
+if (process.argv[2] === "dummy") {
   createDummy();
 }
+
+app.listen(PORT, () => console.log(`http server is runnning on ${PORT}`));

@@ -12,14 +12,14 @@ import handleResponseSuccess from "../App";
 
 export default function Home({ getUserInfo }) {
   const isSignin = window.localStorage.getItem("isSignin");
-  let history = useHistory();
-
-  const [isLogin, setIsLogin] = useState(false);
-  const [userInfo, setUserInfo] = useState({});
-  const [feeds, setFeeds] = useState([]);
-  // const [unselectedFeeds, setUnselectedFees]
-  const [hashtags, setHashtags] = useState([]);
-  const [selectedHashtags, setSelectedHashtags] = useState([]);
+  const history = useHistory();
+  const [isLogin, setIsLogin] = useState(false);              // 로그인 여부
+  const [userInfo, setUserInfo] = useState({});               // 로그인한 유저 정보 
+  const [feeds, setFeeds] = useState([]);                     // 전체 피드
+  // const [unselectedFeeds, setUnselectedFeeds] = useState([]); // 선택되지 않은 피드
+  const [hashtags, setHashtags] = useState([]);               // 전체 해시태그
+  const [selectedTags, setSelectedTags] = useState([]);       // 선택된 해시태그
+  const [selectedFeeds, setSelectedFeeds] = useState([]);     // 해시태그에 해당하는 피드
 
   // ### 토큰으로 인증이 되었는지 확인
   const isAuthenticated = () => {
@@ -35,10 +35,10 @@ export default function Home({ getUserInfo }) {
     })
       .then((res) => {
         setUserInfo(res.data.data.userInfo);
-        // getUserInfo(userInfo);
         setIsLogin(true);
+        getUserInfo(res.data.data.userInfo);
         const isSignin = localStorage.getItem("isSignin");
-        console.log("=== home ===\n" + token);
+        // console.log(res);
       })
       .catch((err) => {
         console.log("=== home ===\n" + token);
@@ -48,7 +48,6 @@ export default function Home({ getUserInfo }) {
   // ### 토큰 응답을 제대로 받았는지 확인
   const handleResponseSuccess = () => {
     isAuthenticated();
-    // setIsLogin(true);
   };
 
   // ### 전체 해시태그 불러오기
@@ -63,7 +62,6 @@ export default function Home({ getUserInfo }) {
       },
       withCredentials: true,
     }).then((res) => {
-      // console.log(res.data.data.tags);
       const hash = Object.entries(res.data.data.tags);
       const hashArr = [];
       const arr = [];
@@ -71,10 +69,10 @@ export default function Home({ getUserInfo }) {
         hashArr.push([Object.entries(hash[i][1])]);
       }
       for (let i in hashArr) {
-        arr.push([hashArr[i][0][0][1], hashArr[i][0][1][1]]);
+        arr.push(hashArr[i][0][1][1]);
       }
       setHashtags(arr);
-      console.log(hashtags);
+      // setSelectedTags(arr);
     });
   };
 
@@ -101,28 +99,46 @@ export default function Home({ getUserInfo }) {
     });
   };
 
-  useEffect(() => {
-    getFeeds();
-    getHashtags();
-    window.localStorage.getItem("isSign");
-  }, []);
-
-  useEffect(() => {
-    window.localStorage.setItem("isSign", isSignin);
-  });
-
-  // ### 필터링할 해시태그 선택
-  const selectHashtags = () => {
-    // setFeeds
-    console.log(selectedHashtags);
+  // ### 선택된 해시태그 가져오기
+  const selectTags = (input) => {
+    if (selectedTags.includes(input) === false) {
+      setSelectedTags([...selectedTags, input]);
+      console.log(selectedTags);
+      let filtered = feeds.filter(feed => feed[0][7][1].includes(input));
+      let difference = filtered.filter(feed => !selectedFeeds.includes(feed));
+      setSelectedFeeds([...selectedFeeds, ...difference]);
+    }
   };
+
+  // ### 선택된 해시태그 지우기
+  const deleteSelectedHashtags = (input) => {
+    let filteredTag = selectedTags.filter(tag => tag !== input);
+    setSelectedTags([...filteredTag]);
+    let filteredFeeds = selectedFeeds.filter(feed => !feed[0][7][1].includes(input));
+    //! 선택된 태그와 제외한 태그 모두 포함한 피드가 사라짐 -> 해결방법
+    setSelectedFeeds([...filteredFeeds]);
+  }
 
   const handleAddButton = () => {
     history.push("/feed/upload");
   };
 
-  console.log(userInfo);
-  console.log(isSignin);
+   // ### 로그인 되고 받아오는 한번만 실행되는 함수
+   useEffect(() => {
+    isAuthenticated();
+    getFeeds();
+    getHashtags();
+  }, []);
+
+  // ### state가 업데이트될 때 사용되는 함수
+  useEffect(() => {
+    // selectTags(selectedTags);
+    // deleteSelectedHashtags(selectedTags);
+  }, [selectedTags])
+
+  console.log(selectedTags);
+  // console.log(selectedFeeds);
+
   return (
     <>
       {isLogin === true || isSignin === true ? (
@@ -133,18 +149,34 @@ export default function Home({ getUserInfo }) {
               <div className="home__hashtag-title">해시태그</div>
               <span className="home__hashtag-table">
                 {hashtags.map((tag, i) => {
-                  // return <HomeHashtags hashtag={tag} onClick={() => setSelectedHashtags([...selectedHashtags, hashtags[i]])} />;
                   return (
-                    <HomeHashtags hashtag={tag} onClick={selectHashtags} />
+                    <HomeHashtags
+                      hashtag={tag}
+                      selectTags={selectTags}
+                      deleteSelectedHashtags={deleteSelectedHashtags}
+                    />
                   );
                 })}
               </span>
             </div>
             <div className="home__feeds-container">
               <span className="home__feeds-table">
-                {feeds.map((id, i) => (
-                  <HomeFeed feedId={id[0]} />
-                ))}
+                {selectedTags.length === 0 ?
+                  (<>
+                    {
+                      feeds.map((id, i) => (
+                        <HomeFeed feedId={id[0]} />
+                      ))}
+                    </>
+                  ) : (
+                    <>
+                    {
+                      selectedFeeds.map((id, i) => (
+                        <HomeFeed feedId={id[0]} />
+                      ))}
+                    </>
+                  )
+                }
               </span>
             </div>
             <button className="home__feed-add-button" onClick={handleAddButton}>
@@ -164,7 +196,3 @@ export default function Home({ getUserInfo }) {
     </>
   );
 }
-
-/*
-  feedInfo 에서 사용 feeds - id, thumnail, tags[0], tags[1] (있다면). 없으면 tags[0]
-*/

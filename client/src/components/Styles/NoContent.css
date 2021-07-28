@@ -1,0 +1,11 @@
+.no-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80%;
+  width: 100%;
+}
+
+.no-content > img {
+  width: 40%;
+}

@@ -54,7 +54,7 @@ export default function Signup() {
           alert(
             `${nickname}님 회원가입이 완료되었습니다! 최고의 핑계사진을 찾으러 가볼까요?`
           );
-          history.push("/login");
+          history.push("/");
         })
         // TODO : 이미 있는 회원이라면, 모달창을 띄워서 로그인하러 가시겠습니까? 만들면 좋을듯.
         .catch(() => alert("이미 있는 회원입니다!"));
