@@ -47,7 +47,7 @@ export default function FeedDetail({ userInfo }) {
       url: `${pinGGyeURL}/feeds/${feedId}`,
       headers: {
         authorization: `Bearer ${accessToken}`,
-        logintype: "email",
+        logintype: localStorage.getItem("loginType"),
       },
     })
       .then((resp) => {
@@ -100,7 +100,7 @@ export default function FeedDetail({ userInfo }) {
       url: `${pinGGyeURL}/feeds/${feedId}`,
       headers: {
         authorization: `Bearer ${accessToken}`,
-        logintype: "email",
+        logintype: localStorage.getItem("loginType"),
       },
       data: {
         tagsText: feedData.tags,
@@ -131,7 +131,7 @@ export default function FeedDetail({ userInfo }) {
       url: `${pinGGyeURL}/feeds/${feedId}`,
       headers: {
         authorization: `Bearer ${accessToken}`,
-        logintype: "email",
+        logintype: localStorage.getItem("loginType"),
       },
     })
       .then((resp) => {
@@ -151,7 +151,7 @@ export default function FeedDetail({ userInfo }) {
         url: `${pinGGyeURL}/feeds/${feedId}/egg`,
         headers: {
           authorization: `Bearer ${accessToken}`,
-          logintype: "email",
+          logintype: localStorage.getItem("loginType"),
         },
       })
         .then((resp) => {
@@ -172,7 +172,7 @@ export default function FeedDetail({ userInfo }) {
       url: `${pinGGyeURL}/feeds/${feedId}/comment`,
       headers: {
         authorization: `Bearer ${accessToken}`,
-        logintype: "email",
+        logintype: localStorage.getItem("loginType"),
       },
     })
       .then((resp) => {
@@ -205,7 +205,7 @@ export default function FeedDetail({ userInfo }) {
         data: { textContent: inputComment },
         headers: {
           authorization: `Bearer ${accessToken}`,
-          logintype: "email",
+          logintype: localStorage.getItem("loginType"),
         },
       })
         .then(() => {

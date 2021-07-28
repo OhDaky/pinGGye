@@ -1,5 +1,5 @@
 .home__feed {
-  border-radius: 10px;
+  border-radius: 5px;
   position: relative;
   margin: 2rem;
   display: flex;
@@ -9,11 +9,8 @@
   width: 200px;
   height: 200px;
   /* flex-basis: auto; */
-  border: 1px solid black;
-  /* background: linear-gradient(to bottom ,
-  rgba(20, 20, 20, 0) 50%,
-  rgba(20, 20, 20, 0.2) 75%,
-  rgba(20, 20, 20, 0.6) 100%); */
+  /* border: 1px solid black; */
+  box-shadow: 2px 4px 6px rgba(2, 7, 21, 0.2);
 }
 
 .home__feed-thumbnail-container {
@@ -28,18 +25,20 @@
 }
 
 .home__feed-thumbnail {
-  /* position: absolute; */
-  border-radius: 10px;
+  position: absolute;
+  border-radius: 5px;
   top: 0;
   left: 0;
 }
 
 .home__feed-gradient {
   position: absolute;
-  background: linear-gradient(to bottom ,
+  /* background: linear-gradient(to bottom ,
   rgba(20, 20, 20, 0) 50%,
   rgba(20, 20, 20, 0.2) 75%,
-  rgba(20, 20, 20, 0.6) 100%);
+  rgba(20, 20, 20, 0.6) 100%); */
+  background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.6));
+  z-index: 999;
   top: 0;
   left: 0;
 }

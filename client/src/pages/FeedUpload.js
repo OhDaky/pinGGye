@@ -106,7 +106,7 @@ export default function FeedUpload() {
       headers: {
         "Content-Type": "multipart/form-data",
         authorization: `Bearer ${accessToken}`,
-        logintype: "email",
+        logintype: localStorage.getItem("loginType"),
       },
     })
       .then((resp) => {
