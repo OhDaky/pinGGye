@@ -2,12 +2,6 @@ const { User: UserModel } = require("../../models");
 const crypto = require("crypto");
 const logger = require("../../utils/logger");
 
-// 유저 정보 수정
-// 클라이언트로부터 PATCH 요청을 받는다 (payload: 수정된 이메일 or 수정된 닉네임, 토큰)
-// 요청에 있는 유저 아이디과 일치하는 유저 아이디를 DB에서 찾는다.
-// 수정할 유저 정보를 DB에 저장한다 (nickname)
-// 수정된 유저 정보를 응답으로 보낸다.
-
 module.exports = async (req, res) => {
   const { userId, email } = req.userInfo;
   const { nickname, password } = req.body;

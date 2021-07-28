@@ -6,9 +6,7 @@ module.exports = async (req, res) => {
   const { id: feedId } = req.params;
 
   if (!feedId) {
-    logger(
-      `[ERROR] 피드 다운 수 수정 - 유저 ${userId}: 요청 파라미터 부족. feedId: ${feedId}`
-    );
+    logger(`[ERROR] 피드 다운 수 수정 - 유저 ${userId}: 요청 파라미터 부족. feedId: ${feedId}`);
     return res
       .status(400)
       .json({ message: "Insufficient parameters supplied" });
@@ -44,9 +42,7 @@ module.exports = async (req, res) => {
       message: "Feed download count successfully updated",
     });
   } catch (error) {
-    logger(
-      `[ERROR] 피드 다운 수 수정 - 유저 ${userId}: 서버 에러. 피드 ${feedId}번 다운로드 요청 실패`
-    );
+    logger(`[ERROR] 피드 다운 수 수정 - 유저 ${userId}: 서버 에러. 피드 ${feedId}번 다운로드 요청 실패`);
     console.error(error);
     res.status(500).json({ message: "Failed to update feed download cound" });
   }

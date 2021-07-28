@@ -12,9 +12,7 @@ module.exports = async (req, res) => {
   const { userId } = req.userInfo;
   const { id: feedId } = req.params;
   if (!feedId) {
-    logger(
-      `[ERROR] 피드 조회 - 유저 ${userId}: 요청 파라미터 부족. feedId: ${feedId}`
-    );
+    logger(`[ERROR] 피드 조회 - 유저 ${userId}: 요청 파라미터 부족. feedId: ${feedId}`);
     return res
       .status(400)
       .json({ message: "Insufficient parameters supplied" });
@@ -42,9 +40,7 @@ module.exports = async (req, res) => {
     });
 
     if (!feed) {
-      logger(
-        `[ERROR] 피드 조회 - 유저 ${userId}: 유효하지 않은 피드 ${feedId}번 조회 요청`
-      );
+      logger(`[ERROR] 피드 조회 - 유저 ${userId}: 유효하지 않은 피드 ${feedId}번 조회 요청`);
       return res.status(400).json({ message: "Feed does not exist" });
     }
     logger(`피드 조회 - 유저 ${userId}: 피드 ${feedId}번 조회`);
@@ -64,9 +60,7 @@ module.exports = async (req, res) => {
       .status(200)
       .json({ data: { feed, comments }, message: "Feed and comments successfully read" });
   } catch (error) {
-    logger(
-      `[ERROR] 피드 조회 - 유저 ${userId}: 서버 에러. 피드 ${feedId} 댓글 조회 요청 실패`
-    );
+    logger(`[ERROR] 피드 조회 - 유저 ${userId}: 서버 에러. 피드 ${feedId} 댓글 조회 요청 실패`);
     console.error(error);
     res.status(500).json({ message: "Failed to read feed and comments" });
   }

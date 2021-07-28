@@ -4,10 +4,10 @@ const upload = require("../middlewares/uploadImage");
 const express = require("express");
 const feedRouter = express.Router();
 
+// 사용자 인증
 feedRouter.use("/", authUser);
 
-// 이미지 업로드 /feeds/image
-// feedRouter.post("/image", upload.single("image"), controller.createFeedImage);
+
 // 피드 업로드 /feeds/upload
 feedRouter.post("/upload", upload.single("image"), controller.createFeed);
 

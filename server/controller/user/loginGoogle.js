@@ -34,8 +34,7 @@ module.exports = async (req, res) => {
     return res.status(400).json({ message: "Invalid authorization code" });
   }
 
-  const { access_token: accessToken, refresh_token: refreshToken } =
-    googleToken.data;
+  const { access_token: accessToken, refresh_token: refreshToken } = googleToken.data;
   // logger("소셜 로그인 - Google 유저 토큰 발급 완료: ", googleToken.data);
   logger("소셜 로그인 - Google 유저 토큰 발급 완료");
 

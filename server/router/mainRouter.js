@@ -3,6 +3,7 @@ const authUser = require("../middlewares/authUser");
 const express = require("express");
 const mainRouter = express.Router();
 
+// 사용자 인증
 mainRouter.use("/", authUser);
 
 // 유저정보, 피드, 태그 읽기 /

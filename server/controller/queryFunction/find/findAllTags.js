@@ -29,8 +29,6 @@ module.exports = async (limit, order) => {
     includeIgnoreAttributes: true,
   });
 
-  // return tags;
-
   //* 각 태그 요소와 연결된 피드 갯수 입력
   const formattedTags = tags.map((tag) => {
     const feedCount = tag.dataValues.Feeds.length;
@@ -38,7 +36,6 @@ module.exports = async (limit, order) => {
     delete tag.dataValues.Feeds;
     return tag.dataValues;
   });
-  // .filter((tag) => tag.feedCount > 0);
 
   return formattedTags;
 };

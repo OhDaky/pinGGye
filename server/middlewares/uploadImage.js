@@ -29,7 +29,7 @@ const upload = multer({
           // cb(null, file.originalname.split(".")[0] + "_t." + file.originalname.split(".").pop()); //! for dummy
         },
         transform: function (req, file, cb) {
-          cb(null, sharp().withMetadata().resize(200, 200)); // 리사이징
+          cb(null, sharp().withMetadata().resize(200, 200)); // 200x200 리사이징
         },
       },
     ],
