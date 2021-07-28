@@ -6,7 +6,7 @@ import Footer from "../components/Footer";
 import axios from "axios";
 
 // TODO : Home에서 user.email, nickname을 props로 받아와서 state로 저장
-export default function Mypage() {
+export default function Mypage({user}) {
   // ? ###### Default Value ######
   let pinGGyeURL = process.env.REACT_APP_API_URL;
   let accessToken = process.env.REACT_APP_ACCESSTOKEN;
@@ -68,14 +68,14 @@ export default function Mypage() {
           <input
             className="input__email"
             type="email"
-            value={userInfo.email}
+            value={user.email}
             readOnly
           />
           <input
             className="input__nickname"
             type="text"
             placeholder="Nickname"
-            value={userInfo.nickname}
+            value={user.nickname}
             onChange={handleInputValue("nickname")}
           />
           <div className="signup__alert-box">{nicknameError}</div>

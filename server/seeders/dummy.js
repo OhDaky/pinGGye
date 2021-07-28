@@ -11,33 +11,29 @@ const generateRandomNum = (min, max) => {
   return num;
 }
 
-const truncateAll = async (value) => {
-  if (value === "true") {
+const truncateAll = async () => {
     logger("모든 테이블 초기화 시작");
     await sequelize.query("SET FOREIGN_KEY_CHECKS = 0", null);
     await sequelize.truncate({ cascade: true });
     await sequelize.query("SET FOREIGN_KEY_CHECKS = 1", null);
     logger("모든 테이블 초기화 완료");
-  } else {
-    logger("모든 테이블 초기화 비활성");
-  }
 };
 
 const createDummy = async () => {
   const ADMIN_PW = process.env.DUMMY_ADMIN_PW;
   const USER_PW = process.env.DUMMY_USER_PW;
-  //! DB 테이블 초기화
-  await truncateAll(process.env.TRUNCATE_TABLE);
-
   const dummyUsersInfo = dummy.users;
   const dummyFeedsInfo = dummy.feeds;
   const dummyCommentsInfo = dummy.comments;
 
+  //! DB 테이블 초기화
+  await truncateAll();
   console.log("Dummy data 생성 시작");
+  
   //! 유저 생성
+  //* createUserData(email, password, nickname, signUpType?, accountType?);
   const userInfoArr = [];
 
-  //* createUserData(email, password, nickname, signUpType?, accountType?);
   //? 어드민 유저 입력
   const userAdmin = await db.createUserData(
     "admin@mail.com",
@@ -46,10 +42,10 @@ const createDummy = async () => {
     "email",
     "admin"
   );
-  if (userAdmin.error === "exist") {
-    console.log("Dummy data 존재, 종료");
-    return; // 관리자 계정 존재 시, 더미 입력 금지
-  }
+  // if (userAdmin.error === "exist") {
+  //   console.log("Dummy data 존재, 종료");
+  //   return; // 관리자 계정 존재 시, 더미 입력 금지
+  // }
   userInfoArr.push(userAdmin);
 
   //? 일반 유저 입력
@@ -66,7 +62,9 @@ const createDummy = async () => {
 
   //! 피드 생성
   //* createFeedData(userId, subject, imageSrc, thumbnailSrc, tagsText)
-  const feedInfoArr = []; // 관리자 제외
+  // 랜덤한 유저가 피드 작성
+  
+  const feedInfoArr = [];
   for (let feed of dummyFeedsInfo) {
     const userIdx = generateRandomNum(2, lastUserIdx); // 관리자, kim을 제외한 유저
     const feedInfo = await db.createFeedData(userInfoArr[userIdx].id, feed[0], `${IMG_SERVER}/${feed[1]}`, `${IMG_SERVER}/${feed[2]}`, feed[3]);
@@ -87,7 +85,6 @@ const createDummy = async () => {
     const feedIdx = generateRandomNum(0, lastFeedIdx);
     const commIdx = generateRandomNum(0, lastCommnetIdx);
 
-    //자신의 게시물에는 댓글 달지 않음
     if (feedInfoArr[feedIdx].userId === userInfoArr[userIdx].id) continue;
 
     await db.createFeedCommentData(feedInfoArr[feedIdx].id, userInfoArr[userIdx].id, dummyCommentsInfo[commIdx]);    

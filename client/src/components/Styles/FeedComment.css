@@ -2,13 +2,26 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 50px;
+  height: 55px;
   margin: 10px;
-  border: 1px solid black;
+  box-shadow: 0px 3px 5px rgba(2, 7, 21, 0.1);
 }
 
 .feed__comment-content {
   border: none;
+}
+
+.feed__comment-left-content {
+  width: 50px;
+  height: 50px;
+  border-right: 2px solid rgba(2, 7, 21, 0.1);
+}
+.feed__comment-userName {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
 }
 
 .feed__comment-right-content {
@@ -21,4 +34,26 @@
 
 .feed__comment-right-content > button {
   height: 80%;
+}
+
+.feed__comment-content {
+  margin: 0;
+  font-size: 1rem;
+  width: 100%;
+}
+
+.feed__comment-content:focus {
+  outline: none;
+}
+
+.border {
+  border-bottom: 2px solid rgba(2, 7, 21, 0.2);
+}
+
+.feed__comment-center-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 60%;
 }

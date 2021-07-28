@@ -123,6 +123,7 @@ const getUserInfo = async (accessToken, loginType) => {
         where: { email: email, signUpType: loginType },
       });
       if (!googleUserInfo) {
+        logger("소셜 로그인 유저 조회 실패. 가입돼 있지 않음");
         userInfo.error = "invalid";
         return userInfo;
       }
@@ -130,6 +131,7 @@ const getUserInfo = async (accessToken, loginType) => {
       userInfo.email = googleUserInfo.email;
       userInfo.accountType = googleUserInfo.accountType;
     } catch (error) {
+      logger("소셜 로그인 유저 조회 실패. 서버 에러");
       console.error(error);
       userInfo.error = "error";
       return userInfo;
