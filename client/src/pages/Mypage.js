@@ -45,7 +45,7 @@ export default function Mypage({ user }) {
         data: { nickname, password },
         headers: {
           authorization: `Bearer ${accessToken}`,
-          logintype: "email",
+          logintype: localStorage.getItem("loginType"),
         },
       })
         .then(() => {
