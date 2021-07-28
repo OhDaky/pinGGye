@@ -4,6 +4,7 @@
   align-items: center;
   width: 100%;
   height: 100vh;
+  background-color: rgb(255, 204, 204);
 }
 
 .feed-detail__content {
@@ -12,13 +13,14 @@
   align-items: center;
   width: 80%;
   height: 80vh;
-  border: 1px solid;
+  border-radius: 5px;
+  box-shadow: 2px 4px 6px rgba(2, 7, 21, 0.3);
+  background-color: white;
 }
 
 .feed-detail__left-content {
   height: 500px;
   width: 500px;
-  border: 1px solid black;
 }
 
 .feed-detail__right-content {
@@ -27,7 +29,8 @@
   justify-content: space-between;
   height: 500px;
   width: 45%;
-  border: 1px solid black;
+  border-radius: 10px;
+  box-shadow: 1px 2px 4px rgba(2, 7, 21, 0.5);
 }
 
 .feed-detail__main-img {
@@ -36,6 +39,7 @@
   display: flex;
   justify-content: center;
   text-align: center;
+  border-radius: 10px;
 }
 
 .feed-detail__main-img__underbar {
@@ -47,6 +51,7 @@
   justify-content: space-between;
   align-items: center;
   height: 100px;
+  border-radius: 10px;
   background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.6));
 }
 
@@ -74,21 +79,34 @@
 .egg-img {
   width: 80%;
   height: 80%;
+  cursor: pointer;
 }
 
 .egg-count {
   position: fixed;
   color: white;
   font-size: 2rem;
+  cursor: pointer;
 }
 
-.feed-detail__writter {
+.feed-detail__topbar {
+  z-index: 10;
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
   height: 50px;
-  border-bottom: 1px solid black;
+  border-bottom: 2px solid rgba(2, 7, 21, 0.2);
+  box-shadow: 1px 2px 4px rgba(2, 7, 21, 0.2);
+}
+
+.feed-detail__writter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  border-right: 2px solid rgba(2, 7, 21, 0.1);
 }
 
 .feed-detail__UD-box {
@@ -105,16 +123,19 @@
 
 .feed-detail__main-content {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  width: 100%;
-  height: 100px;
+  width: 80%;
+  margin-left: 20px;
+  font-size: 1.5rem;
 }
 
 .feed-detail__comments {
   width: 100%;
-  height: 60%;
-  border: 1px solid black;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .input-comment-box {
@@ -123,46 +144,41 @@
   align-items: center;
   width: 100%;
   height: 50px;
+  box-shadow: 0px 0px 10px rgba(2, 7, 21, 0.2);
 }
 
 .input-comment-box > input {
   margin: 0;
-  height: 100%;
+  height: 90%;
   width: 80%;
+  border: none;
+  font-size: 1.3rem;
+  background-color: rgba(0, 0, 0, 0);
+  margin-left: 20px;
+}
+
+.input-comment-box > input:focus {
+  outline: none;
+  background-color: rgba(0, 0, 0, 0);
 }
 
 .input-comment-box > button {
   margin: 0;
   height: 100%;
   width: 20%;
+  border: none;
+  background-color: rgb(255, 204, 204);
+  color: white;
+  font-size: 1.3rem;
+  border-radius: 10px;
 }
 
 .feed-detail__comments-box {
   width: 100%;
-  height: 230px;
-  margin-top: 10px;
+  height: 390px;
   overflow-y: scroll;
 }
 
-/* modal */
-.upload-modal__background {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100vh;
-  background-color: rgba(2, 7, 21, 0.8);
-  position: fixed;
-  z-index: 999;
-}
-
-.upload-modal__main {
-  width: 500px;
-  height: 500px;
-  background-color: white;
-}
-
-.modal__image {
-  width: 100px;
-  height: 100px;
+.icon {
+  width: 40px;
 }

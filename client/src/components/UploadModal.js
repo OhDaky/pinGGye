@@ -1,4 +1,5 @@
 import React from "react";
+import "./Styles/UploadModal.css";
 
 export default function UploadModal({
   handleInputValue,
@@ -6,7 +7,6 @@ export default function UploadModal({
   feedData,
   handleBack,
 }) {
-  console.log("###@!#!@#", feedData);
   const goToBack = () => {
     handleBack();
   };
@@ -14,47 +14,33 @@ export default function UploadModal({
     <>
       <div className="upload-modal__background">
         <div className="upload-modal__main">
+          <div className="upload-modal__topbar">
+            <button className="modal__back-btn" onClick={goToBack}>
+              X
+            </button>
+          </div>
           <img className="modal__image" src={feedData.image} />
+          <div className="title-box">
+            <span>제목</span>
+          </div>
           <input
             className="modal__subject"
             onChange={handleInputValue("subject")}
             defaultValue={feedData.subject}
           />
+          <div className="title-box">
+            <span>해시태그</span>
+          </div>
           <input
             className="modal__hashTag"
             onChange={handleInputValue("tags")}
             defaultValue={feedData.tags}
           />
-          <button onClick={handleFeedUpdate}>수정 완료</button>
-          <button onClick={goToBack}>뒤로 가기</button>
+          <button className="modal__update-btn" onClick={handleFeedUpdate}>
+            수정 완료
+          </button>
         </div>
       </div>
     </>
   );
-}
-
-{
-  /* <UploadModal
-tempImage={tempImage}
-feedContent={feedContent}
-handleInputValue={handleInputValue}
-handleFeedUpdate={handleFeedUpdate}
-/>
-
-<div className="upload-modal__background">
-<div className="upload-modal__main">
-  <img className="modal__image" src={tempImage} />
-  <input
-    className="modal__subject"
-    onChange={handleInputValue("subject")}
-    defaultValue={feedContent.subject}
-  />
-  <input
-    className="modal__hashTag"
-    onChange={handleInputValue("tags")}
-    defaultValue={feedContent.tags}
-  />
-  <button onClick={handleFeedUpdate}>수정 완료</button>
-</div>
-</div> */
 }
