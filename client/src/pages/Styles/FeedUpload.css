@@ -13,18 +13,28 @@
   align-items: center;
   width: 80%;
   height: 80vh;
-  border: 1px solid;
+  border-radius: 5px;
+  box-shadow: 2px 4px 6px rgba(2, 7, 21, 0.3);
+  /* background-color: rgb(255, 253, 241); */
+  background-color: white;
 }
 
 .feed-upload__left-content {
   height: 500px;
   width: 500px;
-  border: 1px solid black;
+  box-shadow: 2px 4px 6px rgba(2, 7, 21, 0.3);
+  background-color: white;
 }
 
 .feed-upload__right-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   height: 500px;
   width: 45%;
+  border-radius: 10px;
+  box-shadow: 2px 4px 6px rgba(2, 7, 21, 0.3);
+  background-color: white;
 }
 
 .feed-upload__main-img {
@@ -33,6 +43,8 @@
   flex-direction: column;
   justify-content: space-between;
   text-align: center;
+  border-bottom: 1px solid rgba(2, 7, 21, 0.2);
+  box-shadow: 0px 3px 2px rgba(2, 7, 21, 0.1);
   background-size: 100% 100%;
   background-image: url(./pinGGyeMarket.png);
 }
@@ -47,12 +59,12 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  background-color: rgb(255, 230, 230);
 }
 
 .feed-upload__main-contents {
   width: 100%;
   height: 100%;
-  border: 1px solid black;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -64,42 +76,51 @@
   align-items: center;
   width: 100px;
   height: 50px;
-  border: 1px solid black;
   border-radius: 30px;
+  border: none;
+  font-size: 1.25rem;
   margin: 30px;
+  background-color: rgb(255, 253, 241);
+  box-shadow: 1px 2px 4px rgba(2, 7, 21, 0.4);
+}
+
+.feed-upload__btn:active {
+  box-shadow: inset 1px 2px 4px rgba(2, 7, 21, 0.4);
 }
 
 #feed-upload__hashtag {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  margin: 20px 0px;
   width: 100%;
-  height: 30%;
-  background-color: rgba(0, 0, 255, 0.1);
+  height: 100%;
+  border-bottom: 3px solid rgba(2, 7, 21, 0.2);
 }
 
 .feed-upload__hashtag-input {
   display: flex;
-  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 40px;
 }
 
 .hashtag-input {
-  width: 70%;
+  margin: 0;
+  width: 80%;
+  height: 100%;
+  font-size: 1rem;
 }
 
 .hashtag-submit-btn {
+  margin: 0;
   width: 20%;
+  height: 100%;
+  border: none;
+  background-color: rgb(255, 204, 204);
+  color: white;
+  font-size: 1.3rem;
+  border-radius: 10px;
 }
-
-.feed-upload__hashtag-box {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .hashtag {
   display: flex;
   align-items: center;
@@ -108,12 +129,30 @@
   padding: 10px;
   border-radius: 10px;
   margin: 0px 5px;
+  font-size: 1.5rem;
+}
+
+.no-hashtag {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+  font-size: 1.5rem;
+  color: rgb(255, 204, 204);
+}
+
+.feed-upload__hashtag-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .signup__alert-box {
   color: red;
   width: 100%;
   text-align: center;
+  font-size: 1.5rem;
 }
 
 #feed-upload__img-content {
@@ -122,12 +161,16 @@
   align-items: center;
   width: 100%;
   height: 30%;
-  background-color: rgba(255, 0, 0, 0.1);
+  border-bottom: 2px solid rgba(2, 7, 21, 0.1);
 }
 
-.feed-upload__main-message {
-  font-size: 1.5rem;
+.feed-upload__main-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
   width: 100%;
+  margin-top: 10px;
 }
 
 .feed-upload__subject {
@@ -139,4 +182,173 @@
 .feed-upload__underbar {
   display: flex;
   justify-content: flex-end;
+  background-color: rgb(255, 230, 230);
+}
+
+.hashtag {
+  background-color: white;
+  border: 2px solid rgba(2, 7, 21, 0.1);
+}
+
+.hashtag > img {
+  width: 20px;
+  margin: 5px;
+}
+
+/* FeedUpload */
+@media screen and (max-width: 420px) {
+  .feed-upload-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    background-color: rgb(255, 204, 204);
+  }
+
+  .feed-upload__content {
+    margin-top: 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 90%;
+    height: 80vh;
+    border: 1px solid;
+    background-color: rgb(255, 255, 255);
+    overflow-y: auto;
+  }
+
+  .feed-upload__left-content {
+    height: 60vh;
+    width: 300px;
+    border: rgb(255, 255, 255);
+  }
+
+  .feed-upload__right-content {
+    height: 30vh;
+    width: 300px;
+    margin-top: 0;
+  }
+
+  .feed-upload__main-img {
+    width: 300px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    border-bottom: 1px solid black;
+    background-size: 100% 100%;
+    background-image: url(./pinGGyeMarket.png);
+    margin-top: 1rem;
+  }
+
+  .feed-upload__profile_preview {
+    width: 100%;
+    height: 100%;
+  }
+
+  .feed-upload__main-underbar {
+    height: 20%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .feed-upload__main-contents {
+    width: 100%;
+    height: 70%;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .feed-upload__btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 5rem;
+    height: 2.5rem;
+    border: 1px solid black;
+    border-radius: 30px;
+    margin: 30px;
+  }
+
+  #feed-upload__hashtag {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin-top: 2rem;
+    width: 100%;
+    height: 30%;
+    background-color: rgb(255, 255, 255);
+  }
+
+  .feed-upload__hashtag-input {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 40px;
+  }
+
+  .hashtag-input {
+    width: 70%;
+    height: 1.5rem;
+  }
+
+  .hashtag-submit-btn {
+    width: 15%;
+    height: 1.5rem;
+    margin-left: 5px;
+  }
+
+  .feed-upload__hashtag-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .hashtag {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid black;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 0px 5px;
+  }
+
+  .signup__alert-box {
+    color: red;
+    width: 100%;
+    text-align: center;
+  }
+
+  #feed-upload__img-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 30%;
+    background-color: rgb(255, 255, 255);
+  }
+
+  .feed-upload__main-message {
+    margin: 1rem 0 0 1rem;
+    font-size: 1rem;
+    width: 100%;
+  }
+
+  .feed-upload__subject {
+    width: 80%;
+    height: 50px;
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+  }
+  .feed-upload__underbar {
+    margin-top: 1.2rem;
+    height: max-content;
+  }
 }
