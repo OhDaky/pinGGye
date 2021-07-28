@@ -18,7 +18,7 @@ module.exports = async (req, res) => {
     const tags = await db.findAllTags(tlimit, torder);
 
     logger(
-      `피드 조회 - 유저 ${userId}: 모든 피드 조회. 옵션(start: ${start}, end: ${end}, limit: ${limit}, order: ${order})`
+      `모든 정보 조회 - 유저 ${userId}: 모든 피드 조회. 옵션(start: ${start}, end: ${end}, limit: ${limit}, order: ${order})`
     );
 
     res
@@ -29,9 +29,9 @@ module.exports = async (req, res) => {
       });
   } catch (error) {
     logger(
-      `[ERROR] 피드 조회 - 유저 ${userId}: 서버 에러. 모든 정보 조회 요청 실패. 옵션(start: ${start}, end: ${end}, limit: ${limit}, order: ${order})`
+      `[ERROR] 모든 정보 조회 - 유저 ${userId}: 서버 에러. 모든 정보 조회 요청 실패. 옵션(start: ${start}, end: ${end}, limit: ${limit}, order: ${order})`
     );
     console.error(error);
-    return res.status(500).json({ message: "Failed to read all feeds" });
+    return res.status(500).json({ message: "Failed to read all data" });
   }
 };
