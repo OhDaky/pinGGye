@@ -66,3 +66,84 @@ input {
   text-align: center;
   margin-top: 30vh;
 }
+
+.login__logo {
+  display: none;
+}
+
+@media screen and (max-width: 500px) {
+  .login__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+  }
+  
+.login__logo {
+  display: flex;
+  width: 12rem;
+  margin-left: 3rem;
+  margin-bottom: 1.5rem;
+}
+  
+.login__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+}
+
+.login__img-box {
+  display: none;
+}
+
+.login__login-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  margin-left: 2rem;
+  border : 1px solid black;
+  width: 40vh;
+  height: 50vh;
+}
+
+.login__container-title {
+  max-width: 20%;
+  margin-bottom: 2rem;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.login__input-email, .login__input-password{
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+.login__btn-login {
+  margin-bottom: 0.5rem;
+  width: 100%;
+}
+
+
+.login__btn-signup {
+  float: right;
+  margin-top: 1rem;
+}
+
+input {
+  margin-top: 0.5rem;
+  position: relative;
+  width: 95%;
+}
+
+.login__alert-box {
+  position: absolute;
+  text-align: center;
+  margin-top: 30vh;
+}
+}
