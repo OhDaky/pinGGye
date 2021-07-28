@@ -1,6 +1,7 @@
 import axios from "axios";
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
+import logo from "../components/Styles/pinGGyeLogo.png";
 
 import "./Styles/Login.css"  
 export default function Login({ handleResponseSuccess, userInfo, setUserInfo, getHashtags }) {
@@ -52,8 +53,14 @@ export default function Login({ handleResponseSuccess, userInfo, setUserInfo, ge
 
   return (
     <>
-    <div className="login__container">
+
+      <div className="login__container">
+      <img className="login__logo" src={logo} alt="logo" />
+      <div className="login__img-box">로그인 페이지 이미지 예시</div>
+
+
       <div className="login__img-box" />
+
       <div className="login__login-box">
         <div className="login__container-title">Login</div>
         <form onSubmit={(e) => e.preventDefault()}>

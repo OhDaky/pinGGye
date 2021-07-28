@@ -9,7 +9,7 @@ const googleInfoURL = 'https://www.googleapis.com/oauth2/v3/userinfo';
 
 const loginGoogle = async (req, res) => {
 	// 로그인 - OAuth 방식: google
-	console.log('💙loginGoogle-', req.body);
+	console.log('loginGoogle-', req.body);
 	// authorization code를 이용해 access token을 발급받음
 	await axios
 		.post(googleLoginURL, {
@@ -31,7 +31,7 @@ const loginGoogle = async (req, res) => {
 				})
 				.then(result => result.data.email)
 				.catch(err => {
-					console.log('💙loginGoogle-err:', err.message);
+					console.log('loginGoogle-err:', err.message);
 				});
 			// 유저정보 확인하여 새로운 유저면 데이터베이스에 저장
 			const userInfo = await Users.findOne({
@@ -45,7 +45,7 @@ const loginGoogle = async (req, res) => {
 				try {
 					newUser.save();
 				} catch (err) {
-					console.log('💙loginGoogle-err:', err.message);
+					console.log('loginGoogle-err:', err.message);
 				}
 			}
 			// cookie에 refresh token 저장
@@ -57,7 +57,7 @@ const loginGoogle = async (req, res) => {
 			});
 
 			// access token과 loginType, email을 응답으로 보내줌
-			//console.log('💙loginGoogle-at:', accessToken, '\n💙loginGoogle-rt:', refreshToken);
+			//console.log('loginGoogle-at:', accessToken, '\nloginGoogle-rt:', refreshToken);
 			res.status(200).json({
 				accessToken,
 				loginType: 'google',
@@ -65,7 +65,7 @@ const loginGoogle = async (req, res) => {
 			});
 		})
 		.catch(err => {
-			console.log('💙loginGoogle-err:', err.message);
+			console.log('loginGoogle-err:', err.message);
 			res.status(401).json({
 				message: 'authorizationCode Error!' + err.message,
 			});

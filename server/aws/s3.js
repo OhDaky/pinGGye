@@ -1,5 +1,7 @@
 const aws = require("aws-sdk");
+
 //* S3 이미지 서버 연결
+
 aws.config.update({
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
@@ -7,6 +9,7 @@ aws.config.update({
 });
 
 const s3 = new aws.S3();
+
 console.log("Image server connected");
 
 module.exports = s3;
