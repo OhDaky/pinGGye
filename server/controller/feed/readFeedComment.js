@@ -4,7 +4,8 @@ const db = require("../queryFunction");
 module.exports = async (req, res) => {
   const { userId } = req.userInfo;
   const { id: feedId } = req.params;
-  
+  const { order } = req.query;
+
   if (!feedId) {
     logger(`[ERROR] 피드 댓글 조회 - 유저 ${userId}: 요청 파라미터 부족. feedId: ${feedId}`);
     return res
@@ -21,7 +22,7 @@ module.exports = async (req, res) => {
       return res.status(400).json({ message: "Feed does not exist" });
     }
 
-    const comments = await db.findFeedComments(feedId);
+    const comments = await db.findFeedComments(feedId, order);
     logger(`피드 댓글 조회 - 유저 ${userId}: 피드 ${feedId}번 댓글 조회`);
 
     res

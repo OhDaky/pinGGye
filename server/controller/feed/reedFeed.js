@@ -11,6 +11,8 @@ const db = require("../queryFunction");
 module.exports = async (req, res) => {
   const { userId } = req.userInfo;
   const { id: feedId } = req.params;
+  const { corder } = req.query;
+
   if (!feedId) {
     logger(`[ERROR] 피드 조회 - 유저 ${userId}: 요청 파라미터 부족. feedId: ${feedId}`);
     return res
@@ -53,7 +55,7 @@ module.exports = async (req, res) => {
     delete feed.dataValues.User;
 
     //* 피드 댓글 조회
-    const comments = await db.findFeedComments(feedId);
+    const comments = await db.findFeedComments(feedId, corder);
     logger(`피드 조회 - 유저 ${userId}: 피드 ${feedId}번 댓글 조회`);
 
     res
