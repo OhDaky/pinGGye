@@ -52,7 +52,7 @@ export default function FeedComment({
         data: { commentId, textContent: input },
         headers: {
           authorization: `Bearer ${accessToken}`,
-          logintype: "email",
+          logintype: localStorage.getItem("loginType"),
         },
       }).then(() => alert("댓글 수정 완료!"));
     }
@@ -69,7 +69,7 @@ export default function FeedComment({
       data: { commentId },
       headers: {
         authorization: `Bearer ${accessToken}`,
-        logintype: "email",
+        logintype: localStorage.getItem("loginType"),
       },
     })
       .then(() => {
