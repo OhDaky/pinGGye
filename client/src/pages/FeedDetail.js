@@ -7,6 +7,7 @@ import Footer from "../components/Footer";
 import FeedComment from "../components/FeedComment";
 import UploadModal from "../components/UploadModal";
 import NoContent from "../components/NoContent";
+import submitImg from "./Styles/submit.png"
 
 export default function FeedDetail({ userInfo }) {
   // ? ###### Default Value ######
@@ -337,6 +338,7 @@ export default function FeedDetail({ userInfo }) {
                 <button className="comment__btn" onClick={handleCommentSubmit}>
                   댓글 달기
                 </button>
+                <img className="submitComment__btn" src={submitImg} alt="logout" onClick={handleCommentSubmit} /> 
               </div>
             </div>
           </div>

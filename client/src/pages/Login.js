@@ -107,11 +107,11 @@ export default function Login({ handleResponseSuccess, userInfo, setUserInfo, ge
         <form onSubmit={(e) => e.preventDefault()}>
           <div className="login__input-email">
             <div>이메일</div>
-            <input type="email" onChange={handleInputValue("email")}></input>
+            <input className="inputbox" type="email" onChange={handleInputValue("email")}></input>
           </div>
           <div className="login__input-password">
             <div>비밀번호</div>
-              <input type="password" onChange={handleInputValue("password")}/>
+              <input className="inputbox" type="password" onChange={handleInputValue("password")}/>
           </div>
           <div>
             <button className="login__btn-login" type="submit" onClick={handleLogin}>
