@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import "./Styles/FeedComment.css";
-import UserImage from "./Styles/mypage.png";
+import UserImage from "../static/images/mypage.png";
 
 export default function FeedComment({
   feedId,

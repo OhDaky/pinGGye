@@ -1,6 +1,6 @@
 import React from "react";
 import "./Styles/Footer.css";
-import GithubImg from "./Styles/github.png";
+import GithubImg from "../static/images/github.png";
 
 export default function Footer() {
   return (

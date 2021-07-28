@@ -1,9 +1,9 @@
 import React from "react";
 import "./Styles/Nav.css";
-import logo from "./Styles/pinGGyeLogo.png";
+import logo from "../static/images/pinGGyeLogo.png";
 import { useHistory } from "react-router-dom";
-import logout from "./Styles/logout.png";
-import mypage from "./Styles/mypage.png";
+import logout from "../static/images/logout.png";
+import mypage from "../static/images/mypage.png";
 
 export default function Nav() {
   // ? ###### router function ######
