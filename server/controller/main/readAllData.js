@@ -7,19 +7,19 @@ module.exports = async (req, res) => {
   const { start, end, limit, order, tlimit, torder } = req.query;
 
   try {
+    // 유저 정보
     const userInfo = await UserModel.findOne({
       where: { id: userId },
     });
     delete userInfo.dataValues.id;
     delete userInfo.dataValues.password;
 
+    // 피드 정보
     const feeds = await db.findAllFeeds(start, end, limit, order);
-
+    // 태그 정보
     const tags = await db.findAllTags(tlimit, torder);
-
-    logger(
-      `모든 정보 조회 - 유저 ${userId}: 모든 피드 조회. 옵션(start: ${start}, end: ${end}, limit: ${limit}, order: ${order})`
-    );
+    
+    logger(`모든 정보 조회 - 유저 ${userId}: 모든 피드 조회. 옵션(start: ${start}, end: ${end}, limit: ${limit}, order: ${order})`);
 
     res
       .status(200)
@@ -28,9 +28,7 @@ module.exports = async (req, res) => {
         message: "All feeds, tags, user info successfully read",
       });
   } catch (error) {
-    logger(
-      `[ERROR] 모든 정보 조회 - 유저 ${userId}: 서버 에러. 모든 정보 조회 요청 실패. 옵션(start: ${start}, end: ${end}, limit: ${limit}, order: ${order})`
-    );
+    logger(`[ERROR] 모든 정보 조회 - 유저 ${userId}: 서버 에러. 모든 정보 조회 요청 실패. 옵션(start: ${start}, end: ${end}, limit: ${limit}, order: ${order})`);
     console.error(error);
     return res.status(500).json({ message: "Failed to read all data" });
   }

@@ -5,16 +5,12 @@ module.exports = async (req, res) => {
   const { email, password, nickname } = req.body;
 
   if (!email || !password || !nickname) {
-    logger(
-      `회원가입 - 요청 파라미터 부족. email=${email} nickname=${nickname}`
-    );
+    logger(`회원가입 - 요청 파라미터 부족. email=${email} nickname=${nickname}`);
     return res.status(422).send("insufficient parameters supplied");
   }
 
   if (email === "" || password === "" || nickname === "") {
-    logger(
-      `회원가입 - 요청 파라미터 에러. email=${email} nickname=${nickname}`
-    );
+    logger(`회원가입 - 요청 파라미터 에러. email=${email} nickname=${nickname}`);
     return res.status(422).send("insufficient parameters supplied");
   }
 

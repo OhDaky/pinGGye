@@ -3,11 +3,15 @@ const {
   FeedComment: FeedCommentModel,
 } = require("../../../models");
 
-module.exports = async (feedId) => {
+module.exports = async (feedId, order) => {
+  if (typeof order === "string") order = order.toUpperCase();
+  if (order !== "ASC" && order !== "DESC") order = "ASC";
+
   const comment = await FeedCommentModel.findAll({
     attributes: ["id", "feedId", "textContent", "createdAt", "updatedAt"],
     where: { feedId: feedId },
     include: [{ model: UserModel }],
+    order: [["id", order]],
   });
 
   const result = comment.map((comment) => {

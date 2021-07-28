@@ -3,6 +3,9 @@ const getUserInfo = require("./getUserInfo");
 
 const authUser = async (req, res, next) => {
   const { authorization, logintype: loginType } = req.headers;
+  logger("유저 토큰 검증 - 검증 시작");
+  logger("인증 헤더: ", authorization);
+  logger("로그인 타입: ", loginType);
 
   if (!authorization) {
     // 액세스 토큰 없음
@@ -42,7 +45,7 @@ const authUser = async (req, res, next) => {
 
   // if (userInfo.accessToken) {
   //   logger("유저 토큰 검증 - 재발급 완료: ", userInfo);
-  //   res.write({ accessToken });    // 헤더에 담아서 보낸다?
+  //   res.write({ accessToken });    //? Not work, 헤더에 담아서 전송?
   // } else {
   // }
   

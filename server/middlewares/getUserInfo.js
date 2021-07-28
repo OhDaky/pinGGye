@@ -5,7 +5,7 @@ const verifyRefreshToken = require("../token/verifyRefreshToken");
 const axios = require("axios");
 const logger = require("../utils/logger");
 
-const googleTokenUrl = "https://oauth2.googleapis.com/token";
+// const googleTokenUrl = "https://oauth2.googleapis.com/token";
 const googleProfileUrl = "https://www.googleapis.com/oauth2/v3/userinfo";
 
 const getUserInfo = async (accessToken, loginType) => {
@@ -26,14 +26,14 @@ const getUserInfo = async (accessToken, loginType) => {
       // const decodedRefresh = await verifyRefreshToken(refreshToken);
 
       // if (decodedRefresh.error === "expired") {
-      //   //! 재로그인 필요 -> 리프래시 토큰 재발급
+      //   //? 재로그인 필요 -> 리프래시 토큰 재발급
       //   userInfo.error = "expired";
       //   return userInfo;
       // } else if (decodedRefresh.error === "invalid") {
       //   userInfo.error = "invalid";
       //   return userInfo;
       // } else {
-      //   //! 액세스 토큰을 다시 보내고, 클라이언트의 재요청이 필요
+      //   //? 액세스 토큰을 다시 보내고, 클라이언트의 재요청이 필요
       //   const userInfoDB = await UserModel.findOne({
       //     where: { email: decodedRefresh.email, signUpType: loginType },
       //   });
@@ -77,7 +77,7 @@ const getUserInfo = async (accessToken, loginType) => {
       //   });
 
       //   if (!googleUserInfo) {
-      //     //! 가입하지 않은 유저
+      //     //? 가입하지 않은 유저
       //     logger("소셜 로그인 유저 토큰 검증 실패 - 가입되지 않은 유저");
       //     userInfo.error = "invalid";
       //     return userInfo;
@@ -86,7 +86,7 @@ const getUserInfo = async (accessToken, loginType) => {
       //   const googleRefreshToken = googleUserInfo.refreshToken;
       //   if (!googleRefreshToken) {
       //     logger("소셜 로그인 유저 토큰 검증 실패 - 리프레시 토큰 없음");
-      //     //! 유저 DB에 리프레시 토큰 없음. 발생하면 안되는 에러
+      //     //? 유저 DB에 리프레시 토큰 없음. 발생하면 안되는 에러
       //     userInfo.error = "invalid";
       //     return userInfo;
       //   }

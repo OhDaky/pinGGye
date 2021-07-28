@@ -1,6 +1,4 @@
 require("dotenv").config();
-const fs = require("fs");
-const https = require("https");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const express = require("express");
@@ -14,7 +12,15 @@ const userRouter = require("./router/userRouter");
 const app = express();
 const PORT = 80;
 
-app.use(morgan("dev"));
+// Setting morgan date
+const today = new Date();
+const dateFormat = new Date(today.getTime() - today.getTimezoneOffset() * 60000).toISOString();
+morgan.token("date", () => {
+  return dateFormat;
+});
+
+// Middleware
+app.use(morgan(`"HTTP/:http-version :method :url" :status :remote-addr - :remote-user :res[content-length] [:date]`));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(
@@ -34,6 +40,7 @@ app.get("/", (req, res) => {
   res.status(200).send("Hello World");
 });
 
+// Error handling
 app.use((req, res, next) => {
   res.status(404).send("Page Not Found!");
 });
@@ -45,9 +52,10 @@ app.use((err, req, res, next) => {
   });
 });
 
-// 첫번째 실행 인자가 dummy인 경우 더미 생성
+// Create dummy option
 if (process.argv[2] === "dummy") {
   createDummy();
 }
 
+// Listen
 app.listen(PORT, () => console.log(`http server is runnning on ${PORT}`));

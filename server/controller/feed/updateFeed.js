@@ -8,9 +8,7 @@ module.exports = async (req, res) => {
   const { subject, tagsText } = req.body;
 
   if (!feedId || !subject || !tagsText) {
-    logger(
-      `[ERROR] 피드 수정 - 유저 ${userId}: 요청 파라미터 부족. feedId: ${feedId} subject: ${subject} tagsText:${tagsText}`
-    );
+    logger(`[ERROR] 피드 수정 - 유저 ${userId}: 요청 파라미터 부족. feedId: ${feedId} subject: ${subject} tagsText:${tagsText}`);
     return res
       .status(400)
       .json({ message: "Insufficient parameters supplied" });
@@ -26,9 +24,7 @@ module.exports = async (req, res) => {
     });
 
     if (!feed) {
-      logger(
-        `피드 수정 - 유저 ${userId}: 유효하지 않거나 수정 권한이 없는 피드 ${feedId}번 수정 요청`
-      );
+      logger(`피드 수정 - 유저 ${userId}: 유효하지 않거나 수정 권한이 없는 피드 ${feedId}번 수정 요청`);
       return res.status(400).json({ message: "Invalid request" });
     }
 
@@ -54,15 +50,9 @@ module.exports = async (req, res) => {
 
     logger(`피드 수정 - 유저 ${userId}: 피드 ${feedId}번 신규 태그 입력 완료`);
 
-    //! 피드 조회 및 응답
-    // const feeds = await db.findAllFeeds();
-    // logger("피드 수정 - 모든 피드 조회");
-
     res.status(200).json({ message: "Feed successfully updated" });
   } catch (error) {
-    logger(
-      `[ERROR] 피드 수정 - 유저 ${userId}: 서버 에러. 피드 ${feedId}번 수정 요청 실패`
-    );
+    logger(`[ERROR] 피드 수정 - 유저 ${userId}: 서버 에러. 피드 ${feedId}번 수정 요청 실패`);
     console.error(error);
     return res.status(500).json({ message: "Failed to update feed" });
   }

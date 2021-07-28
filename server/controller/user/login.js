@@ -18,6 +18,7 @@ module.exports = async (req, res) => {
     .createHash("sha512")
     .update(password + salt)
     .digest("hex");
+  
   try {
     const userInfo = await UserModel.findOne({
       where: { email: email, signUpType: "email" },
@@ -38,19 +39,15 @@ module.exports = async (req, res) => {
     // }
 
     if (userInfo.password !== hashedPassword) {
-      logger(
-        `[ERROR] 로그인 - 유저 ${userInfo.id}: 이메일 ${email} 비밀번호 오류`
-      );
+      logger(`[ERROR] 로그인 - 유저 ${userInfo.id}: 이메일 ${email} 비밀번호 오류`);
       return res.status(401).json({ message: "Not authorized" });
     }
 
     delete userInfo.dataValues.password;
     const accessToken = await generateAccessToken(userInfo);
-    logger(
-      `로그인 - 유저 ${userInfo.id}: 이메일 ${email} 로그인 성공. 액세스 토큰 발급 완료`
-    );
-    // const refreshToken = await generateRefreshToken(userInfo);
+    logger(`로그인 - 유저 ${userInfo.id}: 이메일 ${email} 로그인 성공. 액세스 토큰 발급 완료`);
 
+    // const refreshToken = await generateRefreshToken(userInfo);
     // await userInfo.update({ refreshToken });
 
     // res.cookie("refreshToken", refreshToken, {
@@ -64,13 +61,12 @@ module.exports = async (req, res) => {
     // delete userInfo.dataValues.refreshToken;
     delete userInfo.dataValues.id;
     //! 리프레시 토큰 유무?
+    
     return res
       .status(201)
       .json({ data: { accessToken, userInfo }, message: "Login succeed" });
   } catch (error) {
-    logger(
-      `로그인 - 유저 ${userInfo.id}: 서버 에러. 이메일 ${email} 로그인 실패`
-    );
+    logger(`로그인 - 유저 ${userInfo.id}: 서버 에러. 이메일 ${email} 로그인 실패`);
     console.error(error);
     return res.status(500).json({ message: "Server error" });
   }
