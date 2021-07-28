@@ -9,7 +9,6 @@ import Mypage from "./pages/Mypage";
 import Signup from "./pages/Signup";
 
 function App() {
-  const token = localStorage.getItem("accessToken");
   // ### 전체에서 사용되는 유저의 정보 state
   const [userInfo, setUserInfo] = useState({});
 
@@ -17,13 +16,6 @@ function App() {
   const getUserInfo = (input) => {
     setUserInfo(input);
   };
-
-  axios
-    .get(`${process.env.REACT_APP_API_URL}/`)
-    .then((res) => {
-      // console.log(res);
-    })
-    .catch((err) => console.error(err));
 
   return (
     <>
@@ -35,13 +27,13 @@ function App() {
           <FeedUpload />
         </Route>
         <Route path="/feed/:id" exact>
-          <FeedDetail />
+          <FeedDetail userInfo={userInfo} />
         </Route>
         <Route path="/landing">
           <Landing />
         </Route>
         <Route path="/mypage">
-          <Mypage user={userInfo}/>
+          <Mypage user={userInfo} />
         </Route>
         <Route path="/signup">
           <Signup />

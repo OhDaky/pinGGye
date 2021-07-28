@@ -9,7 +9,7 @@ import axios from "axios";
 export default function FeedUpload() {
   let pinGGyeURL = process.env.REACT_APP_API_URL;
   // ? ###### accessToken props로 받아오기 ######
-  let accessToken = process.env.REACT_APP_ACCESSTOKEN;
+  let accessToken = localStorage.getItem("accessToken");
 
   // ? ###### 메인 페이지로 redirect ######
   const history = useHistory();

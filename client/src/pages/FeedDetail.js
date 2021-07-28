@@ -8,7 +8,7 @@ import FeedComment from "../components/FeedComment";
 import UploadModal from "../components/UploadModal";
 import NoContent from "../components/NoContent";
 
-export default function FeedDetail() {
+export default function FeedDetail({ userInfo }) {
   // ? ###### Default Value ######
   let pinGGyeURL = process.env.REACT_APP_API_URL;
   const history = useHistory();
@@ -20,27 +20,7 @@ export default function FeedDetail() {
   };
   feedId = getFeedId();
 
-  let accessToken = process.env.REACT_APP_ACCESSTOKEN;
-  const [userInfo, setUserInfo] = useState({});
-
-  // ? ###### USER INFO는 받아와야할듯?
-  // ? ###### USER INFO는 받아와야할듯?
-  // ? ###### USER INFO는 받아와야할듯?
-  // ? ###### USER INFO는 받아와야할듯?
-  const getUserInfo = async () => {
-    await axios({
-      method: "post",
-      url: `${pinGGyeURL}/users/login`,
-      data: {
-        email: "admin@mail.com",
-        password: "12345",
-      },
-    })
-      .then((resp) => {
-        setUserInfo(resp.data.data.userInfo);
-      })
-      .catch((err) => console.log(err));
-  };
+  let accessToken = localStorage.getItem("accessToken");
 
   // ? ###### 해당 id의 모든 feed Data 불러오기  ######
   const [feedData, setFeedData] = useState({
@@ -244,7 +224,7 @@ export default function FeedDetail() {
 
   const allUpdate = () => {
     handleFeedAllUpdate();
-    getUserInfo();
+    // getUserInfo();
     getComment();
   };
 
