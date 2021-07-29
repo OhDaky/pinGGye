@@ -67,7 +67,7 @@ export default function Signup() {
             <div className="signup__input-email">
               <div>Email</div>
               <input
-                className="inputbox"
+                className="signup__inputbox"
                 type="email"
                 onChange={handleInputValue("email")}
               />
