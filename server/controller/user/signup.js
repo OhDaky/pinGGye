@@ -1,17 +1,18 @@
-const logger = require("../../utils/logger");
 const db = require("../queryFunction");
+const logger = require("../../utils/logger");
+const { checkEmail, checkPassword } = require("../../utils/validator");
 
 module.exports = async (req, res) => {
   const { email, password, nickname } = req.body;
 
   if (!email || !password || !nickname) {
     logger(`회원가입 - 요청 파라미터 부족. email=${email} nickname=${nickname}`);
-    return res.status(422).send("insufficient parameters supplied");
+    return res.status(400).json({ message: "Insufficient parameters supplied"});
   }
 
-  if (email === "" || password === "" || nickname === "") {
+  if (checkEmail(email) || checkPassword(password) || nickname === "") {
     logger(`회원가입 - 요청 파라미터 에러. email=${email} nickname=${nickname}`);
-    return res.status(422).send("insufficient parameters supplied");
+    return res.status(400).json({ message: "Invalid format"});
   }
 
   try {

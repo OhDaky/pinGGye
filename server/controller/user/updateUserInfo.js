@@ -1,6 +1,7 @@
 const { User: UserModel } = require("../../models");
 const crypto = require("crypto");
 const logger = require("../../utils/logger");
+const { checkEmail } = require("../../utils/validator");
 
 module.exports = async (req, res) => {
   const { userId, email } = req.userInfo;
@@ -8,12 +9,12 @@ module.exports = async (req, res) => {
 
   if (!password || !nickname) {
     logger(`유저 정보 수정 - 요청 파라미터 부족. nickname=${nickname}`);
-    return res.status(422).send("insufficient parameters supplied");
+    return res.status(400).send({ message: "Insufficient parameters supplied"});
   }
 
-  if (password === "" || nickname === "") {
+  if (checkEmail(password) || nickname === "") {
     logger(`유저 정보 수정 - 요청 파라미터 에러. nickname=${nickname}`);
-    return res.status(422).send("insufficient parameters supplied");
+    return res.status(400).send({ message: "Invalid format"});
   }
 
   const salt = process.env.PASSWORD_SALT;
