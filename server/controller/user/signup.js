@@ -10,7 +10,7 @@ module.exports = async (req, res) => {
     return res.status(400).json({ message: "Insufficient parameters supplied"});
   }
 
-  if (checkEmail(email) || checkPassword(password) || nickname === "") {
+  if (!checkEmail(email) || !checkPassword(password) || nickname === "") {
     logger(`회원가입 - 요청 파라미터 에러. email=${email} nickname=${nickname}`);
     return res.status(400).json({ message: "Invalid format"});
   }
