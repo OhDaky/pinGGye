@@ -182,7 +182,7 @@ export default function FeedUpload() {
                     입력
                   </button>
                 </div>
-                <div className="signup__alert-box">{hashTagError}</div>
+                <div className="feed-upload__alert-box">{hashTagError}</div>
                 {hashTags.length > 0 ? (
                   <div className="feed-upload__hashtag-box">
                     {hashTags.map((hashTag, i) => (
@@ -213,7 +213,7 @@ export default function FeedUpload() {
           </div>
         </div>
       </div>
-      <Footer className="footer"/>
+      <Footer className="footer" />
     </>
   );
 }
