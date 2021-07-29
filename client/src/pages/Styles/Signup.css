@@ -28,11 +28,11 @@
   font-weight: bold;
 }
 
-.inputbox {
+/* .signup__inputbox {
   margin-bottom: 1rem;
   text-align: left;
   font-size: 1.2rem;
-}
+} */
 
 .signup__btn {
   margin-top: 0.5rem;
@@ -47,8 +47,9 @@
 }
 
 
-input {
+.signup__inputbox {
   margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
   position: relative;
   width: 98%;
   height: 24px;
@@ -56,9 +57,9 @@ input {
   border-radius: 5px;
   border: 0px;
   box-shadow: 2px 4px 6px rgba(3, 4, 6, 0.15);
-}
+} 
 
-input:focus {
+/* input:focus {
   outline: none;
 }
 
@@ -69,8 +70,8 @@ input:focus {
   margin-left: 30px;
   color: rgb(230, 70, 70);
   /* font-weight: bold; */
-  font-size: 1.2rem
-}
+  /* font-size: 1.2rem
+} */
 
 .signup__logo {
   display: none;
@@ -119,11 +120,11 @@ input:focus {
     font-size: 1.2rem;
     width: 100%;
   }
-  input {
+  /* input {
     margin-top: 0.5rem;
     position: relative;
     width: 95%;
-  }
+  } */
 
   .signup__alert-box {
     position: absolute;

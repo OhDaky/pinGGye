@@ -80,7 +80,7 @@
   color: #72728a;
 }
 
-input {
+.inputbox {
   margin-top: 0.5rem;
   position: relative;
   width: 98%;
@@ -91,7 +91,7 @@ input {
   box-shadow: 2px 4px 6px rgba(3, 4, 6, 0.15);
 }
 
-input:focus {
+.inputbox:focus {
   outline: none;
 }
 
@@ -166,11 +166,11 @@ input:focus {
     margin-top: 1rem;
   }
 
-  input {
+  /* input {
     margin-top: 0.5rem;
     position: relative;
     width: 95%;
-  }
+  } */
 
   .login__alert-box {
     position: absolute;
