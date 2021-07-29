@@ -12,7 +12,6 @@ module.exports = async (email, password, nickname, signUpType, accountType) => {
   signUpType = signUpType || "email";
   accountType = accountType || "user";
   
-
   const [userInfo, created] = await UserModel.findOrCreate({
     where: {
       email,

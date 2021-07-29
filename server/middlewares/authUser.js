@@ -19,8 +19,6 @@ const authUser = async (req, res, next) => {
   }
 
   const accessToken = authorization.split("Bearer ")[1];
-
-  // const { refreshToken } = req.cookies;
   
   const userInfo = await getUserInfo(accessToken, loginType);
   // logger("유저 토큰 검증 - 유저 정보:", userInfo);
@@ -42,12 +40,6 @@ const authUser = async (req, res, next) => {
     logger("유저 토큰 검증 - 잘못된 토큰");
     return res.status(403).json({ message: "Invalid token" });
   }
-
-  // if (userInfo.accessToken) {
-  //   logger("유저 토큰 검증 - 재발급 완료: ", userInfo);
-  //   res.write({ accessToken });    //? Not work, 헤더에 담아서 전송?
-  // } else {
-  // }
   
   logger("유저 토큰 검증 - 검증 완료: ", userInfo);
   req.userInfo = userInfo; // 요청 객체에 유저 정보 입력

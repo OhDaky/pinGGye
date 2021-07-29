@@ -1,6 +1,5 @@
 const { Feed: FeedModel, Tag: TagModel } = require("../../models");
 const logger = require("../../utils/logger");
-const db = require("../queryFunction");
 
 module.exports = async (req, res) => {
   const { userId } = req.userInfo;
@@ -17,7 +16,7 @@ module.exports = async (req, res) => {
   try {
     //* 변경할 피드 조회
     const feed = await FeedModel.findOne({
-      where: { id: feedId, userId: userId }, //! 작성자만 수정 가능
+      where: { id: feedId, userId: userId }, //! 작성자만 수정 가능 (관리자 수정 불가)
       include: [
         { model: TagModel, required: false, through: { attributes: [] } },
       ],

@@ -23,13 +23,11 @@ morgan.token("date", () => {
 app.use(morgan(`"HTTP/:http-version :method :url" :status :remote-addr - :remote-user :res[content-length] [:date]`));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(
-  cors({
+app.use(cors({
     origin: true,
     credentials: true,
     methods: ["GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS"],
-  })
-);
+}));
 app.use(cookieParser());
 
 // Routing
@@ -47,9 +45,7 @@ app.use((req, res, next) => {
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
-  res.status(500).json({
-    message: "Internal Server Error",
-  });
+  res.status(500).send("Internal Server Error");
 });
 
 // Create dummy option

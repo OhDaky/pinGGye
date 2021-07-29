@@ -1,5 +1,5 @@
-const logger = require("../../utils/logger");
 const db = require("../queryFunction");
+const logger = require("../../utils/logger");
 
 module.exports = async (req, res) => {
   const { userId } = req.userInfo;
