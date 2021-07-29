@@ -10,13 +10,13 @@ export default function Landing() {
   return (
     <center>
       <div className="landing__container">
-        <ReactLoading
+        <div className="landing-img" />
+        <ReactLoading className="loading"
           type= {type}
           color= {color}
           height={100}
           width={200} />
-        <div>여기는 핑계마켓</div>
-        <div className="landing-img" />
+        <div className="landing-text">마켓 가는 중!</div>
       </div>
       <Footer />
     </center>

@@ -20,8 +20,8 @@ export default function HomeFeed({ feedid }) {
         <span className="home__feed-thumbnail-container">
           <img className="home__feed-thumbnail" src={thumbnail} />
           <div className="home__feed-gradient" />
+          <span className="home__feed-tags">#{tags[0]}</span>
         </span>
-        <span className="home__feed-tags">#{tags[0]}</span>
       </span>
     </>
   );

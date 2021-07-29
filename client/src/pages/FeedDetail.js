@@ -19,6 +19,8 @@ export default function FeedDetail({ userInfo }) {
   // ? ###### Default Value ######
   let pinGGyeURL = process.env.REACT_APP_API_URL;
   const history = useHistory();
+  // const [user, setUser] = useState();
+  // setUser(userInfo);
 
   // ? ###### url의 feedId 구하는 함수 ######
   let feedId;

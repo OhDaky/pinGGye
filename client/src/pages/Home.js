@@ -83,13 +83,29 @@ export default function Home({ getUserInfo }) {
 
   // ### 선택된 해시태그 지우기
   const deleteSelectedHashtags = (input) => {
+    // input: 삭제된 태그
     let filteredTag = selectedTags.filter((tag) => tag !== input);
-    setSelectedTags([...filteredTag]);
-    let filteredFeeds = selectedFeeds.filter(
-      (feed) => !feed[0][7][1].includes(input)
-    );
-    //! 선택된 태그와 제외한 태그 모두 포함한 피드가 사라짐 -> 해결방법
-    setSelectedFeeds([...filteredFeeds]);
+    setSelectedTags([...filteredTag]); // 필터된 태그 상태 갱신
+
+    //* 선택된 피드 필터링
+    let filteredFeeds = selectedFeeds.filter((feed) => {  // 이미 선택된 피드 순회
+      const feedTags = feed[0][7][1]; // 피드(요소)의 태그 배열
+      if (feedTags.includes(input)) {
+        // 원래 해당 태그를 가지고 있는 피드
+        for (let tag of filteredTag) {
+          // 필터된 피드를 순회
+          if (feedTags.some((feedTag) => feedTag === tag)) {
+            // 해당 피드가 가진 태그 중, 필터된 태그를 하나라도 가지고 있으면 삭제되면 안됨
+            return true;
+          }
+        }
+        return false; // 삭제
+      } else {
+        // 원래 해당 태그를 가지고 있지 않은 피드 -> 삭제되면 안됨
+        return true;
+      }
+    });
+    setSelectedFeeds([...filteredFeeds]); // 필터된 피드 상태 갱신
   };
 
   const handleAddButton = () => {

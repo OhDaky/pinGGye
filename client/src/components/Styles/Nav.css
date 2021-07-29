@@ -8,7 +8,7 @@ body {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  height: 90px;
+  height: 60px;
   border-bottom: 3px solid rgba(2, 7, 21, 0.1);
   box-shadow: 1px 2px 4px rgba(2, 7, 21, 0.1);
   background-color: white;
@@ -18,6 +18,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+  margin-left: 20px;
+  margin-top: 5px;
   width: 100%;
   height: 100%;
 }
@@ -55,10 +57,11 @@ body {
   background-color: white;
   border: none;
   padding: 10px 25px;
-  border-radius: 10px;
+  border-radius: 20px;
+  font-family: 'dream';
 }
 .mypage__tab:hover {
-  color: rgb(255, 175, 175);
+  color: #FD8A8A;
 }
 
 .logout__tab {
@@ -150,4 +153,9 @@ body {
     width: 50px;
     height: 50px;
   }
+}
+
+@font-face {
+  font-family: 'dream';
+  src: url('../../static/font/SCDream5.otf');
 }
