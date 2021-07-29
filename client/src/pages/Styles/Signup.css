@@ -135,4 +135,8 @@ input:focus {
     margin-bottom: 0.5rem;
     width: 100%;
   }
+
+  .footer {
+    display: none;
+  }
 }

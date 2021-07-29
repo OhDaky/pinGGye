@@ -18,7 +18,7 @@ export default function Landing() {
           width={200} />
         <div className="landing-text">마켓 가는 중!</div>
       </div>
-      <Footer />
+      <Footer className="footer"/>
     </center>
   )
 }
