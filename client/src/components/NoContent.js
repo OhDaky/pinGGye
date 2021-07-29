@@ -1,6 +1,7 @@
 import React from "react";
-import Nocontent from "../static/images/no_content.png";
+
 import "./Styles/NoContent.css";
+import Nocontent from "../static/images/no_content.png";
 
 export default function NoContent() {
   return (

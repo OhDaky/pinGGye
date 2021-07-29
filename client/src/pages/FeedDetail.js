@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import "./Styles/FeedDetail.css";
 import axios from "axios";
 
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
+import NoContent from "../components/NoContent";
 import FeedComment from "../components/FeedComment";
 import UploadModal from "../components/UploadModal";
-import NoContent from "../components/NoContent";
 
+import "./Styles/FeedDetail.css";
 import Hatch from "../static/images/hatch.png";
 import pinkEgg from "../static/images/pinkEgg.png";
 import submitImg from "../static/images/submit.png";
@@ -19,8 +19,6 @@ export default function FeedDetail({ userInfo }) {
   // ? ###### Default Value ######
   let pinGGyeURL = process.env.REACT_APP_API_URL;
   const history = useHistory();
-  // const [user, setUser] = useState();
-  // setUser(userInfo);
 
   // ? ###### url의 feedId 구하는 함수 ######
   let feedId;
@@ -125,11 +123,9 @@ export default function FeedDetail({ userInfo }) {
   // ? ###### 수정버튼 누를 시 모달창 켜짐 ######
   const handleFeedUpdate = async () => {
     if (isUpload) {
-      console.log("모달 꺼짐");
       patchFeed();
       setIsUpload(false);
     } else {
-      console.log("모달 켜짐");
       setIsUpload(true);
     }
   };
@@ -356,7 +352,7 @@ export default function FeedDetail({ userInfo }) {
           </div>
         </div>
       </div>
-    <Footer className="footer"/>
+      <Footer className="footer" />
     </>
   );
 }

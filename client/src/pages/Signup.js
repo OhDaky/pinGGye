@@ -1,10 +1,12 @@
-import axios from "axios";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import axios from "axios";
+import { emailIsValid, pwIsValid } from "../utils/Validator";
+
 import Footer from "../components/Footer";
+
 import "./Styles/Signup.css";
 import logo from "../static/images/pinGGyeLogo.png";
-import { emailIsValid, pwIsValid } from "../utils/Validator";
 
 export default function Signup() {
   // ? ###### Default Value ######
@@ -98,9 +100,8 @@ export default function Signup() {
             <div className="signup__alert-box">{existError}</div>
           </form>
         </div>
-
       </div>
-        <Footer className="footer"/>
+      <Footer className="footer" />
     </>
   );
 }

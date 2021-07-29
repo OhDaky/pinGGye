@@ -15,7 +15,6 @@
   height: 80vh;
   border-radius: 5px;
   box-shadow: 2px 4px 6px rgba(2, 7, 21, 0.3);
-  /* background-color: rgb(255, 253, 241); */
   background-color: white;
 }
 
@@ -36,11 +35,11 @@
 }
 
 .feed-detail__main-img {
-  height: 100%;
-  width: 100%;
   display: flex;
   justify-content: center;
   text-align: center;
+  height: 100%;
+  width: 100%;
   border-radius: 10px;
   box-shadow: 1px 2px 4px rgba(2, 7, 21, 0.5);
   object-fit: cover;
@@ -49,12 +48,12 @@
 .feed-detail__main-img__underbar {
   position: fixed;
   z-index: 5;
-  width: 600px;
-  margin-top: 500px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 600px;
   height: 100px;
+  margin-top: 500px;
   border-radius: 10px;
   background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.6));
 }
@@ -141,11 +140,11 @@
 }
 
 .feed-detail__comments {
-  width: 100%;
-  height: 85%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  width: 100%;
+  height: 85%;
 }
 
 .input-comment-box {
@@ -159,11 +158,11 @@
 }
 
 .comment__btn {
-  font-family: 'ssuround';
+  font-family: "ssuround";
 }
 
 .feed__comment-content {
-  font-family: 'ssuround';
+  font-family: "ssuround";
 }
 
 .input-comment-box > input {
@@ -174,7 +173,7 @@
   font-size: 1.5rem;
   background-color: rgba(0, 0, 0, 0);
   margin-left: 10px;
-  font-family: 'ssuround';
+  font-family: "ssuround";
 }
 
 .input-comment-box > input:focus {
@@ -205,7 +204,7 @@
   height: 500px;
   overflow-y: scroll;
   overflow-x: hidden;
-  font-family: 'ssuround';
+  font-family: "ssuround";
 }
 
 .main__icon {
@@ -213,7 +212,7 @@
 }
 
 .upload-modal {
-  font-family: 'ssuround';
+  font-family: "ssuround";
 }
 
 /* media query */
@@ -264,12 +263,12 @@
     margin-bottom: 3rem;
   }
 
-  div.feed-detail__main-img{
+  div.feed-detail__main-img {
     border: white;
     margin-top: 1.5rem;
     box-shadow: none;
   }
-  
+
   img.feed-detail__main-img {
     width: 250px;
     height: 250px;
@@ -278,8 +277,6 @@
     justify-content: space-between;
     text-align: left;
     border: none;
-    /* border-radius: 10px;
-    box-shadow: 1px 2px 4px rgba(2, 7, 21, 0.5); */
     object-fit: cover;
   }
 
@@ -294,7 +291,7 @@
     align-items: flex-end;
     height: 70px;
     border-radius: 10px;
-    background-image: linear-gradient(ß
+    background-image: linear-gradient(
       rgba(255, 255, 255, 0),
       rgba(0, 0, 0, 0.6)
     );
@@ -306,7 +303,6 @@
     align-items: center;
     width: 80%;
     height: 100%;
-    /* margin-left: 30px; */
     color: white;
     font-size: 1rem;
     white-space: nowrap;
@@ -395,7 +391,6 @@
     font-size: 1rem;
   }
 
-
   .input-comment-box {
     display: flex;
     justify-content: space-evenly;
@@ -414,13 +409,13 @@
     font-size: 1rem;
     background-color: rgba(0, 0, 0, 0);
     margin-left: 20px;
-    font-family: 'ssuround';
+    font-family: "ssuround";
   }
 
   .input-comment-box > input:focus {
     outline: none;
     background-color: rgba(0, 0, 0, 0);
-    font-family: 'ssuround';
+    font-family: "ssuround";
   }
 
   .input-comment-box > button {
@@ -497,10 +492,7 @@
   }
 
   .submitComment__btn {
-    display: none
-    /* width: 27px;
-    height: auto;
-    margin-right: 1rem; */
+    display: none;
   }
 
   .footer {

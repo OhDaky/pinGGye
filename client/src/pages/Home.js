@@ -1,15 +1,15 @@
-import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import axios from "axios";
 
-import HomeHashtags from "../components/HomeHashtags";
-import HomeFeed from "../components/HomeFeed";
-import "./Styles/Home.css";
-import Nav from "../components/Nav";
-import Footer from "../components/Footer";
 import Login from "./Login";
 import Landing from "./Landing";
-import handleResponseSuccess from "../App";
+import Nav from "../components/Nav";
+import Footer from "../components/Footer";
+import HomeFeed from "../components/HomeFeed";
+import HomeHashtags from "../components/HomeHashtags";
+
+import "./Styles/Home.css";
 
 export default function Home({ getUserInfo }) {
   const history = useHistory();
@@ -25,7 +25,6 @@ export default function Home({ getUserInfo }) {
   const isAuthenticated = () => {
     const token = localStorage.getItem("accessToken");
     setLoading(true);
-    console.log(loading);
     axios({
       method: "get",
       url: `${process.env.REACT_APP_API_URL}/main`,
@@ -62,7 +61,6 @@ export default function Home({ getUserInfo }) {
       })
       .catch((err) => {
         setLoading(false);
-        // console.log("=== home ===\n" + token);
       });
   };
 
@@ -75,7 +73,6 @@ export default function Home({ getUserInfo }) {
   const selectTags = (input) => {
     if (selectedTags.includes(input) === false) {
       setSelectedTags([...selectedTags, input]);
-      console.log(selectedTags);
       let filtered = feeds.filter((feed) => feed[0][7][1].includes(input));
       let difference = filtered.filter((feed) => !selectedFeeds.includes(feed));
       setSelectedFeeds([...selectedFeeds, ...difference]);
@@ -89,7 +86,8 @@ export default function Home({ getUserInfo }) {
     setSelectedTags([...filteredTag]); // 필터된 태그 상태 갱신
 
     //* 선택된 피드 필터링
-    let filteredFeeds = selectedFeeds.filter((feed) => {  // 이미 선택된 피드 순회
+    let filteredFeeds = selectedFeeds.filter((feed) => {
+      // 이미 선택된 피드 순회
       const feedTags = feed[0][7][1]; // 피드(요소)의 태그 배열
       if (feedTags.includes(input)) {
         // 원래 해당 태그를 가지고 있는 피드
@@ -118,12 +116,12 @@ export default function Home({ getUserInfo }) {
     isAuthenticated();
   }, []);
 
-  const token = localStorage.getItem("accessToken")
+  const token = localStorage.getItem("accessToken");
   if (token === undefined) {
     setLoading(null);
   }
 
-  if (loading && token) return <Landing />
+  if (loading && token) return <Landing />;
 
   return (
     <>
@@ -174,7 +172,7 @@ export default function Home({ getUserInfo }) {
           userInfo={userInfo}
         />
       )}
-      <Footer className="footer"/>
+      <Footer className="footer" />
     </>
   );
 }

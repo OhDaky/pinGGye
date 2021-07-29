@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import "./Styles/FeedUpload.css";
 import axios from "axios";
 
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 
+import "./Styles/FeedUpload.css";
 import xBtn from "../static/images/xBtn.png";
 
 export default function FeedUpload() {
@@ -101,10 +101,6 @@ export default function FeedUpload() {
     formData.append("image", image.file);
     formData.append("subject", subject);
     formData.append("tagsText", hashTagSTR);
-    // ? # formData 확인하는 방법
-    for (let pair of formData.entries()) {
-      console.log(pair[0], pair[1]);
-    }
 
     // ? ###### formData 서버로 업로드 ######
     axios({
@@ -118,7 +114,6 @@ export default function FeedUpload() {
       },
     })
       .then((resp) => {
-        console.log(resp);
         if (resp.status === 201) {
           alert("피드가 성공적으로 업로드 되었습니다.");
           history.push("/");
@@ -126,7 +121,6 @@ export default function FeedUpload() {
       })
       .catch((err) => alert(`에러 발생! 에러코드 ${err}`));
   };
-  console.log("####", image.previewURL.includes(""));
   return (
     <>
       <Nav />
