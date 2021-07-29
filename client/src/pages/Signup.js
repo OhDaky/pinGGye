@@ -81,7 +81,7 @@ export default function Signup() {
             <div className="signup__input-nickname">
               <div>닉네임</div>
               <input
-                className="inputbox"
+                className="signup__inputbox"
                 type="text"
                 onChange={handleInputValue("nickname")}
               />
@@ -90,7 +90,7 @@ export default function Signup() {
             <div className="signup__input-password">
               <div>비밀번호</div>
               <input
-                className="inputbox"
+                className="signup__inputbox"
                 type="password"
                 onChange={handleInputValue("password")}
               />

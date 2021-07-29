@@ -46,7 +46,7 @@
   box-shadow: 2px 4px 6px rgba(3, 4, 6, 0.15);
 }
 
-input {
+/* input {
   margin-top: 0.5rem;
   position: relative;
   width: 98%;
@@ -59,7 +59,7 @@ input {
 
 input:focus {
   outline: none;
-}
+} */
 
 /* .input__message {
     width: 70%;
