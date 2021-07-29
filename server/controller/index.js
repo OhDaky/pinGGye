@@ -3,7 +3,6 @@ module.exports = {
   auth: require("./user/login"),
   login: require("./user/login"),
   loginGoogle: require("./user/loginGoogle"),
-  logout: require("./user/logout"),
   signup: require("./user/signup"),
   updateUserInfo: require("./user/updateUserInfo"),
 

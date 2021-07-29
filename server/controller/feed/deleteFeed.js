@@ -17,16 +17,16 @@ module.exports = async (req, res) => {
     //* 삭제할 피드 조회
     let feed;
     if (accountType === "admin") {
-      //! 관리자 권한
+      //! 관리자 권한 - 작성자에 관계 없이 삭제 가능
       logger(`피드 삭제 - 유저 ${userId}: 피드 ${feedId}번 관리자 권한 삭제 요청`);
-      feed = await FeedModel.findOne({ where: { id: feedId } }); // 작성자에 관계 없이 삭제 가능
+      feed = await FeedModel.findOne({ where: { id: feedId } });
     } else {
       logger(`피드 삭제 - 유저 ${userId}: 피드 ${feedId}번 삭제 요청`);
       feed = await FeedModel.findOne({ where: { id: feedId, userId: userId } });
     }
     if (!feed) {
       logger(`[ERROR] 피드 삭제 - 유저 ${userId}: 유효하지 않거나 삭제 권한이 없는 피드 ${feedId}번 삭제 요청`);
-      return res.status(400).json({ message: "Invalid request" }); // 유효하지 않은 피드 번호 또는 권한 오류
+      return res.status(400).json({ message: "Invalid request" });
     }
 
     // 이미지 경로에서 이름 추출

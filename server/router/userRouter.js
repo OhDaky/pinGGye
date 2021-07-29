@@ -16,7 +16,4 @@ userRouter.post("/signup", controller.signup);
 userRouter.post("/login", controller.login);
 userRouter.post("/login/google", controller.loginGoogle);
 
-// 로그아웃
-userRouter.post("/logout", controller.logout);
-
 module.exports = userRouter;

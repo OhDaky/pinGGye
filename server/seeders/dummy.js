@@ -42,10 +42,6 @@ const createDummy = async () => {
     "email",
     "admin"
   );
-  // if (userAdmin.error === "exist") {
-  //   console.log("Dummy data 존재, 종료");
-  //   return; // 관리자 계정 존재 시, 더미 입력 금지
-  // }
   userInfoArr.push(userAdmin);
 
   //? 일반 유저 입력
@@ -93,9 +89,8 @@ const createDummy = async () => {
   
   //! 피드 좋아요 생성
   //* createLikeFeedData(userId, feedId)
-  // 랜덤한 유저가 자신이 작성한 피드를 제외한 피드에 좋아요 꾹
+  // 랜덤한 유저가 자신이 작성한 피드를 제외한 피드에 좋아요(다운)
 
-  // 46~48번째 피드 좋아요 9. 49~50 피드 좋아요 10
   for (let userIdx = 2; userIdx <= lastUserIdx; userIdx++) {
     if (userIdx !== lastUserIdx) {
       await db.createLikeFeedData(userInfoArr[userIdx].id, feedInfoArr[lastFeedIdx - 4].id);
