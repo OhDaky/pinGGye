@@ -356,7 +356,7 @@ export default function FeedDetail({ userInfo }) {
           </div>
         </div>
       </div>
-      <Footer />
+    <Footer className="footer"/>
     </>
   );
 }

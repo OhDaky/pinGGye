@@ -213,7 +213,7 @@ export default function FeedUpload() {
           </div>
         </div>
       </div>
-      <Footer />
+      <Footer className="footer"/>
     </>
   );
 }

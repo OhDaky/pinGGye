@@ -173,7 +173,7 @@ export default function Home({ getUserInfo }) {
           userInfo={userInfo}
         />
       )}
-      <Footer />
+      <Footer className="footer"/>
     </>
   );
 }
