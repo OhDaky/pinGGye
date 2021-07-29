@@ -1,7 +1,7 @@
 const { User: UserModel } = require("../../models");
 const crypto = require("crypto");
 const logger = require("../../utils/logger");
-const { checkEmail } = require("../../utils/validator");
+const { checkPassword } = require("../../utils/validator");
 
 module.exports = async (req, res) => {
   const { userId, email } = req.userInfo;
@@ -12,7 +12,7 @@ module.exports = async (req, res) => {
     return res.status(400).send({ message: "Insufficient parameters supplied"});
   }
 
-  if (!checkEmail(password) || nickname === "") {
+  if (!checkPassword(password) || nickname === "") {
     logger(`유저 정보 수정 - 요청 파라미터 에러. nickname=${nickname}`);
     return res.status(400).send({ message: "Invalid format"});
   }
