@@ -158,6 +158,14 @@
   background-color: rgb(255, 230, 230);
 }
 
+.comment__btn {
+  font-family: 'ssuround';
+}
+
+.feed__comment-content {
+  font-family: 'ssuround';
+}
+
 .input-comment-box > input {
   margin: 0;
   height: 90%;
@@ -166,6 +174,7 @@
   font-size: 1.5rem;
   background-color: rgba(0, 0, 0, 0);
   margin-left: 10px;
+  font-family: 'ssuround';
 }
 
 .input-comment-box > input:focus {
@@ -196,10 +205,15 @@
   height: 500px;
   overflow-y: scroll;
   overflow-x: hidden;
+  font-family: 'ssuround';
 }
 
 .main__icon {
   width: 30px;
+}
+
+.upload-modal {
+  font-family: 'ssuround';
 }
 
 /* media query */
@@ -375,11 +389,13 @@
     font-size: 1rem;
     background-color: rgba(0, 0, 0, 0);
     margin-left: 20px;
+    font-family: 'ssuround';
   }
 
   .input-comment-box > input:focus {
     outline: none;
     background-color: rgba(0, 0, 0, 0);
+    font-family: 'ssuround';
   }
 
   .input-comment-box > button {

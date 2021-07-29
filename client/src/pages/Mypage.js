@@ -71,7 +71,7 @@ export default function Mypage({ user }) {
             <div>
               <div>이메일</div>
               <input
-                className="inputbox"
+                className="mypage-inputbox"
                 type="email"
                 value={userInfo.email}
                 readOnly
@@ -80,7 +80,7 @@ export default function Mypage({ user }) {
             <div>
               <div>닉네임</div>
               <input
-                className="inputbox"
+                className="mypage-inputbox"
                 type="text"
                 // placeholder="Nickname"
                 value={userInfo.nickname}
@@ -91,7 +91,7 @@ export default function Mypage({ user }) {
             <div>
               <div>비밀번호</div>
               <input
-                className="inputbox"
+                className="mypage-inputbox"
                 type="password"
                 // placeholder="Password"
                 onChange={handleInputValue("password")}

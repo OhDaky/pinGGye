@@ -110,7 +110,7 @@ export default function Login({
             <div className="login__input-email">
               <div>email</div>
               <input
-                className="inputbox"
+                className="inputbox-email"
                 type="email"
                 onChange={handleInputValue("email")}
               ></input>
@@ -118,7 +118,7 @@ export default function Login({
             <div className="login__input-password">
               <div>password</div>
               <input
-                className="inputbox"
+                className="inputbox-login"
                 type="password"
                 onChange={handleInputValue("password")}
               />

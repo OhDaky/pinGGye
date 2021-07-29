@@ -7,14 +7,12 @@
 }
 
 .login__img-box {
-  /* margin-top: 10rem; */
   position: relative;
   display: flex;
   justify-content: space-around;
   align-items: center;
   width: 40vh;
   height: 20vh;
-  /* border : 1px solid black; */
   background-size: 100% 100%;
   background-image: url(../../static/images/pinkLogo.png);
 }
@@ -26,15 +24,13 @@
   align-items: center;
   font-size: 1rem;
   margin-left: 5rem;
-  /* border: 1px solid black; */
   border-radius: 20px;
-  /* width: 40vh;
-  height: 50vh; */
   width: 400px;
   height: 500px;
   background-color: rgb(255, 204, 204);
   color: rgb(96, 96, 96);
   box-shadow: 2px 4px 6px rgba(3, 4, 6, 0.15);
+  font-family: 'ssuround';
 }
 
 .login__container-title {
@@ -62,6 +58,7 @@
   border-radius: 5px;
   color: white;
   box-shadow: 2px 4px 6px rgba(3, 4, 6, 0.15);
+  font-family: 'ssuround';
 }
 
 .login__btn-signup {
@@ -73,6 +70,7 @@
   border: 0px;
   border-radius: 5px;
   box-shadow: 2px 4px 6px rgba(3, 4, 6, 0.15);
+  font-family: 'ssuround';
 }
 
 .login__btn-signup > a {
@@ -80,7 +78,7 @@
   color: #72728a;
 }
 
-.inputbox {
+.inputbox-login, .inputbox-email {
   margin-top: 0.5rem;
   position: relative;
   width: 98%;
@@ -89,16 +87,17 @@
   border-radius: 5px;
   border: 0px;
   box-shadow: 2px 4px 6px rgba(3, 4, 6, 0.15);
+  font-family: 'ssuround';
 }
 
-.inputbox:focus {
+.inputbox-login:focus, .inputbox-email:focus {
   outline: none;
 }
 
 .login__alert-box {
   position: absolute;
   text-align: center;
-  margin-top: 400px;
+  margin-top: 420px;
   color: rgb(230, 70, 70);
   /* font-weight: bold; */
 }
@@ -177,4 +176,9 @@
     text-align: center;
     margin-top: 43vh;
   }
+}
+
+@font-face {
+  font-family: 'ssuround';
+  src: url('../../static/font/Cafe24SsurroundAir.ttf');
 }

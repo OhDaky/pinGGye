@@ -72,7 +72,7 @@ export default function Signup() {
             <div className="signup__input-email">
               <div>이메일</div>
               <input
-                className="inputbox"
+                className="signup__inputbox"
                 type="email"
                 onChange={handleInputValue("email")}
               />
