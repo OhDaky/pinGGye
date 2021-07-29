@@ -1,14 +1,15 @@
-import axios from "axios";
 import React, { useState, useEffect } from "react";
 import "./Styles/FeedComment.css";
+import axios from "axios";
+
 import UserImage from "../static/images/mypage.png";
 
 export default function FeedComment({
   feedId,
   comment,
   getComment,
-  userInfo,
   accessToken,
+  userInfo,
 }) {
   // ? ###### Default value ######
   let pinGGyeURL = process.env.REACT_APP_API_URL;
@@ -20,9 +21,6 @@ export default function FeedComment({
   const handleIsMe = () => {
     setIsMe(true);
     // ? # admin의 경우 모든 댓글에 접근 가능
-    // ! [BUG] admin계정은 수정과 삭제 버튼은 보이나, 실제로 작동하지 않음.
-    // ! 서버측에서 김군의 토큰을 받았을 때 admin 기능을 제대로 하는지 (다른 사람의 글 접근권한) 확인해보기
-    // TODO : admin에 대한 요청을 따로 구현해야 할듯
     if (userInfo.accountType === "admin") setIsMe(true);
     else {
       // ? # 본인 이메일과 댓글 이메일이 같을 경우 수정 가능
@@ -33,7 +31,6 @@ export default function FeedComment({
   };
   useEffect(() => {
     handleIsMe();
-    console.log("댓글 수 만큼 자기 글인지 확인");
   }, []);
 
   // ? ###### 댓글 state ######
@@ -75,50 +72,51 @@ export default function FeedComment({
     })
       .then(() => {
         getComment();
-        window.location.replace(`/feed/${feedId}`);
       })
       .catch(() => alert("본인이 쓴 글만 수정 및 삭제가 가능합니다!"));
   };
   return (
     <>
-      <div className="feed__userinfo">
-        <img className="feed__comment-userImage" src={UserImage} />
-        <div className="feed__comment-userName">{nickname}</div>
-      </div>
-      <div className="feed__comment">
-        <div className="feed__comment-center-content">
-          {isUpdate ? (
-            <input
-              className="feed__comment-content border"
-              onChange={(e) => setInput(e.target.value)}
-              value={input}
-            />
-          ) : (
-            <input
-              className="feed__comment-content"
-              onChange={(e) => setInput(e.target.value)}
-              value={input}
-              readOnly
-            />
-          )}
+      <div className="feed__comment-box">
+        <div className="feed__userinfo">
+          <img className="feed__comment-userImage" src={UserImage} />
+          <div className="feed__comment-userName">{nickname}</div>
         </div>
-        {isMe ? (
-          <div className="feed__comment-right-content">
-            <img
-              className="comment__icon"
-              src="https://cdn2.iconfinder.com/data/icons/vivid/48/pencil-512.png"
-              alt="update"
-              onClick={handleUpdateComment}
-            />
-            <img
-              className="comment__icon"
-              src="https://cdn1.iconfinder.com/data/icons/feather-2/24/trash-2-512.png"
-              alt="trash can"
-              onClick={handleDeleteComment}
-            />
+        <div className="feed__comment">
+          <div className="feed__comment-center-content">
+            {isUpdate ? (
+              <input
+                className="feed__comment-content border"
+                onChange={(e) => setInput(e.target.value)}
+                value={input}
+              />
+            ) : (
+              <input
+                className="feed__comment-content"
+                onChange={(e) => setInput(e.target.value)}
+                value={input}
+                readOnly
+              />
+            )}
           </div>
-        ) : // <div className="feed__comment-right-content"></div>
-        null}
+          {isMe ? (
+            <div className="feed__comment-right-content">
+              <img
+                className="comment__icon"
+                src="https://cdn2.iconfinder.com/data/icons/vivid/48/pencil-512.png"
+                alt="update"
+                onClick={handleUpdateComment}
+              />
+              <img
+                className="comment__icon"
+                src="https://cdn1.iconfinder.com/data/icons/feather-2/24/trash-2-512.png"
+                alt="trash can"
+                onClick={handleDeleteComment}
+              />
+            </div>
+          ) : // <div className="feed__comment-right-content"></div>
+          null}
+        </div>
       </div>
     </>
   );

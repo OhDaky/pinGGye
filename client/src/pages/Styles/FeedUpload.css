@@ -9,7 +9,7 @@
 
 .feed-upload__content {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
   width: 80%;
   height: 80vh;
@@ -20,8 +20,8 @@
 }
 
 .feed-upload__left-content {
-  height: 500px;
-  width: 500px;
+  height: 600px;
+  width: 600px;
   box-shadow: 2px 4px 6px rgba(2, 7, 21, 0.3);
   background-color: white;
 }
@@ -30,7 +30,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 500px;
+  height: 600px;
   width: 45%;
   border-radius: 10px;
   box-shadow: 2px 4px 6px rgba(2, 7, 21, 0.3);
@@ -52,6 +52,7 @@
 .feed-upload__profile_preview {
   width: 100%;
   height: 100%;
+  object-fit: cover;
 }
 
 .feed-upload__main-underbar {
@@ -92,6 +93,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  align-items: center;
   width: 100%;
   height: 100%;
   border-bottom: 3px solid rgba(2, 7, 21, 0.2);
@@ -99,16 +101,32 @@
 
 .feed-upload__hashtag-input {
   display: flex;
+  justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 40px;
+  width: 80%;
+  height: 70px;
+  border: 2px solid rgba(2, 7, 21, 0.2);
+  border-radius: 10px;
+}
+
+.feed-upload__hashtag-input:hover {
+  border: 3px solid rgb(255, 204, 204);
 }
 
 .hashtag-input {
   margin: 0;
-  width: 80%;
-  height: 100%;
-  font-size: 1rem;
+  width: 100%;
+  height: 90%;
+  outline: none;
+  border: none;
+  border-right: 2px solid rgb(2, 7, 21, 0.2);
+  background-color: rgba(0, 0, 0, 0);
+  margin-left: 20px;
+  font-size: 1.5rem;
+}
+
+.hashtag-input:focus {
+  border-right: 2px solid rgba(255, 204, 204);
 }
 
 .hashtag-submit-btn {
@@ -116,20 +134,34 @@
   width: 20%;
   height: 100%;
   border: none;
-  background-color: rgb(255, 204, 204);
-  color: white;
-  font-size: 1.3rem;
+  background-color: rgba(0, 0, 0, 0);
+  font-size: 1.5rem;
   border-radius: 10px;
+  color: rgba(2, 7, 21, 0.6);
+  font-weight: bold;
 }
+
+.feed-upload__hashtag-box {
+  width: 80%;
+  height: 100px;
+  display: flex;
+  align-items: center;
+}
+
 .hashtag {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid black;
   padding: 10px;
-  border-radius: 10px;
+  border-radius: 50px;
   margin: 0px 5px;
   font-size: 1.5rem;
+  border: 2px solid rgb(255, 204, 204);
+}
+
+.hashtag > img {
+  width: 20px;
+  margin: 5px;
 }
 
 .no-hashtag {
@@ -137,15 +169,9 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 50px;
+  height: 100px;
   font-size: 1.5rem;
   color: rgb(255, 204, 204);
-}
-
-.feed-upload__hashtag-box {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .signup__alert-box {
@@ -161,15 +187,14 @@
   align-items: center;
   width: 100%;
   height: 30%;
-  border-bottom: 2px solid rgba(2, 7, 21, 0.1);
 }
 
 .feed-upload__main-title {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   font-size: 2rem;
-  width: 100%;
+  width: 80%;
   margin-top: 10px;
 }
 
@@ -178,21 +203,18 @@
   height: 50px;
   margin: 10px;
   font-size: 1.75rem;
+  outline: none;
+  border: none;
+  border-bottom: 2px solid rgb(2, 7, 21, 0.2);
 }
+.feed-upload__subject:focus {
+  border-bottom: 2px solid rgb(255, 204, 204);
+}
+
 .feed-upload__underbar {
   display: flex;
   justify-content: flex-end;
   background-color: rgb(255, 230, 230);
-}
-
-.hashtag {
-  background-color: white;
-  border: 2px solid rgba(2, 7, 21, 0.1);
-}
-
-.hashtag > img {
-  width: 20px;
-  margin: 5px;
 }
 
 /* FeedUpload */
@@ -295,7 +317,6 @@
 
   .hashtag-input {
     width: 70%;
-    height: 1.5rem;
   }
 
   .hashtag-submit-btn {

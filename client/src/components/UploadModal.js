@@ -15,13 +15,16 @@ export default function UploadModal({
       <div className="upload-modal__background">
         <div className="upload-modal__main">
           <div className="upload-modal__topbar">
-            <button className="modal__back-btn" onClick={goToBack}>
-              X
-            </button>
+            <img
+              className="modal__back-btn"
+              onClick={goToBack}
+              src="https://cdn0.iconfinder.com/data/icons/web/512/e52-512.png"
+              alt="x"
+            />
           </div>
           <img className="modal__image" src={feedData.image} />
           <div className="title-box">
-            <span>제목</span>
+            <span>Subject</span>
           </div>
           <input
             className="modal__subject"
@@ -29,7 +32,7 @@ export default function UploadModal({
             defaultValue={feedData.subject}
           />
           <div className="title-box">
-            <span>해시태그</span>
+            <span>HashTag</span>
           </div>
           <input
             className="modal__hashTag"

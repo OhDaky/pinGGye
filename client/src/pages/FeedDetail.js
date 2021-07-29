@@ -1,13 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import "./Styles/FeedDetail.css";
-import Nav from "../components/Nav";
 import axios from "axios";
+
+import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 import FeedComment from "../components/FeedComment";
 import UploadModal from "../components/UploadModal";
 import NoContent from "../components/NoContent";
+
+import Hatch from "../static/images/hatch.png";
+import pinkEgg from "../static/images/pinkEgg.png";
 import submitImg from "../static/images/submit.png";
+import trashCan from "../static/images/trashCan.png";
+import pinkPencil from "../static/images/pinkPencil.png";
 
 export default function FeedDetail({ userInfo }) {
   // ? ###### Default Value ######
@@ -228,7 +234,6 @@ export default function FeedDetail({ userInfo }) {
     // getUserInfo();
     getComment();
   };
-
   useEffect(() => {
     allUpdate();
   }, []);
@@ -264,24 +269,17 @@ export default function FeedDetail({ userInfo }) {
                     className="feed-detail__main-img__underbar__right-content"
                     onClick={downloadImage}
                   >
-                    <img
-                      className="egg-img"
-                      src="https://cdn4.iconfinder.com/data/icons/animal-malibu-vol-1/128/chicken-256.png"
-                      alt="꼬꼬댁쓰"
-                    />
+                    <img className="egg-img" src={Hatch} alt="꼬꼬댁쓰" />
                   </a>
                 ) : (
                   <a
                     className="feed-detail__main-img__underbar__right-content"
                     onClick={downloadImage}
-                    // href={feedData.image}
-                    // download
+                    href={feedData.image}
+                    download
+                    target="_blank"
                   >
-                    <img
-                      className="egg-img"
-                      src="https://cdn0.iconfinder.com/data/icons/easter-color-1/100/egg_pink-512.png"
-                      alt="계란쓰"
-                    />
+                    <img className="egg-img" src={pinkEgg} alt="계란쓰" />
                     <div className="egg-count">{feedData.download}</div>
                   </a>
                 )}
@@ -292,18 +290,21 @@ export default function FeedDetail({ userInfo }) {
             <div className="feed-detail__topbar">
               <div className="feed-detail__feedId">{feedId}</div>
               <div className="feed-detail__main-content">
-                제목 : {feedData.subject}
+                <div className="feed__subject">제목 : {feedData.subject}</div>
+                <div className="feed__writter">
+                  작성자 : {feedData.nickname}
+                </div>
               </div>
               <div className="feed-detail__UD-box">
                 <img
                   className="main__icon"
-                  src="https://cdn2.iconfinder.com/data/icons/vivid/48/pencil-512.png"
+                  src={pinkPencil}
                   alt="update"
                   onClick={handleFeedUpdate}
                 />
                 <img
                   className="main__icon"
-                  src="https://cdn1.iconfinder.com/data/icons/feather-2/24/trash-2-512.png"
+                  src={trashCan}
                   alt="trash can"
                   onClick={deleteFeed}
                 />
@@ -331,12 +332,12 @@ export default function FeedDetail({ userInfo }) {
                 <input
                   className="input-comment"
                   type="text"
-                  placeholder="댓글 입력창"
+                  placeholder="댓글을 입력하세요"
                   onChange={(e) => setInputComment(e.target.value)}
                   onKeyPress={handleKeypress}
                 />
                 <button className="comment__btn" onClick={handleCommentSubmit}>
-                  댓글 달기
+                  등 록
                 </button>
                 <img
                   className="submitComment__btn"
