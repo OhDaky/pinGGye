@@ -330,7 +330,7 @@
 
   .egg-count {
     position: fixed;
-    left: 74.5%;
+    left: 75vw;
     color: white;
     font-size: 1.5rem;
     cursor: pointer;
