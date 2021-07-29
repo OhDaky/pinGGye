@@ -177,4 +177,8 @@
     text-align: center;
     margin-top: 43vh;
   }
+
+  .footer {
+    display: none;
+  }
 }

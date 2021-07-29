@@ -70,7 +70,7 @@ export default function Signup() {
           <div className="signup__container-title">Sign up</div>
           <form onSubmit={(e) => e.preventDefault()}>
             <div className="signup__input-email">
-              <div>이메일</div>
+              <div>Email</div>
               <input
                 className="inputbox"
                 type="email"
@@ -79,7 +79,7 @@ export default function Signup() {
               {/* <div className="signup__alert-box">{emailError}</div> */}
             </div>
             <div className="signup__input-nickname">
-              <div>닉네임</div>
+              <div>Nickname</div>
               <input
                 className="signup__inputbox"
                 type="text"
@@ -88,7 +88,7 @@ export default function Signup() {
               {/* <div className="signup__alert-box">{nicknameError}</div> */}
             </div>
             <div className="signup__input-password">
-              <div>비밀번호</div>
+              <div>Password</div>
               <input
                 className="signup__inputbox"
                 type="password"
@@ -107,7 +107,7 @@ export default function Signup() {
           </form>
           </div>
         </div>
-      <Footer />
+        <Footer className="footer"/>
     </>
   );
 }

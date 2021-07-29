@@ -90,5 +90,9 @@ input:focus {
     height: 50vh;
     margin: 1rem 1.5rem;
   }
+
+  .footer {
+    display: none;
+  }
 }
 
