@@ -53,6 +53,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 5px;
 }
 
 .feed-upload__main-underbar {
@@ -146,6 +147,8 @@
   height: 100px;
   display: flex;
   align-items: center;
+  white-space: nowrap;
+  overflow-x: auto;
 }
 
 .hashtag {
