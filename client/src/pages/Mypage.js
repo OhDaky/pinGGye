@@ -15,11 +15,13 @@ export default function Mypage({ user }) {
   const history = useHistory();
 
   // ? ###### 에러 메세지 state ######
-  const [nicknameError, setNicknameError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
+  const [existError, setExistError] = useState("");
+  // const [nicknameError, setNicknameError] = useState("");
+  // const [passwordError, setPasswordError] = useState("");
   const resetErrorMsg = () => {
-    setNicknameError("");
-    setPasswordError("");
+    // setNicknameError("");
+    // setPasswordError("");
+    setExistError("");
   };
 
   // ? ###### 유저정보 state ######
@@ -32,13 +34,14 @@ export default function Mypage({ user }) {
     setUserInfo({ ...userInfo, [key]: e.target.value });
   };
 
+
   // ? ###### 회원 정보 수정 handler ######
+  const { nickname, password } = userInfo;
   const handleUserInfo = () => {
-    resetErrorMsg();
-    const { nickname, password } = userInfo;
-    if (!nickname) setNicknameError("닉네임을 입력해주세요");
-    else if (!password) setPasswordError("비밀번호를 입력해주세요");
-    else {
+    if (!nickname) setExistError("닉네임을 입력해주세요")
+    else if (!password) setExistError("비밀번호를 입력해주세요");
+    if (nickname && password) {
+      console.log('수정버튼클릭');
       axios({
         method: "patch",
         url: `${pinGGyeURL}/users/mypage`,
@@ -49,8 +52,10 @@ export default function Mypage({ user }) {
         },
       })
         .then(() => {
+          console.log('수정 완료');
           history.push("/");
           alert("회원정보가 수정되었습니다.");
+          resetErrorMsg();
         })
         .catch((err) => alert(err));
     }
@@ -61,31 +66,41 @@ export default function Mypage({ user }) {
       <Nav />
       <div className="main">
         <div className="mypage">
-          <div className="mypage__message">마이 페이지</div>
-          <input
-            className="input__email"
-            type="email"
-            value={userInfo.email}
-            readOnly
-          />
-          <input
-            className="input__nickname"
-            type="text"
-            placeholder="Nickname"
-            value={userInfo.nickname}
-            onChange={handleInputValue("nickname")}
-          />
-          <div className="signup__alert-box">{nicknameError}</div>
-          <input
-            className="input__password"
-            type="password"
-            placeholder="Password"
-            onChange={handleInputValue("password")}
-          />
-          <div className="signup__alert-box">{passwordError}</div>
-          <button onClick={handleUserInfo} className="mypage__btn">
-            회원 정보 수정
-          </button>
+          <div className="mypage-title"> Mypage </div>
+          <form onSubmit={(e) => e.preventDefault()}>
+            <div>
+              <div>이메일</div>
+              <input
+                className="inputbox"
+                type="email"
+                value={userInfo.email}
+                readOnly
+                />
+            </div>
+            <div>
+              <div>닉네임</div>
+              <input
+                className="inputbox"
+                type="text"
+                // placeholder="Nickname"
+                value={userInfo.nickname}
+                onChange={handleInputValue("nickname")}
+              />
+              {/* <div className="mypage__alert-box">{nicknameError}</div> */}
+            </div>
+            <div>
+              <div>비밀번호</div>
+              <input
+                className="inputbox"
+                type="password"
+                // placeholder="Password"
+                onChange={handleInputValue("password")}
+              />
+              {/* <div className="mypage__alert-box">{passwordError}</div> */}
+              </div>
+            <button className="mypage__btn" onClick={() => handleUserInfo()}>회원 정보 수정</button>
+            <div className="mypage__alert-box">{existError}</div>
+          </form>
         </div>
       </div>
       <Footer />

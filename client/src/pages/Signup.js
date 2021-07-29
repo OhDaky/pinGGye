@@ -24,14 +24,14 @@ export default function Signup() {
 
   // ? ###### 에러 메세지 state ######
   // TODO : 에러메세지 로직이 깔끔하지 않아서 수정 예정.
-  const [emailError, setEmailError] = useState("");
-  const [nicknameError, setNicknameError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
+  // const [emailError, setEmailError] = useState("");
+  // const [nicknameError, setNicknameError] = useState("");
+  // const [passwordError, setPasswordError] = useState("");
   const [existError, setExistError] = useState("");
   const handleErrorMsg = () => {
-    setEmailError("");
-    setNicknameError("");
-    setPasswordError("");
+    // setEmailError("");
+    // setNicknameError("");
+    // setPasswordError("");
     setExistError("");
   };
 
@@ -40,9 +40,9 @@ export default function Signup() {
     const { email, nickname, password } = signupInfo;
     handleErrorMsg();
     // TODO : (advanced) 비밀번호 유효성검사
-    if (!email) setEmailError("이메일을 입력하세요");
-    else if (!nickname) setNicknameError("닉네임을 입력하세요");
-    else if (!password) setPasswordError("비밀번호를 입력하세요");
+    if (!email) setExistError("이메일을 입력하세요");
+    else if (!nickname) setExistError("닉네임을 입력하세요");
+    else if (!password) setExistError("비밀번호를 입력하세요");
     else {
       // TODO : 서버와 연결 후 axios 요청 주석풀기
       axios({
@@ -64,41 +64,49 @@ export default function Signup() {
 
   return (
     <>
-      <img className="signup__logo" src={logo} alt="logo" />
-      <div className="main">
-        <form className="sign-up" onSubmit={(e) => e.preventDefault()}>
-          <div className="main__message">회원가입</div>
-          <input
-            className="input__email"
-            type="email"
-            placeholder="Email"
-            onChange={handleInputValue("email")}
-          />
-          <div className="signup__alert-box">{emailError}</div>
-          <input
-            className="input__nickname"
-            type="text"
-            placeholder="Nickname"
-            onChange={handleInputValue("nickname")}
-          />
-          <div className="signup__alert-box">{nicknameError}</div>
-          <input
-            className="input__password"
-            type="password"
-            placeholder="Password"
-            onChange={handleInputValue("password")}
-          />
-          <div className="signup__alert-box">{passwordError}</div>
-          <button
-            className="sign-in__btn"
-            onClick={() => handleSignup()}
-            type="submit"
-          >
-            Sign in
-          </button>
-          <div className="signup__alert-box">{existError}</div>
-        </form>
-      </div>
+      <div className="signup__container">
+        <img className="signup__logo" src={logo} alt="logo" />
+        <div className="signup__signup-box">
+          <div className="signup__container-title">Sign up</div>
+          <form onSubmit={(e) => e.preventDefault()}>
+            <div className="signup__input-email">
+              <div>이메일</div>
+              <input
+                className="inputbox"
+                type="email"
+                onChange={handleInputValue("email")}
+              />
+              {/* <div className="signup__alert-box">{emailError}</div> */}
+            </div>
+            <div className="signup__input-nickname">
+              <div>닉네임</div>
+              <input
+                className="inputbox"
+                type="text"
+                onChange={handleInputValue("nickname")}
+              />
+              {/* <div className="signup__alert-box">{nicknameError}</div> */}
+            </div>
+            <div className="signup__input-password">
+              <div>비밀번호</div>
+              <input
+                className="inputbox"
+                type="password"
+                onChange={handleInputValue("password")}
+              />
+              {/* <div className="signup__alert-box">{passwordError}</div> */}
+            </div>
+            <button
+              className="signup__btn"
+              onClick={() => handleSignup()}
+              type="submit"
+            >
+              회원가입
+            </button>
+           <div className="signup__alert-box">{existError}</div>
+          </form>
+          </div>
+        </div>
       <Footer />
     </>
   );
