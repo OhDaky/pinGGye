@@ -13,6 +13,8 @@ export default function FeedDetail({ userInfo }) {
   // ? ###### Default Value ######
   let pinGGyeURL = process.env.REACT_APP_API_URL;
   const history = useHistory();
+  // const [user, setUser] = useState();
+  // setUser(userInfo);
 
   // ? ###### url의 feedId 구하는 함수 ######
   let feedId;
@@ -292,7 +294,7 @@ export default function FeedDetail({ userInfo }) {
             <div className="feed-detail__topbar">
               <div className="feed-detail__feedId">{feedId}</div>
               <div className="feed-detail__main-content">
-                제목 : {feedData.subject}
+                 {feedData.subject}
               </div>
               <div className="feed-detail__UD-box">
                 <img

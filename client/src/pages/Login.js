@@ -109,7 +109,7 @@ export default function Login({
           <div className="login__container-title">Login</div>
           <form onSubmit={(e) => e.preventDefault()}>
             <div className="login__input-email">
-              <div>이메일</div>
+              <div>email</div>
               <input
                 className="inputbox"
                 type="email"
@@ -117,7 +117,7 @@ export default function Login({
               ></input>
             </div>
             <div className="login__input-password">
-              <div>비밀번호</div>
+              <div>password</div>
               <input
                 className="inputbox"
                 type="password"

@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useState } from "react";
 import { Route, Switch } from "react-router-dom";
 import FeedDetail from "./pages/FeedDetail";
@@ -27,7 +26,7 @@ function App() {
           <FeedUpload />
         </Route>
         <Route path="/feed/:id" exact>
-          <FeedDetail userInfo={userInfo} />
+          <FeedDetail userInfo={userInfo}  />
         </Route>
         <Route path="/landing">
           <Landing />

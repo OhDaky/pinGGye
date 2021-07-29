@@ -1,10 +1,30 @@
 .landing-img {
   position: relative;
-  margin-top: 13rem;
+  margin-top: 35vh;
   width: 30rem;
-  height: 20rem;
+  height: 15rem;
   /* border: 1px solid black; */
   background-size: 100% 100%;
-  background-image: url(../../static/images/pinGGyeMarketPink.png);
-  transform: translate(-50%, -50%);
+  background-image: url(../../static/images/pinkLogo.png);
+}
+
+body {
+  clear: both;
+}
+
+.landing-text {
+  font-size: 1.5rem;
+  margin-top: 60px;
+  font-family: 'ssuround';
+  color: #ffcccc;
+  font-weight: bolder;
+}
+
+.loading {
+  margin-top: -60px;
+}
+
+@font-face {
+  font-family: 'ssuround';
+  src: url('../../static/font/Cafe24SsurroundAir.ttf');
 }

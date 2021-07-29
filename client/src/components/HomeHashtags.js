@@ -3,7 +3,6 @@ import "./Styles/HomeHashtags.css"
 
 export default function HomeHashtags({ hashtag, selectTags, deleteSelectedHashtags }) {
   const [isSelected, setIsSelected] = useState(false);
-  // const tag = hashtag[1];
   const handleHashtagClick = () => {
     if (isSelected === false) {
       console.log('태그 선택');
@@ -27,9 +26,9 @@ export default function HomeHashtags({ hashtag, selectTags, deleteSelectedHashta
   return (
     <>{
       isSelected ? (
-        <button className="home__hashtag-selected" onClick={ handleHashtagClick }>#{ hashtag }</button>
+        <button className="home__hashtag-selected" onClick={ handleHashtagClick }># { hashtag }</button>
       ): (
-        <button className="home__hashtag" onClick={ handleHashtagClick }>#{ hashtag }</button>
+        <button className="home__hashtag" onClick={ handleHashtagClick }># { hashtag }</button>
       )
     }
     </>

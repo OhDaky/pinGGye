@@ -1,6 +1,6 @@
 import React from "react";
 import "./Styles/Nav.css";
-import logo from "../static/images/pinGGyeLogo.png";
+import logo from "../static/images/pinkLogo.png";
 import { useHistory } from "react-router-dom";
 import logout from "../static/images/logout.png";
 import mypage from "../static/images/mypage.png";
