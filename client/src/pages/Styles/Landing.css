@@ -44,3 +44,9 @@ body {
   font-family: 'ssuround';
   src: url('../../static/font/Cafe24SsurroundAir.ttf');
 }
+
+@media screen and (max-width: 420px) {
+  .footer {
+    display: none;
+  }
+}

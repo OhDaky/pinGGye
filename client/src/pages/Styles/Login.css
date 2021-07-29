@@ -176,9 +176,12 @@
     text-align: center;
     margin-top: 43vh;
   }
-}
-
+  
 @font-face {
   font-family: 'ssuround';
   src: url('../../static/font/Cafe24SsurroundAir.ttf');
+  
+  .footer {
+    display: none;
+  }
 }

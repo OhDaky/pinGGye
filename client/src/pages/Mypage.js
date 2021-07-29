@@ -69,7 +69,7 @@ export default function Mypage({ user }) {
           <div className="mypage-title"> Mypage </div>
           <form onSubmit={(e) => e.preventDefault()}>
             <div>
-              <div>이메일</div>
+              <div>Email</div>
               <input
                 className="mypage-inputbox"
                 type="email"
@@ -78,7 +78,7 @@ export default function Mypage({ user }) {
                 />
             </div>
             <div>
-              <div>닉네임</div>
+              <div>Nickname</div>
               <input
                 className="mypage-inputbox"
                 type="text"
@@ -89,7 +89,7 @@ export default function Mypage({ user }) {
               {/* <div className="mypage__alert-box">{nicknameError}</div> */}
             </div>
             <div>
-              <div>비밀번호</div>
+              <div>Password</div>
               <input
                 className="mypage-inputbox"
                 type="password"
@@ -103,7 +103,7 @@ export default function Mypage({ user }) {
           </form>
         </div>
       </div>
-      <Footer />
+      <Footer className="footer"/>
     </>
   );
 }

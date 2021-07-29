@@ -126,7 +126,7 @@ export default function FeedUpload() {
       })
       .catch((err) => alert(`에러 발생! 에러코드 ${err}`));
   };
-
+  console.log("####", image.previewURL.includes(""));
   return (
     <>
       <Nav />
@@ -141,10 +141,13 @@ export default function FeedUpload() {
                 style={{ display: "none" }}
                 ref={hiddenFileInput}
               />
-              <img
-                className="feed-upload__profile_preview"
-                src={image.previewURL}
-              ></img>
+              {image.previewURL ? (
+                <img
+                  className="feed-upload__profile_preview"
+                  src={image.previewURL}
+                  alt=""
+                ></img>
+              ) : null}
             </div>
             <div className="feed-upload__main-underbar">
               <button className="feed-upload__btn" onClick={handleClick}>
@@ -210,7 +213,7 @@ export default function FeedUpload() {
           </div>
         </div>
       </div>
-      <Footer />
+      <Footer className="footer"/>
     </>
   );
 }
