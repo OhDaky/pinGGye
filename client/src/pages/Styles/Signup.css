@@ -4,6 +4,7 @@
   align-items: center;
   width: 100%;
   height: 100vh;
+  font-family: 'ssuround';
 }
 
 .signup__signup-box {
@@ -21,18 +22,18 @@
 }
 
 .signup__container-title {
-  max-width: 20%;
+  max-width: 50%;
   margin-bottom: 2rem;
   text-align: center;
   font-size: 1.5rem;
   font-weight: bold;
 }
 
-.inputbox {
+/* .signup__inputbox {
   margin-bottom: 1rem;
   text-align: left;
   font-size: 1.2rem;
-}
+} */
 
 .signup__btn {
   margin-top: 0.5rem;
@@ -44,11 +45,13 @@
   border-radius: 5px;
   color: white;
   box-shadow: 2px 4px 6px rgba(3, 4, 6, 0.15);
+  font-family: 'ssuround';
 }
 
 
-input {
+.signup__inputbox {
   margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
   position: relative;
   width: 98%;
   height: 24px;
@@ -56,9 +59,10 @@ input {
   border-radius: 5px;
   border: 0px;
   box-shadow: 2px 4px 6px rgba(3, 4, 6, 0.15);
-}
+  font-family: 'ssuround';
+} 
 
-input:focus {
+.signup__inputbox:focus {
   outline: none;
 }
 
@@ -68,8 +72,8 @@ input:focus {
   margin-top: 20px;
   margin-left: 30px;
   color: rgb(230, 70, 70);
-  /* font-weight: bold; */
-  font-size: 1.2rem
+  font-weight: bold;
+  font-size: 1rem
 }
 
 .signup__logo {
@@ -119,16 +123,16 @@ input:focus {
     font-size: 1.2rem;
     width: 100%;
   }
-  input {
+  /* input {
     margin-top: 0.5rem;
     position: relative;
     width: 95%;
-  }
+  } */
 
   .signup__alert-box {
     position: absolute;
     text-align: center;
-    margin-top: 43vh;
+    margin-top: 45vh;
   }
 
   .signup__btn-login {
@@ -139,4 +143,9 @@ input:focus {
   .footer {
     display: none;
   }
+}
+
+@font-face {
+  font-family: 'ssuround';
+  src: url('../../static/font/Cafe24SsurroundAir.ttf');
 }

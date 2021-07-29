@@ -4,6 +4,7 @@
   align-items: center;
   width: 100%;
   height: 100vh;
+  font-family: 'ssuround';
 }
 
 .mypage {
@@ -23,15 +24,10 @@
 .mypage-title {
   max-width: 20%;
   margin-bottom: 2rem;
+  margin-right: 10px;
   text-align: center;
   font-size: 1.5rem;
   font-weight: bold;
-}
-
-.inputbox {
-  margin-bottom: 1rem;
-  text-align: left;
-  font-size: 1.2rem;
 }
 
 .mypage__btn {
@@ -44,10 +40,12 @@
   border-radius: 5px;
   color: white;
   box-shadow: 2px 4px 6px rgba(3, 4, 6, 0.15);
+  font-family: 'ssuround';
 }
 
-input {
+.mypage-inputbox {
   margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
   position: relative;
   width: 98%;
   height: 24px;
@@ -55,9 +53,10 @@ input {
   border-radius: 5px;
   border: 0px;
   box-shadow: 2px 4px 6px rgba(3, 4, 6, 0.15);
+  font-family: 'ssuround';
 }
 
-input:focus {
+.mypage-inputbox:focus {
   outline: none;
 }
 
@@ -96,3 +95,7 @@ input:focus {
   }
 }
 
+@font-face {
+  font-family: 'ssuround';
+  src: url('../../static/font/Cafe24SsurroundAir.ttf');
+}

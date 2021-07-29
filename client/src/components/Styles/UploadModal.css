@@ -34,6 +34,11 @@
   margin-bottom: 50px;
   border-radius: 10px;
   box-shadow: 2px 4px 6px rgba(2, 7, 21, 0.2);
+  object-fit: cover;
+}
+
+.modal__hashTag, .modal__subject {
+  font-family: 'ssuround';
 }
 
 .upload-modal__main > input {
@@ -73,6 +78,7 @@
   font-size: 1.5rem;
   border-radius: 10px;
   width: 80%;
+  font-family: 'ssuround';
 }
 
 .modal__update-btn:active {
@@ -82,4 +88,9 @@
 .upload-modal__main > input {
   height: 50px;
   outline: none;
+}
+
+@font-face {
+  font-family: 'ssuround';
+  src: url('../../static/font/Cafe24SsurroundAir.ttf');
 }
