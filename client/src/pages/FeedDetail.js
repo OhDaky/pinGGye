@@ -143,11 +143,11 @@ export default function FeedDetail({ userInfo }) {
         logintype: localStorage.getItem("loginType"),
       },
     })
-      .then((resp) => {
-        console.log("##delete", resp);
+      .then(() => {
+        alert("피드가 성공적으로 삭제 되었습니다.");
         history.push("/");
       })
-      .catch((err) => console.log("##delete", err));
+      .catch((err) => alert("본인 피드만 삭제가 가능합니다."));
   };
 
   // ? ###### 이미지 다운로드 ######
@@ -259,6 +259,10 @@ export default function FeedDetail({ userInfo }) {
                 referrerPolicy="no-referrer"
                 src={feedData.image}
                 alt="사진"
+                onContextMenu={(e) => {
+                  alert("마우스 오른쪽 버튼은 사용할 수 없습니다");
+                  e.preventDefault(); // 마우스 우클릭 방지
+                }}
               />
               <div className="feed-detail__main-img__underbar">
                 <div className="feed-detail__main-img__underbar__left-content">
@@ -352,7 +356,7 @@ export default function FeedDetail({ userInfo }) {
           </div>
         </div>
       </div>
-      <Footer />
+    <Footer className="footer"/>
     </>
   );
 }

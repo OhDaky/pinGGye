@@ -61,6 +61,7 @@ export default function Home({ getUserInfo }) {
         setLoading(false);
       })
       .catch((err) => {
+        setLoading(false);
         // console.log("=== home ===\n" + token);
       });
   };
@@ -122,7 +123,7 @@ export default function Home({ getUserInfo }) {
     setLoading(null);
   }
 
-  // if (loading) return <Landing />
+  if (loading && token) return <Landing />
 
   return (
     <>
@@ -173,7 +174,7 @@ export default function Home({ getUserInfo }) {
           userInfo={userInfo}
         />
       )}
-      <Footer />
+      <Footer className="footer"/>
     </>
   );
 }

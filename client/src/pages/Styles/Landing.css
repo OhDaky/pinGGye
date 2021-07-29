@@ -1,23 +1,39 @@
 .landing-img {
   position: relative;
-  margin-top: 35vh;
   width: 30rem;
   height: 15rem;
   /* border: 1px solid black; */
   background-size: 100% 100%;
-  background-image: url(../../static/images/pinkLogo.png);
+  background-image: url(../../static/images/whiteLogo.png);
 }
 
 body {
   clear: both;
+  /* background-color: #ffcccc; */
+}
+
+.landing {
+  background-color: #ffcccc;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .landing-text {
   font-size: 1.5rem;
   margin-top: 60px;
   font-family: 'ssuround';
-  color: #ffcccc;
+  color: white;
   font-weight: bolder;
+}
+
+.landing__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .loading {
@@ -27,4 +43,10 @@ body {
 @font-face {
   font-family: 'ssuround';
   src: url('../../static/font/Cafe24SsurroundAir.ttf');
+}
+
+@media screen and (max-width: 420px) {
+  .footer {
+    display: none;
+  }
 }

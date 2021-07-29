@@ -5,8 +5,9 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  bottom: 0;
-  font-size: 1.5rem;
+  bottom: 10px;
+  font-size: 1.2rem;
+  font-family: 'ssuround';
 }
 
 .user-icon__box {
@@ -22,4 +23,9 @@
 }
 .user-icon > a > img {
   width: 30px;
+}
+
+@font-face {
+  font-family: 'ssuround';
+  src: url('../../static/font/Cafe24SsurroundAir.ttf');
 }

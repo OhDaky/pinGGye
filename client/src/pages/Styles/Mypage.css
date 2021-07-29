@@ -4,6 +4,7 @@
   align-items: center;
   width: 100%;
   height: 100vh;
+  font-family: 'ssuround';
 }
 
 .mypage {
@@ -28,12 +29,6 @@
   font-weight: bold;
 }
 
-.inputbox {
-  margin-bottom: 1rem;
-  text-align: left;
-  font-size: 1.2rem;
-}
-
 .mypage__btn {
   margin-top: 0.5rem;
   margin-bottom: 1rem;
@@ -44,10 +39,12 @@
   border-radius: 5px;
   color: white;
   box-shadow: 2px 4px 6px rgba(3, 4, 6, 0.15);
+  font-family: 'ssuround';
 }
 
-/* input {
+.mypage-inputbox {
   margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
   position: relative;
   width: 98%;
   height: 24px;
@@ -55,11 +52,12 @@
   border-radius: 5px;
   border: 0px;
   box-shadow: 2px 4px 6px rgba(3, 4, 6, 0.15);
+  font-family: 'ssuround';
 }
 
-input:focus {
+.mypage-inputbox:focus {
   outline: none;
-} */
+}
 
 /* .input__message {
     width: 70%;
@@ -90,5 +88,13 @@ input:focus {
     height: 50vh;
     margin: 1rem 1.5rem;
   }
+
+  .footer {
+    display: none;
+  }
 }
 
+@font-face {
+  font-family: 'ssuround';
+  src: url('../../static/font/Cafe24SsurroundAir.ttf');
+}

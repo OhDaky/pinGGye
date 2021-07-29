@@ -5,10 +5,10 @@ import "./Styles/Landing.css"
 
 export default function Landing() {
   const type = "bubbles";
-  const color = "rgba(255, 204, 204)";
+  const color = "rgba(255, 255, 255)";
   const message = "여기는 핑계마켓";
   return (
-    <center>
+    <div className="landing">
       <div className="landing__container">
         <div className="landing-img" />
         <ReactLoading className="loading"
@@ -18,7 +18,7 @@ export default function Landing() {
           width={200} />
         <div className="landing-text">마켓 가는 중!</div>
       </div>
-      <Footer />
-    </center>
+      <Footer className="footer"/>
+    </div>
   )
 }
