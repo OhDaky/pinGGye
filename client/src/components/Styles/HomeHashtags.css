@@ -1,0 +1,38 @@
+.home__hashtag {
+  font-size: 1rem;
+  margin: 1rem;
+  padding: 20px;
+  display: flex;
+  float: left;
+  text-align: center;
+  padding: 10px;
+  align-content: center;
+  border-radius: 20px;
+  width: fit-content;
+  height: fit-content;
+  border: 0px solid black;
+  box-shadow: 2px 4px 6px rgba(3, 4, 6, 0.15);
+  font-family: 'dream';
+}
+.home__hashtag-selected {
+  font-size: 1rem;
+  margin: 1rem;
+  display: flex;
+  float: left;
+  text-align: center;
+  color: white;
+  padding: 10px;
+  align-content: center;
+  border-radius: 20px;
+  width: fit-content;
+  height: fit-content;
+  border: 0px solid black;
+  background-color: #72728a;
+  box-shadow: 2px 4px 6px rgba(3, 4, 6, 0.15);
+  font-family: 'dream';
+}
+
+@font-face {
+  font-family: 'dream';
+  src: url('../../static/font/SCDream4.otf');
+}

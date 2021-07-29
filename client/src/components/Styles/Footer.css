@@ -1,0 +1,31 @@
+.footer {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  bottom: 10px;
+  font-size: 1.2rem;
+  font-family: 'ssuround';
+}
+
+.user-icon__box {
+  display: flex;
+  justify-content: space-evenly;
+  width: 300px;
+}
+.user-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.user-icon > a > img {
+  width: 30px;
+}
+
+@font-face {
+  font-family: 'ssuround';
+  src: url('../../static/font/Cafe24SsurroundAir.ttf');
+}

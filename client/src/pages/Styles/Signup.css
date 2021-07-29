@@ -1,0 +1,151 @@
+.signup__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  font-family: 'ssuround';
+}
+
+.signup__signup-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  border-radius: 20px;
+  width: 400px;
+  height: 500px;
+  background-color: rgb(255, 204, 204);
+  color: rgb(96, 96, 96);
+  box-shadow: 2px 4px 6px rgba(3, 4, 6, 0.15);
+}
+
+.signup__container-title {
+  max-width: 50%;
+  margin-bottom: 2rem;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/* .signup__inputbox {
+  margin-bottom: 1rem;
+  text-align: left;
+  font-size: 1.2rem;
+} */
+
+.signup__btn {
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  width: 100%;
+  height: 24px;
+  background-color: #72728aa7;
+  border: 0px;
+  border-radius: 5px;
+  color: white;
+  box-shadow: 2px 4px 6px rgba(3, 4, 6, 0.15);
+  font-family: 'ssuround';
+}
+
+
+.signup__inputbox {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  position: relative;
+  width: 98%;
+  height: 24px;
+  background-color: white;
+  border-radius: 5px;
+  border: 0px;
+  box-shadow: 2px 4px 6px rgba(3, 4, 6, 0.15);
+  font-family: 'ssuround';
+} 
+
+.signup__inputbox:focus {
+  outline: none;
+}
+
+.signup__alert-box {
+  position: absolute;
+  text-align: left;
+  margin-top: 20px;
+  margin-left: 30px;
+  color: rgb(230, 70, 70);
+  font-weight: bold;
+  font-size: 1rem
+}
+
+.signup__logo {
+  display: none;
+}
+
+@media screen and (max-width: 420px) {
+  .signup__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+  }
+
+  .signup__logo {
+    display: flex;
+    width: 12rem;
+    justify-content: center;
+    align-content: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .signup__signup-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    font-size: 1rem;
+    margin: 1rem 1.5rem;
+    width: 80vw;
+    height: 50vh;
+  }
+
+  .signup__container-title {
+    max-width: 50%;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-size: 1.5rem;
+  }
+
+  .inputbox {
+    margin-bottom: 1rem;
+    text-align: left;
+    font-size: 1.2rem;
+    width: 100%;
+  }
+  /* input {
+    margin-top: 0.5rem;
+    position: relative;
+    width: 95%;
+  } */
+
+  .signup__alert-box {
+    position: absolute;
+    text-align: center;
+    margin-top: 45vh;
+  }
+
+  .signup__btn-login {
+    margin-bottom: 0.5rem;
+    width: 100%;
+  }
+
+  .footer {
+    display: none;
+  }
+}
+
+@font-face {
+  font-family: 'ssuround';
+  src: url('../../static/font/Cafe24SsurroundAir.ttf');
+}

@@ -1,0 +1,48 @@
+.home__feed {
+  border-radius: 5px;
+  position: relative;
+  margin: 2rem;
+  display: flex;
+  float: left;
+  text-align: center;
+  align-content: center;
+  width: 200px;
+  height: 200px;
+  box-shadow: 2px 4px 6px rgba(2, 7, 21, 0.2);
+}
+
+.home__feed-thumbnail-container {
+  position: relative;
+  display: flex;
+}
+
+.home__feed-tags {
+  position: absolute;
+  margin: 10px;
+  margin-top: 170px;
+  z-index: 10;
+}
+
+.home__feed-thumbnail {
+  display: flex;
+  position: absolute;
+  border-radius: 5px;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+}
+
+.home__feed-gradient {
+  position: absolute;
+  display: flex;
+  background: linear-gradient(to bottom ,
+  rgba(20, 20, 20, 0) 50%,
+  rgba(20, 20, 20, 0.3) 75%,
+  rgba(20, 20, 20, 0.5) 100%);
+  background-size: cover;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  width: 200px;
+  height: 200px;
+}

@@ -1,0 +1,163 @@
+body {
+  margin: 0;
+}
+
+.nav__content {
+  position: fixed;
+  z-index: 999;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 60px;
+  border-bottom: 3px solid rgba(2, 7, 21, 0.1);
+  box-shadow: 1px 2px 4px rgba(2, 7, 21, 0.1);
+  background-color: white;
+}
+
+.nav__left-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-left: 20px;
+  margin-top: 5px;
+  width: 100%;
+  height: 100%;
+}
+
+.nav__center-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.nav__right-content {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  /* background-color: red; */
+}
+
+.nav__logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  cursor: pointer;
+}
+
+.nav__tab {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #63504d;
+  cursor: pointer;
+  background-color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 20px;
+  font-family: 'dream';
+}
+.mypage__tab:hover {
+  color: #FD8A8A;
+}
+
+.logout__tab {
+  background-color: rgb(255, 204, 204);
+}
+
+.logout__tab:hover {
+  color: white;
+}
+
+/* pink */
+/* rgb(255, 175, 175) */
+
+/* yellow */
+/* rgb(255, 209, 110) */
+
+.nav__logout {
+  display: none;
+}
+
+.nav__mypage {
+  display: none;
+}
+
+@media screen and (max-width: 500px) {
+  body {
+    margin: 0;
+  }
+
+  .nav__content {
+    position: fixed;
+    z-index: 999;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 70px;
+    border-bottom: 3px solid rgba(2, 7, 21, 0.1);
+    box-shadow: 1px 2px 4px rgba(2, 7, 21, 0.1);
+    background-color: white;
+  }
+
+  .nav__left-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-left: 10px;
+    width: 100%;
+    height: 100%;
+  }
+
+  .nav__center-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  .nav__right-content {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    margin-right: 10px;
+  }
+
+  .nav__logo {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+    margin-left: 1rem;
+    align-items: center;
+    height: 80%;
+    cursor: pointer;
+  }
+
+  .nav__tab {
+    display: none;
+  }
+
+  .nav__logout {
+    display: inline;
+    width: 50px;
+    height: 50px;
+    margin-left: 10px;
+  }
+
+  .nav__mypage {
+    display: inline;
+    width: 50px;
+    height: 50px;
+  }
+}
+
+@font-face {
+  font-family: 'dream';
+  src: url('../../static/font/SCDream5.otf');
+}

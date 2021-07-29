@@ -1,0 +1,452 @@
+body {
+  font-family: "ssuround";
+}
+
+.feed-upload-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  background-color: rgb(255, 204, 204);
+}
+
+.feed-upload__content {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 80%;
+  height: 80vh;
+  border-radius: 5px;
+  box-shadow: 2px 4px 6px rgba(2, 7, 21, 0.3);
+  background-color: white;
+}
+
+.feed-upload__left-content {
+  height: 600px;
+  width: 600px;
+  box-shadow: 2px 4px 6px rgba(2, 7, 21, 0.3);
+  background-color: white;
+}
+
+.feed-upload__right-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 600px;
+  width: 45%;
+  border-radius: 10px;
+  box-shadow: 2px 4px 6px rgba(2, 7, 21, 0.3);
+  background-color: white;
+}
+
+.feed-upload__main-img {
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+  border-bottom: 1px solid rgba(2, 7, 21, 0.2);
+  box-shadow: 0px 3px 2px rgba(2, 7, 21, 0.1);
+  background-size: 100% 100%;
+  background-image: url(../../static/images/pinGGyeMarketPink.png);
+}
+
+.feed-upload__profile_preview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.feed-upload__main-underbar {
+  height: 20%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  background-color: rgb(255, 230, 230);
+}
+
+.feed-upload__main-contents {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.feed-upload__btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 110px;
+  height: 50px;
+  border-radius: 30px;
+  border: none;
+  font-size: 1.25rem;
+  margin: 30px;
+  background-color: rgb(255, 253, 241);
+  box-shadow: 1px 2px 4px rgba(2, 7, 21, 0.4);
+  font-family: "ssuround";
+}
+
+.feed-upload__btn:active {
+  box-shadow: inset 1px 2px 4px rgba(2, 7, 21, 0.4);
+}
+
+#feed-upload__hashtag {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  border-bottom: 3px solid rgba(2, 7, 21, 0.2);
+}
+
+.feed-upload__hashtag-input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  height: 70px;
+  border: 2px solid rgba(2, 7, 21, 0.2);
+  border-radius: 10px;
+  font-family: "ssuround";
+}
+
+.feed-upload__hashtag-input:hover {
+  border: 3px solid rgb(255, 204, 204);
+}
+
+.hashtag-input {
+  margin: 0;
+  width: 100%;
+  height: 90%;
+  outline: none;
+  border: none;
+  border-right: 2px solid rgb(2, 7, 21, 0.2);
+  background-color: rgba(0, 0, 0, 0);
+  margin-left: 20px;
+  font-size: 1.5rem;
+  font-family: "ssuround";
+}
+
+.hashtag-input:focus {
+  border-right: 2px solid rgba(255, 204, 204);
+}
+
+.hashtag-submit-btn {
+  margin: 0;
+  width: 20%;
+  height: 100%;
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+  font-size: 1.5rem;
+  border-radius: 10px;
+  color: rgba(2, 7, 21, 0.6);
+  font-weight: bold;
+  font-family: "ssuround";
+}
+
+.feed-upload__hashtag-box {
+  width: 80%;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  overflow-x: auto;
+}
+
+.hashtag {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border-radius: 50px;
+  margin: 0px 5px;
+  font-size: 1.5rem;
+  border: 2px solid rgb(255, 204, 204);
+}
+
+.hashtag > img {
+  width: 20px;
+  margin: 5px;
+}
+
+.no-hashtag {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100px;
+  font-size: 1.5rem;
+  color: rgb(255, 204, 204);
+}
+
+.feed-upload__alert-box {
+  color: red;
+  width: 100%;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+#feed-upload__img-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 30%;
+}
+
+.feed-upload__main-title {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 1.5rem;
+  width: 80%;
+  margin-top: 10px;
+}
+
+.feed-upload__subject {
+  width: 80%;
+  height: 50px;
+  margin: 10px;
+  font-size: 1.75rem;
+  outline: none;
+  border: none;
+  border-bottom: 2px solid rgb(2, 7, 21, 0.2);
+}
+.feed-upload__subject:focus {
+  border-bottom: 2px solid rgb(255, 204, 204);
+}
+
+.feed-upload__underbar {
+  display: flex;
+  justify-content: flex-end;
+  background-color: rgb(255, 230, 230);
+}
+
+/* FeedUpload */
+@media screen and (max-width: 420px) {
+  .feed-upload-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-color: rgb(255, 204, 204);
+  }
+
+  .feed-upload__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 90%;
+    height: 85vh;
+    margin-top: 2.5rem;
+    border-radius: 5px;
+    box-shadow: 2px 4px 6px rgba(2, 7, 21, 0.3);
+    background-color: white;
+  }
+
+  .feed-upload__left-content {
+    height: 300px;
+    width: 300px;
+    box-shadow: none;
+    border: none;
+    margin: 1rem 13vw 0rem 3rem;
+    box-shadow: 2px 4px 6px rgba(2, 7, 21, 0.3);
+  }
+
+  .feed-upload__right-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 38vh;
+    width: 300px;
+    border-radius: 10px;
+    box-shadow: 1px 2px 4px rgba(2, 7, 21, 0.5);
+    margin-bottom: 2rem;
+  }
+
+  .feed-upload__main-title {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 1.15rem;
+    width: 80%;
+    margin-top: 10px;
+  }
+
+  .feed-upload__main-img {
+    border: white;
+    box-shadow: none;
+    margin-left: 0px;
+    width: 300px;
+    background-size: 100% 100%;
+    background-image: url(../../static/images/pinGGyeMarketPink.png);
+  }
+
+  .feed-upload__profile_preview {
+    width: 100%;
+    height: 100%;
+  }
+
+  .feed-upload__main-underbar {
+    display: flex;
+    justify-content: flex-end;
+    background-color: rgb(255, 230, 230);
+    width: 300px;
+    height: 65px;
+    border-radius: 5px;
+  }
+
+  .feed-upload__subject {
+    width: 80%;
+    height: 50px;
+    margin: 10px;
+    font-size: 1rem;
+    outline: none;
+    border: none;
+    border-bottom: 2px solid rgb(2, 7, 21, 0.2);
+  }
+  .feed-upload__subject:focus {
+    border-bottom: 2px solid rgb(255, 204, 204);
+  }
+
+  .feed-upload__main-contents {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    margin-top: 10px;
+  }
+
+  .feed-upload__btn {
+    display: flex;
+    width: 7rem;
+    height: 2rem;
+    border-radius: 30px;
+    margin: 1rem;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8rem;
+    border: none;
+    background-color: rgb(255, 253, 241);
+    box-shadow: 1px 2px 4px rgba(2, 7, 21, 0.4);
+    color: rgb(96, 96, 96);
+  }
+
+  .feed-upload__btn:active {
+    box-shadow: inset 1px 2px 4px rgba(2, 7, 21, 0.4);
+  }
+
+  #feed-upload__hashtag {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin-bottom: 0;
+    width: 100%;
+    height: 50%;
+    background-color: rgb(255, 255, 255);
+    border: none;
+  }
+
+  .hashtag-input {
+    margin: 0;
+    width: 100%;
+    height: 90%;
+    outline: none;
+    border: none;
+    border-right: 2px solid rgb(2, 7, 21, 0.2);
+    background-color: rgba(0, 0, 0, 0);
+    margin-left: 20px;
+    font-size: 1rem;
+  }
+
+  .hashtag-input:focus {
+    border-right: 2px solid rgba(255, 204, 204);
+  }
+
+  .hashtag-submit-btn {
+    margin: 0;
+    width: 20%;
+    height: 100%;
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
+    font-size: 1rem;
+    border-radius: 10px;
+    color: rgba(2, 7, 21, 0.6);
+    font-weight: bold;
+  }
+
+  .feed-upload__hashtag-box {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    overflow-x: none;
+  }
+
+  .hashtag {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3px;
+    border-radius: 50px;
+    margin: 0px 5px;
+    font-size: 1rem;
+    border: 2px solid rgb(255, 204, 204);
+  }
+
+  .no-hashtag {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100px;
+    font-size: 1rem;
+    color: rgb(255, 204, 204);
+  }
+
+  .feed-upload__alert-box {
+    color: red;
+    width: 100%;
+    text-align: center;
+    font-size: 13px;
+  }
+
+  #feed-upload__img-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 30%;
+    background-color: rgb(255, 255, 255);
+  }
+
+  .feed-upload__main-message {
+    margin: 1rem 0 0 1rem;
+    width: 100%;
+  }
+
+  .feed-upload__underbar {
+    width: 300px;
+    height: 65px;
+    margin-right: 5px;
+    justify-self: flex-end;
+    border-radius: 5px;
+  }
+
+  .footer {
+    display: none;
+  }
+}
+
+@font-face {
+  font-family: "ssuround";
+  src: url("../../static/font/Cafe24SsurroundAir.ttf");
+}
