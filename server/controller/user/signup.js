@@ -1,6 +1,6 @@
 const db = require("../queryFunction");
 const logger = require("../../utils/logger");
-const validate = require("../../utils/validate");
+const { checkEmail, checkPassword } = require("../../utils/validator");
 
 module.exports = async (req, res) => {
   const { email, password, nickname } = req.body;
@@ -10,7 +10,7 @@ module.exports = async (req, res) => {
     return res.status(400).json({ message: "Insufficient parameters supplied"});
   }
 
-  if (validate.checkEmail(email) || validate.checkPassword(password) || nickname === "") {
+  if (checkEmail(email) || checkPassword(password) || nickname === "") {
     logger(`회원가입 - 요청 파라미터 에러. email=${email} nickname=${nickname}`);
     return res.status(400).json({ message: "Invalid format"});
   }
