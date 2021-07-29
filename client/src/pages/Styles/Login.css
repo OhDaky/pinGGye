@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "ssuround";
+  src: url("../../static/font/Cafe24SsurroundAir.ttf");
+}
+
 .login__container {
   display: flex;
   justify-content: center;
@@ -30,7 +35,7 @@
   background-color: rgb(255, 204, 204);
   color: rgb(96, 96, 96);
   box-shadow: 2px 4px 6px rgba(3, 4, 6, 0.15);
-  font-family: 'ssuround';
+  font-family: "ssuround";
 }
 
 .login__container-title {
@@ -58,7 +63,7 @@
   border-radius: 5px;
   color: white;
   box-shadow: 2px 4px 6px rgba(3, 4, 6, 0.15);
-  font-family: 'ssuround';
+  font-family: "ssuround";
 }
 
 .login__btn-signup {
@@ -70,7 +75,7 @@
   border: 0px;
   border-radius: 5px;
   box-shadow: 2px 4px 6px rgba(3, 4, 6, 0.15);
-  font-family: 'ssuround';
+  font-family: "ssuround";
 }
 
 .login__btn-signup > a {
@@ -78,7 +83,8 @@
   color: #72728a;
 }
 
-.inputbox-login, .inputbox-email {
+.inputbox-login,
+.inputbox-email {
   margin-top: 0.5rem;
   position: relative;
   width: 98%;
@@ -87,10 +93,11 @@
   border-radius: 5px;
   border: 0px;
   box-shadow: 2px 4px 6px rgba(3, 4, 6, 0.15);
-  font-family: 'ssuround';
+  font-family: "ssuround";
 }
 
-.inputbox-login:focus, .inputbox-email:focus {
+.inputbox-login:focus,
+.inputbox-email:focus {
   outline: none;
 }
 
@@ -176,11 +183,7 @@
     text-align: center;
     margin-top: 43vh;
   }
-  
-@font-face {
-  font-family: 'ssuround';
-  src: url('../../static/font/Cafe24SsurroundAir.ttf');
-  
+
   .footer {
     display: none;
   }
