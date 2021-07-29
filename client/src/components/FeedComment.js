@@ -54,12 +54,10 @@ export default function FeedComment({
         .then(() => alert("댓글 수정 완료!"))
         .catch(() => alert("본인이 쓴 글만 수정 및 삭제가 가능합니다!"));
     }
-    // TODO : 댓글의 유저 ID와 현재 유저와 같은지 확인해야함.
     setIsUpdate(isUpdate ? false : true);
   };
 
   // ? ###### Comment delete 기능 ######
-  // ! [BUG] 일시적으로 삭제한 코멘트가 아닌, 다른 코멘트가 지워짐. 새로고침하면 제대로.
   const handleDeleteComment = () => {
     axios({
       method: "delete",
@@ -114,8 +112,7 @@ export default function FeedComment({
                 onClick={handleDeleteComment}
               />
             </div>
-          ) : // <div className="feed__comment-right-content"></div>
-          null}
+          ) : null}
         </div>
       </div>
     </>

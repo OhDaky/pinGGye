@@ -9,9 +9,8 @@ export default function HomeFeed({ feedid }) {
   const tags = feedid[7][1];
   const thumbnail = feedid[3][1];
   const handleFeedClick = () => {
-    console.log("피드클릭");
+    // ? # 해당하는 피드의 아이디
     history.push(`/feed/${id}`);
-    // 해당하는 피드의 아이디
   };
 
   return (

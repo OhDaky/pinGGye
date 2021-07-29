@@ -8,10 +8,10 @@ import Mypage from "./pages/Mypage";
 import Signup from "./pages/Signup";
 
 function App() {
-  // ### 전체에서 사용되는 유저의 정보 state
+  // ? ### 전체에서 사용되는 유저의 정보 state
   const [userInfo, setUserInfo] = useState({});
 
-  // ### 메인페이지에서 로그인 정보 받아오기
+  // ? ### 메인페이지에서 로그인 정보 받아오기
   const getUserInfo = (input) => {
     setUserInfo(input);
   };
@@ -26,7 +26,7 @@ function App() {
           <FeedUpload />
         </Route>
         <Route path="/feed/:id" exact>
-          <FeedDetail userInfo={userInfo}  />
+          <FeedDetail userInfo={userInfo} />
         </Route>
         <Route path="/landing">
           <Landing />

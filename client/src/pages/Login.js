@@ -1,16 +1,12 @@
-import axios from "axios";
-import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
-import logo from "../static/images/pinGGyeLogo.png";
+import { Link } from "react-router-dom";
 import GoogleButton from "react-google-button";
+import axios from "axios";
 
 import "./Styles/Login.css";
-export default function Login({
-  handleResponseSuccess,
-  userInfo,
-  setUserInfo,
-  getHashtags,
-}) {
+import logo from "../static/images/pinGGyeLogo.png";
+
+export default function Login({ handleResponseSuccess }) {
   const [loginInfo, setLoginInfo] = useState({
     email: "",
     password: "",
@@ -42,45 +38,38 @@ export default function Login({
       withCredentials: true,
     })
       .then((res) => {
-        // 액세스토큰 로컬 스토리지에 저장
-        const isLogin = true;
+        // ? # 액세스토큰 로컬 스토리지에 저장
         const accessToken = res.data.data.accessToken;
-        localStorage.setItem("accessToken", accessToken);
         const loginType = res.data.data.userInfo.signUpType;
+        localStorage.setItem("accessToken", accessToken);
         localStorage.setItem("loginType", loginType);
-        window.localStorage.setItem("isSignin", isLogin);
         setLoginInfo(res.data.data.userInfo);
         handleResponseSuccess();
         window.location.replace("/");
       })
       .catch((err) => {
         setErrorMessage("이메일과 비밀번호를 다시 확인하세요");
-        console.log(err);
       });
   };
 
-  //! ### 소셜 로그인
+  // ? # 소셜 로그인
   const getAccessToken = async (authorizationCode) => {
     await axios
       .post(`${process.env.REACT_APP_API_URL}/users/login/google`, {
         authorizationCode: authorizationCode,
       })
       .then((res) => {
-        const isLogin = true;
         const accessToken = res.data.data.accessToken;
-        localStorage.setItem("accessToken", accessToken);
         const loginType = res.data.data.userInfo.signUpType;
+        localStorage.setItem("accessToken", accessToken);
         localStorage.setItem("loginType", loginType);
-        window.localStorage.setItem("isSignin", isLogin);
-        // setLoginInfo(res.data.data.userInfo);
-        // setUserInfo(res.data.data.userInfo)
         handleResponseSuccess();
         window.location.replace("/");
       });
   };
 
   useEffect(() => {
-    // 페이지 새로고침 시마다 url에 code 쿼리 파라미터가 있으면 추출하여 getAccessToken 호출
+    // ? # 페이지 새로고침 시마다 url에 code 쿼리 파라미터가 있으면 추출하여 getAccessToken 호출
     const url = new URL(window.location.href);
     const authorizationCode = url.searchParams.get("code");
     if (authorizationCode) {
@@ -94,10 +83,9 @@ export default function Login({
 
   const google_client_id =
     "204319481381-2loiedqtk9uoac7bp7npoq9qmi9ntc89.apps.googleusercontent.com";
-  const redirect_uri = "http://localhost:3000";
+  const redirect_uri = "https://www.pinggye.com";
 
   const GOOGLE_LOGIN_URL = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${google_client_id}&redirect_uri=${redirect_uri}&response_type=code&scope=profile email&access_type=offline`;
-  //! ### 소셜 로그인 end
 
   return (
     <>
@@ -133,7 +121,11 @@ export default function Login({
               </button>
             </div>
             <div>
-              <GoogleButton type="light" onClick={socialLoginHandler} data-border-radius="5px"/>
+              <GoogleButton
+                type="light"
+                onClick={socialLoginHandler}
+                data-border-radius="5px"
+              />
             </div>
             <div>
               <button className="login__btn-signup">
