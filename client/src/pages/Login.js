@@ -104,7 +104,6 @@ export default function Login({
       <div className="login__container">
         <img className="login__logo" src={logo} alt="logo" />
         <div className="login__img-box" />
-
         <div className="login__login-box">
           <div className="login__container-title">Login</div>
           <form onSubmit={(e) => e.preventDefault()}>
@@ -134,7 +133,7 @@ export default function Login({
               </button>
             </div>
             <div>
-              <GoogleButton onClick={socialLoginHandler} />
+              <GoogleButton type="light" onClick={socialLoginHandler} data-border-radius="5px"/>
             </div>
             <div>
               <button className="login__btn-signup">

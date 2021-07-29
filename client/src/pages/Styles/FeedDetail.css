@@ -9,7 +9,7 @@
 
 .feed-detail__content {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
   width: 80%;
   height: 80vh;
@@ -20,18 +20,18 @@
 }
 
 .feed-detail__left-content {
-  height: 500px;
-  width: 500px;
+  height: 600px;
+  width: 600px;
 }
 
 .feed-detail__right-content {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 500px;
+  height: 600px;
   width: 45%;
   border-radius: 10px;
-  box-shadow: 1px 2px 4px rgba(2, 7, 21, 0.5);
+  box-shadow: 2px 4px 6px rgba(2, 7, 21, 0.3);
   background-color: white;
 }
 
@@ -43,13 +43,14 @@
   text-align: center;
   border-radius: 10px;
   box-shadow: 1px 2px 4px rgba(2, 7, 21, 0.5);
+  object-fit: cover;
 }
 
 .feed-detail__main-img__underbar {
   position: fixed;
   z-index: 5;
-  width: 500px;
-  margin-top: 400px;
+  width: 600px;
+  margin-top: 500px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -127,16 +128,21 @@
 
 .feed-detail__main-content {
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
+  flex-direction: column;
   width: 80%;
   margin-left: 20px;
+}
+.feed__subject {
   font-size: 1.5rem;
+}
+
+.feed__writter {
+  color: rgba(2, 7, 21, 0.6);
 }
 
 .feed-detail__comments {
   width: 100%;
-  height: 100%;
+  height: 85%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -147,8 +153,9 @@
   justify-content: space-evenly;
   align-items: center;
   width: 100%;
-  height: 50px;
+  height: 70px;
   box-shadow: 0px 0px 10px rgba(2, 7, 21, 0.2);
+  background-color: rgb(255, 230, 230);
 }
 
 .input-comment-box > input {
@@ -156,9 +163,9 @@
   height: 90%;
   width: 80%;
   border: none;
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   background-color: rgba(0, 0, 0, 0);
-  margin-left: 20px;
+  margin-left: 10px;
 }
 
 .input-comment-box > input:focus {
@@ -166,22 +173,29 @@
   background-color: rgba(0, 0, 0, 0);
 }
 
-.input-comment-box > button {
-  margin: 0;
-  height: 100%;
-  width: 20%;
-  border: none;
-  background-color: rgb(255, 204, 204);
+.input-comment-box > input::placeholder {
   color: white;
-  font-size: 1.3rem;
-  border-radius: 10px;
+}
+
+.input-comment-box > button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 50px;
+  border-radius: 30px;
+  border: none;
+  font-size: 1.25rem;
+  background-color: rgb(255, 253, 241);
+  box-shadow: 1px 2px 4px rgba(2, 7, 21, 0.4);
+  color: rgb(142, 142, 142);
 }
 
 .feed-detail__comments-box {
   width: 100%;
-  height: 390px;
+  height: 500px;
   overflow-y: scroll;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 .main__icon {

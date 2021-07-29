@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import "./Styles/FeedUpload.css";
-import Nav from "../components/Nav";
-import Footer from "../components/Footer";
 import { useHistory } from "react-router-dom";
+import "./Styles/FeedUpload.css";
 import axios from "axios";
 
-// TODO : 피드의 id는 Database에서 부여?
+import Nav from "../components/Nav";
+import Footer from "../components/Footer";
+
+import xBtn from "../static/images/xBtn.png";
+
 export default function FeedUpload() {
   let pinGGyeURL = process.env.REACT_APP_API_URL;
   // ? ###### accessToken props로 받아오기 ######
@@ -188,7 +190,7 @@ export default function FeedUpload() {
                             handleDeleteTag(i);
                             setHashTagError("");
                           }}
-                          src="https://cdn1.iconfinder.com/data/icons/smallicons-controls/32/614397-x-256.png"
+                          src={xBtn}
                           alt="X"
                         />
                       </div>
