@@ -13,8 +13,9 @@
 \
 지친 현대인들의 휴식 파트너, 핑계닷컴으로 오세요!
 
-### [🐔 핑계 닷컴 구경하기](https://www.pinggye.com)
-\
+###  👇 프로젝트가 좀더 궁금하시다면 아래 링크를 눌러주세요 👇
+[🐔 핑계 닷컴 구경하기](https://www.pinggye.com) \
+[✏️ 핑계 닷컴 Wiki 구경하기](https://github.com/codestates/pinGGye/wiki)
 
 
 # 사용한 Stack
